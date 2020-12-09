@@ -3,7 +3,7 @@ import Product from './Product/Product.js';
 
 import './Main.scss';
 
-const prueba = [
+export const prueba = [
     {
         nombre: 'teclado',
         descripcion: 'asdfdasf',
