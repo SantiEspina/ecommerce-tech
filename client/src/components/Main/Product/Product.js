@@ -10,10 +10,10 @@ export default function Product ({prop}) {
             {
                 prop.map((p, i) => <Card 
                     key={i}
-                    nombre={p.nombre}
-                    descripcion={p.descripcion}
-                    imagen={p.imagen}
-                    precio={p.precio}
+                    name={p.name}
+                    description={p.description}
+                    image={p.image}
+                    price={p.price}
                     stock={p.stock} 
                     />
                 )
