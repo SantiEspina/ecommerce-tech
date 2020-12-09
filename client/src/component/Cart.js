@@ -1,3 +1,0 @@
-//Creamos el component cart
-//
-//
