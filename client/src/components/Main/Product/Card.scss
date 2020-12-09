@@ -1,0 +1,36 @@
+.cardCnt{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    border: 1px solid black;
+    height: 35rem;
+    margin: .5rem;
+    margin-top: 1rem;
+    .imgName{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 75%;
+        .imgProduct{
+            width: 25rem;
+            max-height: 22rem;
+        }
+        span:hover{
+            color: gold;
+        }
+    }
+    .info{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 8px;
+        .btn-primary{
+            cursor: pointer;
+            width: 15rem;
+            border-radius: 3rem;
+            &:hover{
+                background-color: gold;
+            }
+        }
+    }
+}
