@@ -1,0 +1,9 @@
+.searchBar{
+    .btnSearch{
+        cursor: pointer;
+        &:hover{
+            background-color: orange;
+            color: #ffffff;
+        }
+    }
+}
