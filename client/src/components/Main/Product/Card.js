@@ -7,7 +7,7 @@ export default function Card ({ name, description, image, price, stock }) {
             <div className='cardCnt'>
                 <div className='imgName'>
                     <img src={image} className='imgProduct'/>
-                    <span>{name}</span>
+                    <span className='name' value={name} onClick={(e) => console.log(e)}>{name}</span>
                 </div>
                 <div className='info'>
                     <p>${price}</p> 
