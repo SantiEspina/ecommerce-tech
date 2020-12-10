@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon -L",
     "forever": "forever index.js",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "insert": "node ./INSERT.js"
   },
   "author": "Dev5",
   "license": "ISC",
