@@ -4,6 +4,7 @@ import './SearchBar.scss';
 
 export default function SearchBar ({ filterSearchBar, products }) {
     const [ input, setInput ] = useState('');
+    let check = 'active';
 
     const handleChange = (e) => {
       setInput(e.target.value);
@@ -13,10 +14,13 @@ export default function SearchBar ({ filterSearchBar, products }) {
         filterSearchBar(input, products);
         setInput('');
     }
+    if (window.location.pathname != '/') {
+        check = 'inactive';
+    }
     return (
-        <form onSubmit={(e) => handleSubmit(e)} className='searchBar'>
-            <input type='text' value={input} placeholder='Que estas buscando?' onChange={(e) => handleChange(e)}></input>
-            <input type='submit' value='Buscar' className='btnSearch'></input>
+        <form onSubmit={(e) => handleSubmit(e)} className={`searchBar-${check}`}>
+            <input type='text' value={input} placeholder='What are you looking for?' onChange={(e) => handleChange(e)}></input>
+            <input type='submit' value='Search' className='btnSearch'></input>
         </form>
     )
 }

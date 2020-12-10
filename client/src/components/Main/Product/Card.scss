@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
 .cardCnt{
     display: flex;
     flex-direction: column;
@@ -32,5 +33,9 @@
                 background-color: gold;
             }
         }
+    }
+    .name {
+        font-family: 'Nerko One', cursive;
+        cursor: pointer;
     }
 }

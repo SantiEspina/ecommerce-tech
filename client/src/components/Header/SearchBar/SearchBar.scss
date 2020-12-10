@@ -1,4 +1,4 @@
-.searchBar{
+.searchBar-active{
     .btnSearch{
         cursor: pointer;
         &:hover{
@@ -6,4 +6,7 @@
             color: #ffffff;
         }
     }
+}
+.searchBar-inactive {
+    display: none;
 }

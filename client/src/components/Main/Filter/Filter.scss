@@ -1,0 +1,13 @@
+.filterCnt{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem;
+    padding: 1rem;
+    border-bottom: .1rem gray solid;
+    .selectFilter{
+        cursor: pointer;
+        &:hover {
+            border: solid black .13rem;
+        }
+    }
+}
