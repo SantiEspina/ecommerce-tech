@@ -1,19 +1,34 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar/SearchBar';
-import { filterSearchBar } from '../../utils';
-import { prueba } from '../Main/Main';
+import { findProductBySearchBar } from '../../Redux/actions';
+import { connect } from 'react-redux';
 
 import './Header.scss';
 
-export default function Header () {
+function Header ({ prueba, findProductBySearchBar }) {
     return (
         <header className='header'>
-            {/* <Link to='/'>
-                <span>ECOMMERCE GRUPO 2</span>
-            </Link> */}
-            <h1>asdfdas</h1>
-            <SearchBar filterSearchBar={filterSearchBar} products={prueba}/>
+            <Link to='/' className='link'>
+                <h3>ECOMMERCE GRUPO 2</h3>
+            </Link>
+            <SearchBar filterSearchBar={findProductBySearchBar} products={prueba}/>
+            <div className='adds'>
+                <Link to='/admin/addproduct' className='link'>
+                    <button>Add Products</button>
+                </Link>
+                <Link to='/admin/addcategory' className='link'>
+                    <button>Add Categories</button>
+                </Link>
+            </div>
         </header>
     )
-}
+};
+
+const mapStateToProps = (state) => {
+    return {
+        prueba: state
+    }
+};
+
+export default connect(mapStateToProps, { findProductBySearchBar })(Header);
