@@ -9,10 +9,7 @@ VALUES ('laptop', '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 ('sound', '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00');
 
 
-
-
 INSERT INTO "products" ("name", "description", "image", "price", "stock", "createdAt", "updatedAt")
-
 VALUES ('NOTEBOOK 14" LENOVO', 'THINKPAD E495 RYZEN 3 3200U 8GB SSD 256GB W10H', 'https://armytech.com.ar/Image/0/450_450-Ryze%20n3.jpg', 73000 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 ('Notebook HP Intel', 'Core i3 (10ma. gen) - 8GB - 256GB - 14" - W10H', 'https://www.computershopping.com.ar/Images/Productos/HP-14-CF3047LA_Foto0.jpg', 97000 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 ('Notebook Lenovo V15', 'ADA - AMD 3020e - 4GB - 256GB SSD - 15,6" - W10', 'https://www.computershopping.com.ar/Images/Productos/82C7007SSP_Foto0.jpg', 75650 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
@@ -47,5 +44,5 @@ VALUES ('NOTEBOOK 14" LENOVO', 'THINKPAD E495 RYZEN 3 3200U 8GB SSD 256GB W10H',
 ('Sistema de Audio LG OK99 1800W RMS' , 'Este equipo de audio posee una potencia de 1800 watts.El LG XBOOM OK99 bombea el sonido de manera punzante y estrenduosa, a traves de sus parlantes potentes de 12 pulgadas para bajos que puedas sentir y escuchar. Hace que tu reunion familiar sea muy especial con LG XBOOM OK99. Con luces coloridas y funciones de karaoke, la fiesta estara llena de risas y alegria. Completa tu fiesta con los parlantes de Multi Color Lighting que cambian al ritmo de la musica.' , 'https://armytech.com.ar/Image/0/450_450-h901-c.jpg' , 100000, 100 , '2020-12-10 00:00:00 -3:00' , '2020-12-10 00:00:00 -3:00'),
 ('Sistema De Sonido Genius Gx Gaming Sw-g2.1 3000 70w' , 'Potencia total (watts): 70watts , Subwoofer: 40 W , Subwoofer: 6.5 pulgadas; 8 , Frecuencia: 35 Hz – 20K Hz  , Satelites: 15 W x 2 Satelites: 99 x 143 x 115 mm , Satelites: 60 x 170 x 154 mm' , 'https://www.codigo-binario.com.ar/wp-content/uploads/2020/09/924806-MLA43463080885_092020-150x150.jpg' , 38000 , 100 , '2020-12-10 00:00:00 -3:00' , '2020-12-10 00:00:00 -3:00');
 
-`);
 
+`);
