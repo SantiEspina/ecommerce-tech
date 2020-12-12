@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Product from './Product/Product.js';
+import Categories from './Categories/Categories';
 import Filter from './Filter/Filter.js';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getProducts } from '../../Redux/actions';
+
 
 import './Main.scss';
 
-function Main ({prueba}) {
+function Main () {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getProducts());
+    }, [dispatch]);
+
     return (
         <div className='main'>
-            <Filter products={prueba.length}/>
-            <Product prop={prueba}/>
+            <Filter />
+            <div className='categoriesProduct'>
+                <Categories />
+                <Product />
+            </div>
         </div>
     )
 };
 
-const mapStateToProps = (state) => {
-    return {
-        prueba: state
-    }
-};
 
-
-export default connect(mapStateToProps, null)(Main);
+export default Main;

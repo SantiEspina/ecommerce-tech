@@ -1,0 +1,36 @@
+.editCnt-false{
+    display: none;
+}
+
+.editCnt-true{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: red;
+    font-size: 2rem;
+    .editBox{
+        width: 70%;
+        background-color: #f4f4f4;
+        margin: 20% auto;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.15);
+        .closeBtn{
+            color: rgb(85, 136, 136);
+            border: 0;
+            float: right;
+            font-size: 1.8rem;
+            &:hover{
+                cursor: pointer;
+                color: #000000;   
+            }
+            &:focus{
+                text-decoration: none;
+            }
+        }
+    }
+}

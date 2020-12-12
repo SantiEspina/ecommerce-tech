@@ -1,8 +1,8 @@
 .productCnt{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    display: grid;
     margin-top: 5rem;
-
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 25rem));
+    gap: 0.25rem;
+    justify-content: center;
+    width: 75%;
 }

@@ -21,6 +21,8 @@
         button{
             font-family: 'Archivo Narrow', sans-serif;
             cursor: pointer;
+            border-radius: 1rem;
+            border: .1rem solid #e3e3e3;
             &:hover {
                 background-color: #ffffff;
                 color: black;
