@@ -1,23 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Castoro:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
 
-.formAddCategory{
+.categoriesCnt{
+    width: 15%;
+    max-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color:   #ccebff    ;
-    font-family: 'Castoro', serif;
-
-    height: 80vh;
-    .div{
-        margin: 1rem;
-        padding: 1rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color:   #e6fff2    ;
+    margin-left: 2rem;
+    padding: 1.2rem;
+    box-shadow: 0 0 0.25rem #3e3e3e;
+    overflow: visibility;
+    border-radius: .5rem;
+    &:hover{
+        box-shadow: 0 0 0.4rem #3e3e3e;
+        transition: 200ms;
     }
-    .btnAddCategory {
-        cursor: pointer;
-        &:hover {
-            background-color: #203040;
-            color: white;
+    h2{
+        text-decoration: underline;
+        margin: 0;
+        margin-bottom: .5rem;
+    }
+    li{
+        display: flex;
+        align-items: flex-start;
+        list-style: none;
+        text-align: start;
+        width: 100%;
+        &:hover{
+            text-decoration: underline;
+            background-color: #ccffe6 ;
+            border-radius: .5rem;
+            cursor: pointer;
         }
     }
 }

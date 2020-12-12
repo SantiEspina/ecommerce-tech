@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-
-import './Categories.scss';
+import axios from 'axios'
+import './addCategories.scss';
 
 export default function Categories() {
     const [input, setInput] = useState({
@@ -17,13 +17,18 @@ export default function Categories() {
 
     const handleSubmit = function (e) {
         e.preventDefault();
-        // axios falta importar axios
-        //     .post('http://localhost:3001/categories', {
-        //     name:`${input.name}`,
-        // })
+        axios
+            .post('http://localhost:3001/categories', {
+            name:`${input.name}`,
+        })
+        .then((data) => {
+            return (data);
+        });
         setInput({
             name:'',
         })
+        window.alert("Your category was created successfully!");
+
     }
         return (
             <form onSubmit={(e) => handleSubmit(e)} className='formAddCategory'>
@@ -35,7 +40,7 @@ export default function Categories() {
                      value={input.name} 
                      onChange={handleInputChange} />   
                 </div>
-                <input type='submit' value='Add Category' className='btnAddCategory'></input>
+                <input type='submit' value='Add Category' disabled={!input.name && 'true'} className='btnAddCategory'></input>
             </form>
         )
     
