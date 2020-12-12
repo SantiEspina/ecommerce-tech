@@ -9,13 +9,23 @@ export default function ProductID({ match })  {
     const { details } = useSelector(state => state);
 
     useEffect(() => {
-        dispatch(getDetails(id))
+        dispatch(getDetails(id));
     }, [dispatch]);
 
     if(!details) return (<h2>Loading...</h2>)
     return (
         <div className='productID'>
-            hola
+            <div className='idBox'>
+                <h3>{details.name}</h3>
+                <img src={details.image}/>
+            </div>
+            <div className='info'>
+                <p>{details.description}</p>
+                <div className='details'>
+                    <span>Price: $ {details.price}</span> 
+                    <span>Stock: {details.stock}</span>
+                </div>
+            </div>
         </div>
     )
 };

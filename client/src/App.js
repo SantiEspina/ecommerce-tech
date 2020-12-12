@@ -7,7 +7,7 @@ import Admin from './components/Main/Admin/Admin';
 import AddProduct from './components/Main/Admin/addProduct';
 import AddCategory from './components/Main/Admin/addCategory';
 import ProductID from './components/Main/Product/ProductID';
-
+import EditProduct from './components/Main/Admin/EditProduct'
 
 function App() {
   return (
@@ -17,9 +17,9 @@ function App() {
       <Route exact path="/admin/" render={() => <Admin />} />
       <Route exact path="/admin/addproduct" render={() => <AddProduct />} />
       <Route exact path="/admin/addcategory" render={() => <AddCategory />} />
+      <Route exact path="/admin/editproduct/:id" component={EditProduct} />
       <Route exact path="/product/:id" component={ProductID} />
       <Route path="/" render={() => <Footer />} />
-
     </>
   );
 }

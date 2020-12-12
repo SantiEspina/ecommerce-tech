@@ -1,28 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import './addProduct.scss';
-import { getCategories } from '../../../Redux/actions';
-import { addProduct } from '../../../Redux/actions';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { editProduct, getDetails } from '../../../Redux/actions';
 
+import './editProduct.scss';
 
-function AddProduct(){
-    const { categories } = useSelector(state => state);
+export default function EditProduct({ match }) {
     const dispatch = useDispatch();
-
-    const [input, setInput] = useState({
-        name:'',
-        // category:'',
-        description:'',
-        image:'',
+    const { details } = useSelector(state => state);
+    const { id } = match.params;
+    
+    useEffect(() => {
+        dispatch(getDetails(id))
+    }, [dispatch]);
+    
+    const [ input, setInput ] = useState({
+        name: '',
+        description: '',
+        image: '',
         price: '',
         stock: ''
     });
 
-    useEffect(() => {
-        dispatch(getCategories());
-    }, [dispatch]);
-    
     const handleInputChange = function (e) {
         setInput ({
             ...input,
@@ -30,26 +28,27 @@ function AddProduct(){
         });
     };
     
-    const handleSubmit = function(e) {
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addProduct(input));
+        dispatch(editProduct(id, input));
+        alert('The product was edited correctly!');
         setInput({
             name: '',
             description: '',
             image: '',
             price: '',
             stock: ''
-        });
-        
-        window.alert("Your product was created successfully!");
+        })
     };
-
-    if(!categories) return (<h2>Loading...</h2>)
+    
+    if(!details) return (<h3>Loading...</h3>);
     return (
         <form onSubmit={handleSubmit} className='formAddProduct'>
             <div className='div'>
                 <label>Name: </label>
                 <input 
+                    placeholder={details.name}
                     type='text'
                     name='name'
                     value={input.name} 
@@ -58,6 +57,7 @@ function AddProduct(){
             <div className='div'>
                 <label>Description: </label>
                 <textarea 
+                    placeholder={details.description}
                     type='text' 
                     name='description' 
                     value={input.description} 
@@ -80,15 +80,17 @@ function AddProduct(){
             <div className='div'> 
                 <label>URL or URLS of images: </label>
                 <textarea 
+                    placeholder={details.image}
                     type='text' 
                     name='image' 
-                    value={input.image} 
+                    value={ input.image} 
                     onChange={handleInputChange} 
                 />
             </div>
             <div className='div'>
                 <label>Price: </label>
                 <input 
+                    placeholder={details.price}
                     type='number' 
                     name='price' 
                     value={input.price} 
@@ -99,14 +101,14 @@ function AddProduct(){
                 <label>Stock: </label>
                 <input 
                     type='number'
+                    placeholder={details.stock}
                     name='stock' 
                     value={input.stock} 
                     onChange={handleInputChange}
                     />
             </div>
-            <input type='submit' value='Add Product' disabled={!input.name || !input.price || !input.stock || false} className='btnAddProduct'></input>
+            <input type='submit' value='Edit Product' disabled={!input.name || !input.price || !input.stock || false} className='btnAddProduct'></input>
         </form>
     )
+    
 }
-
-export default AddProduct;

@@ -1,17 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../../../Redux/actions';
+import { getProducts, deleteProduct } from '../../../Redux/actions';
 
 import './Admin.scss';
+import './deleteProduct.scss';
+
 
 export default function Admin() {
     const { products } = useSelector(state => state);
     const dispatch = useDispatch();
+    let [ input, setInput ] = useState({
+        edit: false,
+        delete: false,
+        id: 0
+    });
+
+    const handleToggle = (e) => {
+        let { name, value } = e.target;
+        setInput({
+            ...input,
+            [name]: !input[name],
+            id: value
+        });
+    };
+
+    const deleteFunction = (e) => {
+        let { value, name } = e.target;
+        dispatch(deleteProduct(value));
+        setInput({
+            ...input,
+            [name]: !input[name]
+        })
+    }
 
     useEffect(() => {
         dispatch(getProducts());
-    }, [dispatch]);
+    }, [dispatch, products]);
 
     if(!products) return (<h1>Loading...</h1>)
     return (
@@ -37,10 +62,10 @@ export default function Admin() {
                             <td className='stock'>{p.stock}</td>
                             <td className='categories'>{p.categories}</td>
                             <div className='btnsCRUD'>
-                                <Link to='/admin/editProduct'>
-                                    <button className='edit' value={p.id} onClick={() => {}}>Edit Product</button>   
+                                <Link to={`/admin/editProduct/${p.id}`}>
+                                    <button className='edit' name='edit' value={p.id}>Edit Product</button>   
                                 </Link>
-                                <button className='danger' value={p.id} onClick={() => {}}>Delete Product</button>
+                                <button className='danger' name='delete' value={p.id} onClick={handleToggle}>Delete Product</button>
                             </div>
                         </tr>
                     ))
@@ -54,32 +79,22 @@ export default function Admin() {
                     <button className='addCategory' onClick={e => {}}>Add New Category</button>
                 </Link>
             </div>
-            {/* <div classname={`modal-bg-${check}`}> 
-                <div className='modal'>
-                    <span>Choose category to add: </span>
-                    <select name='category' 
-                        value={categories} 
-                        onChange={handleInputChange} >
-                            <option>Select Category...</option>
-                        {
-                            categories.map((c, i) => (
-                                <option value={c} key={i}>{c}</option>
-                            ))
-                        }
-                    </select>
-                    <button>Finish</button>
-                </div>
-            </div>
-            <div classname={`modal-bg-${check}`}>
-                <div className='modal'>
-                    <label for="stock">Choose how many products you want to remove: </label>
-                    <input type="range" name="stock" id="stock" min="1" max="200" step="1" value="1"></input>
-                    <div>
-                        <button>Delete</button>
-                        <button>Cancel</button>
-                    </div>
+            {/* <div className={`editCnt-${input.edit}`}>
+                <div className='editBox'>
+                    <button className='closeBtn' name='edit' onClick={handleToggle}>&times;</button>
+                    <p>hola</p>
                 </div>
             </div> */}
+            <div className={`deleteCnt-${input.delete}`}>
+                <div className='deleteBox'>
+                    <button className='closeBtn' name='delete' onClick={handleToggle}>&times;</button>
+                    <p>Are you sure you want to remove the product?</p>
+                    <div className='buttons'>
+                        <button className='yes' name='delete' value={input.id} onClick={deleteFunction}>Yes</button>
+                        <button className='no' name='delete' onClick={handleToggle}>No</button>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

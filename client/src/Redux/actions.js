@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, FIND_PRODUCT_SUCCESS, ORDER_BY_FILT, GET_PRODUCTS, GET_CATEGORIES, GET_DETAILS } from './constants';
+import { ADD_PRODUCT, FIND_PRODUCT_SUCCESS, ORDER_BY_FILT, GET_PRODUCTS, GET_CATEGORIES, GET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT } from './constants';
 import axios from 'axios';
 
 const localhost = 'http://localhost:3001';
@@ -47,9 +47,25 @@ export const orderByFilt = (order) => {
     }
 };
 
-export const addProduct = (payload) => {
-    return {
-        type: ADD_PRODUCT,
-        payload
+export const addProduct = (input) => {
+    let { name, description, image, price, stock } = input;
+    return function(dispatch) {
+        axios.post(`${localhost}/products`, { name, description, image, price, stock })
+            .then(data => dispatch({ type: ADD_PRODUCT, payload: data.data }))    
     }
 };
+
+export const deleteProduct = (idParams) => {
+    return function (dispatch) {
+        axios.delete(`${localhost}/products/${idParams}`)
+            .then(data => dispatch ({ type: DELETE_PRODUCT, payload: data.data}))
+    }
+}
+
+export const editProduct = (id, input) => {
+    let { name, description, image, price, stock } = input;
+    return function (dispatch) {
+        axios.put(`${localhost}/products/${id}`, { name, description, image, price, stock } )
+            .then(data => dispatch ({ type: EDIT_PRODUCT, payload: data.data}))
+    }
+}

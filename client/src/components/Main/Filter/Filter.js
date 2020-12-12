@@ -8,9 +8,9 @@ function Filter () {
     const { products } = useSelector(state => state);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(orderByFilt())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(orderByFilt())
+    // }, [dispatch])
 
     if(!products) return (<h1></h1>)
     return (
