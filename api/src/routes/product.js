@@ -15,8 +15,8 @@ function parseWhere(where){
 		}
 	}
     return where;
-
 }
+
 server.get('/', (req, res, next) => {
     let { limit, offset, order, where } = req.query;
     order && (order = JSON.parse(order));
@@ -29,7 +29,8 @@ server.get('/', (req, res, next) => {
 		.catch(next);
 	});
 
-server.get('/categoria/:nombreCat', (req, res) => {
+
+	server.get('/categoria/:nombreCat', (req, res) => {
 	const {nombreCat} = req.params
 	 Product.findAll({include: {
 		model: Category, where: {
@@ -59,7 +60,7 @@ server.get('/search',(req,res) => {
 		res.send(products);
 	  })
 	  .catch((err) => res.send(err));
-	 });
+});
 
 
 
@@ -73,8 +74,7 @@ server.get('/:id', (req, res)=>{
 	.catch(err =>{
 		res.status(404).json(err)
 	})
- })
-
+})
 
 
 server.post('/:idProduct/category/:idCategory', async (req, res) => {
@@ -88,7 +88,6 @@ server.post('/:idProduct/category/:idCategory', async (req, res) => {
 });
 
 server.post('/', (req,res)=>{
-
 	const {name, description, image, price, stock} = req.body
 
 	if(name && description && image && price && stock){
@@ -130,7 +129,6 @@ server.delete('/:idParams',(req, res) => {
     .catch(err=>{
         res.status(400).json(err)
     })
-
 });
 
 server.put('/:id',(req,res)=>{
@@ -157,8 +155,6 @@ server.put('/:id',(req,res)=>{
 	  res.status(400).send('Datos incorrectos')
   }
 })
-
-
 
 
 module.exports = server;

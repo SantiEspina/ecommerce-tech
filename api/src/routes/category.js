@@ -17,6 +17,7 @@ function parseWhere(where){
     return where;
 
 }
+
 server.get('/', (req, res, next) => {
     let { limit, offset, order, where } = req.query;
     order && (order = JSON.parse(order));
