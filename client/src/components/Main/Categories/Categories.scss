@@ -2,7 +2,8 @@
 
 .categoriesCnt{
     width: 15%;
-    max-height: 100vh;
+    min-height: 100vh;
+    max-height: 150vh;
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
@@ -23,10 +24,11 @@
         margin: 0;
         margin-bottom: .5rem;
     }
-    li{
+    button{
         display: flex;
         align-items: flex-start;
-        list-style: none;
+        background-color: transparent;
+        border: 0;
         text-align: start;
         width: 100%;
         &:hover{

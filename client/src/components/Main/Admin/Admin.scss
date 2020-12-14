@@ -94,13 +94,14 @@
 }
 .btnAdd{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     background-color: rgb(209, 255, 209);
-    
+    border-bottom: 1px solid #3e3e3e;
     button{
         margin: 2rem;
         background-color: rgb(209, 255, 255);
-        border-radius: .5rem;
+        border-radius: 1.5rem;
+        padding: 1rem;
         cursor: pointer;
         &:hover{
             background-color: #ffffff;

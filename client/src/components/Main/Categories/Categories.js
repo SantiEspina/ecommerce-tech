@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Categories.scss';
-import { getCategories } from '../../../Redux/actions';
+import { getCategories, getProductByCategory } from '../../../Redux/actions';
 
 export default function Categories() {
     const dispatch = useDispatch();
@@ -11,18 +11,23 @@ export default function Categories() {
         dispatch(getCategories());
     }, [dispatch]);
 
+    const filterCategory = (e) => {
+        let { value } = e.target;
+        dispatch(getProductByCategory(value))
+    };
 
-    if(!categories) return (<h1>Loading...</h1>)
+
+    if(!categories) return (<h1></h1>)
     return (
-        <ul className='categoriesCnt'>
+        <div className='categoriesCnt'>
             <h2>Categories:</h2>
-            <li>All Products</li>
+            <button value='' onClick={filterCategory}>All Products</button>
             {
                 categories.map(c => (
-                    <li key={c.id}>{c.name}</li>
+                    <button key={c.id} value={c.name} onClick={filterCategory}>{c.name}</button>
                 ))
             }
-        </ul>
+        </div>
     )
     
 }
