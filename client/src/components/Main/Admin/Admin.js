@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, deleteProduct, removeCategoryToProduct } from '../../../Redux/actions';
+import { getProducts, deleteProduct, removeCategoryToProduct, getCategories, deleteCategory } from '../../../Redux/actions';
 
 import './Admin.scss';
-import './deleteProduct.scss';
+import './Product/deleteProduct.scss';
+import './Category/removeCategory.scss';
 
 
 export default function Admin() {
-    const { products } = useSelector(state => state);
+    const { products, categories } = useSelector(state => state);
     const dispatch = useDispatch();
     let [ input, setInput ] = useState({
-        remove: false,
+        removeCategory: false,
         delete: false,
         id: 0
     });
@@ -25,6 +26,13 @@ export default function Admin() {
         });
     };
 
+    const handleInputChange = function (e) {
+        setInput ({
+            ...input,
+            id: e.target.value      
+        });
+    }
+
     const deleteFunction = (e) => {
         let { value, name } = e.target;
         dispatch(deleteProduct(value));
@@ -34,19 +42,73 @@ export default function Admin() {
         })
     };
 
-    const deleteCategory = (e, id) => {
-        let { value, name } = e.target;
+    const deleteCategoryToProduct = (e, id) => {
+        let { value } = e.target;
         dispatch(removeCategoryToProduct(id, value));
         window.location.reload()
+    };
+
+    const removeCategory = (e) => {
+        let { value, name } = e.target;
+        dispatch(deleteCategory(value));
+        setInput({
+            ...input,
+            [name]: !input[name]
+        })
     }
 
     useEffect(() => {
         dispatch(getProducts());
+        dispatch(getCategories());
     }, [dispatch, input]);
 
-    if(!products) return (<h1>Loading...</h1>)
+    if(!products || !categories) return (<h1>Loading...</h1>)
     return (
         <>
+            <div className='btnAdd'>
+                <Link to='/admin/addProduct'>
+                    <button>Add New Product</button>
+                </Link>
+                <Link to='/admin/addCategory' >
+                    <button className='addCategory' onClick={e => {}}>Add New Category</button>
+                </Link>
+                <button name='removeCategory' onClick={handleToggle}>Delete A Category</button>
+                <Link to='/admin/editCategory' >
+                    <button className='addCategory' onClick={e => {}}>Edit A Category</button>
+                </Link>
+            </div>
+            <div className={`removeCnt-${input.removeCategory}`}>
+                <div className='removeBox'>
+                    <button className='closeBtn' name='removeCategory' onClick={handleToggle}>&times;</button>
+                    <p>Select a category to remove: </p>
+                    <div className='infoCategories'>
+                        <select name='category' 
+                            value={input.id} 
+                            onChange={handleInputChange} >
+                                <option value=''>Categories...</option>
+                            {   
+                                categories.map((c, i) => (
+                                    <option value={c.id} key={c.id}>{c.name}</option>
+                                    ))
+                                }
+                        </select>
+                    </div>
+                    <div className='buttons'>
+                        <button className='yes' name='removeCategory' value={input.id} onClick={removeCategory}>Delete</button>
+                        <button className='no' name='removeCategory' onClick={handleToggle}>Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div className={`deleteCnt-${input.delete}`}>
+                <div className='deleteBox'>
+                    <button className='closeBtn' name='delete' onClick={handleToggle}>&times;</button>
+                    <p>Are you sure you want to remove the product?</p>
+                    <div className='buttons'>
+                        <button className='yes' name='delete' value={input.id} onClick={deleteFunction}>Yes</button>
+                        <button className='no' name='delete' onClick={handleToggle}>No</button>
+                    </div>
+                </div>
+            </div>
             <table className='admin'>
                 <tr>
                     <th className='id'>id</th>
@@ -71,7 +133,7 @@ export default function Admin() {
                                     p.categories.map(c => (
                                         <div key={c.id} className='categCnt'>
                                             <span>{c.name} </span>
-                                            <button value={c.id} name='remove' onClick={(e) => deleteCategory(e, p.id)}>&times;</button>
+                                            <button value={c.id} name='remove' onClick={(e) => deleteCategoryToProduct(e, p.id)}>&times;</button>
                                         </div>
                                     ))
                                 ) : null
@@ -87,34 +149,6 @@ export default function Admin() {
                     ))
                 }
             </table>
-            <div className='btnAdd'>
-                <Link to='/admin/addProduct'>
-                    <button>Add New Product</button>
-                </Link>
-                <Link to='/admin/addCategory' >
-                    <button className='addCategory' onClick={e => {}}>Add New Category</button>
-                </Link>
-            </div>
-            {/* <div className={`removeCnt-${input.removeCategory}`}>
-                <div className='removeBox'>
-                    <button className='closeBtn' name='removeCategory' onClick={handleToggle}>&times;</button>
-                    <p>Are you sure you want to remove this category?</p>
-                    <div className='buttons'>
-                        <button className='yes' name='removeCategory' value={input.id} onClick={deleteCategory}>Yes</button>
-                        <button className='no' name='removeCategory' onClick={handleToggle}>No</button>
-                    </div>
-                </div>
-            </div> */}
-            <div className={`deleteCnt-${input.delete}`}>
-                <div className='deleteBox'>
-                    <button className='closeBtn' name='delete' onClick={handleToggle}>&times;</button>
-                    <p>Are you sure you want to remove the product?</p>
-                    <div className='buttons'>
-                        <button className='yes' name='delete' value={input.id} onClick={deleteFunction}>Yes</button>
-                        <button className='no' name='delete' onClick={handleToggle}>No</button>
-                    </div>
-                </div>
-            </div>
         </>
     )
 }

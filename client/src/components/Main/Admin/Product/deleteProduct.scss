@@ -16,11 +16,10 @@
     color: #000000;
     font-size: 2rem;
     .deleteBox{
-        width: 70%;
+        width: 55%;
         background-color: #f4f4f4;
-        margin: 20% auto;
-        padding: 2rem;
-        height: 25vh;
+        margin: 15% auto;
+        padding: 1rem;
         box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.15);
         .closeBtn{
             color: red;
@@ -37,7 +36,8 @@
         }
         p{
             text-align: center;
-            margin-bottom: 5rem;
+            text-decoration: underline;
+            margin-bottom: 3rem;
         }
         .buttons{
             display: flex;
@@ -48,8 +48,10 @@
             border: none;
             font-family: 'Montserrat', sans-serif;
             button{
+                padding: 1rem;
                 border-radius: 1rem;
                 width: 15rem;
+                margin-bottom: 1.3rem;
                 &:hover{
                     cursor: pointer;
                 }
