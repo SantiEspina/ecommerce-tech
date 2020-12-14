@@ -1,4 +1,4 @@
-import { ORDER_BY_FILT, ADD_PRODUCT, GET_PRODUCTS, GET_CATEGORIES, GET_DETAILS, FIND_PRODUCT_SUCCESS, DELETE_PRODUCT, EDIT_PRODUCT } from './constants';
+import { ORDER_BY_FILT, ADD_PRODUCT, GET_PRODUCTS, GET_CATEGORIES, GET_DETAILS, FIND_PRODUCT_SUCCESS, DELETE_PRODUCT, EDIT_PRODUCT, REMOVE_CATEGORY_TO_PRODUCT } from './constants';
 
 let initialState = {};
 
@@ -34,15 +34,20 @@ export default function findProductReducer(state = initialState, action) {
                 ...state,
                 products: action.payload
             }
-            case DELETE_PRODUCT:
-                return {
-                    ...state
-                }
-            case EDIT_PRODUCT:
-                return {
-                    ...state,
-                    products: [...state.products, action.payload]
-                }
+        case DELETE_PRODUCT:
+            return {
+                ...state
+            }
+        case EDIT_PRODUCT:
+            return {
+                ...state,
+                products: state.products
+            }
+        case REMOVE_CATEGORY_TO_PRODUCT:
+            return {
+                ...state,
+                products: state.products
+            }
         default: return state;
     }
 }

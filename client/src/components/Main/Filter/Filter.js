@@ -19,6 +19,7 @@ function Filter () {
             <div>
                 Order By: {''}
                 <select className='selectFilter' onChange={(e) => dispatch(orderByFilt(e.target.value))}> 
+                    <option value=''>Select Order</option>
                     <option value='newest'>Newest</option>
                     <option value='lowest'>Lowest</option>
                     <option value='highest'>Highest</option>

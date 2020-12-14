@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { editProduct, getDetails } from '../../../Redux/actions';
+import { editProduct, getDetails, getCategories, addCategoryToProduct } from '../../../Redux/actions';
 
 import './editProduct.scss';
 
 export default function EditProduct({ match }) {
     const dispatch = useDispatch();
-    const { details } = useSelector(state => state);
+    const { details, categories } = useSelector(state => state);
     const { id } = match.params;
     
     useEffect(() => {
-        dispatch(getDetails(id))
+        dispatch(getDetails(id));
+        dispatch(getCategories());
     }, [dispatch]);
     
     const [ input, setInput ] = useState({
         name: '',
+        category:'',
         description: '',
         image: '',
         price: '',
@@ -32,6 +34,7 @@ export default function EditProduct({ match }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(editProduct(id, input));
+        dispatch(addCategoryToProduct(id, input.category));
         alert('The product was edited correctly!');
         setInput({
             name: '',
@@ -42,7 +45,7 @@ export default function EditProduct({ match }) {
         })
     };
     
-    if(!details) return (<h3>Loading...</h3>);
+    if(!details || !categories) return (<h3>Loading...</h3>);
     return (
         <form onSubmit={handleSubmit} className='formAddProduct'>
             <div className='div'>
@@ -64,19 +67,19 @@ export default function EditProduct({ match }) {
                     onChange={handleInputChange}
                 />
             </div>
-            {/* <div className='div'> 
+            <div className='div'> 
                 <label>Categories: </label>
                 <select name='category' 
                     value={input.category} 
                     onChange={handleInputChange} >
                         <option value=''>Select Category...</option>
-                    {
+                    {   
                         categories.map((c, i) => (
-                            <option value={c.name} key={c.id}>{c.name}</option>
+                            <option value={c.id} key={c.id}>{c.name}</option>
                         ))
                     }
                 </select> 
-            </div> */}
+            </div>
             <div className='div'> 
                 <label>URL or URLS of images: </label>
                 <textarea 
