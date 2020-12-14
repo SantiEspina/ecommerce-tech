@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
+
+.cardCnt{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    border-radius: 0.25rem;
+    height: 35rem;
+    margin: .5rem;
+    margin-top: 1rem;
+    box-shadow: 0 0 0 #3e3e3e;
+    transition: box-shadow 250ms;
+    overflow: hidden;
+    &:hover{
+        box-shadow: 0 0 0.25rem #3e3e3e;
+    }
+
+    .imgName{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 75%;
+        .imgProduct{
+            width: 25rem;
+            max-height: 22rem;
+            object-fit: contain;
+        }
+        .link{
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: black;
+            height: 100%;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .name {
+            display: flex;
+            font-family: 'Montserrat', sans-serif;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            max-width: 20vw;
+            &:hover{
+                color: rgb(158, 134, 0);
+            }
+        }
+    }
+    .info{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 8px;
+        .btn-primary{
+            border-radius: 1.5rem;
+            padding: 10px 30px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            &:hover{
+                background-color: rgb(112, 95, 0);
+            }
+        }
+    }
+    
+}

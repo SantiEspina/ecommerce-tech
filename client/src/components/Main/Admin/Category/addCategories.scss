@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro:ital@1&display=swap');
+
+.formAddCategory{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:   #ccebff    ;
+    font-family: 'Castoro', serif;
+    height: 100%;
+    .div{
+        margin: 1rem;
+        padding: 1rem;
+    }
+    .btnAddCategory {
+        cursor: pointer;
+        &:hover {
+            background-color: #203040;
+            color: white;
+        }
+    }
+}

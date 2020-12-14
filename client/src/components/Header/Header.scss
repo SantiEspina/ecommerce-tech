@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #203040;
+    color: #ffffff;
+    grid-area: header;
+    font-family: 'Kaushan Script', cursive;   
+    height: 65px;
+    h3{
+        &:hover {
+            color: orange;
+        }
+    }
+    .link{
+        text-decoration: none;
+        color: #ffffff;
+        button{
+            font-family: 'Archivo Narrow', sans-serif;
+            cursor: pointer;
+            border-radius: 1rem;
+            border: .1rem solid #e3e3e3;
+            &:hover {
+                background-color: #ffffff;
+                color: black;
+            }
+        }
+    }
+    .adds{
+        display: flex;
+        
+    }
+}

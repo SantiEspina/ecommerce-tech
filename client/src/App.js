@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header/Header.js';
+import Main from './components/Main/Main.js';
+import { BrowserRouter, Route } from "react-router-dom";
+import Footer from './components/Footer/Footer.js';
+import Admin from './components/Main/Admin/Admin';
+import AddProduct from './components/Main/Admin/Product/addProduct';
+import AddCategory from './components/Main/Admin/Category/addCategory';
+import ProductID from './components/Main/Product/ProductID';
+import EditProduct from './components/Main/Admin/Product/EditProduct';
+import EditCategory from './components/Main/Admin/Category/EditCategory';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Route path="/" render={() => <Header />} />
+      <Route exact path="/" render={() => <Main />} />
+      <Route exact path="/admin/" render={() => <Admin />} />
+      <Route exact path="/admin/addproduct" render={() => <AddProduct />} />
+      <Route exact path="/admin/addcategory" render={() => <AddCategory />} />
+      <Route exact path="/admin/editproduct/:id" component={EditProduct} />
+      <Route exact path="/product/:id" component={ProductID} />
+      <Route exact path="/admin/editcategory" component={EditCategory} />
+      <Route path="/" render={() => <Footer />} />
+    </>
   );
 }
 
