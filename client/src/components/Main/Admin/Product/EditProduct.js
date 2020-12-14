@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { editProduct, getDetails, getCategories, addCategoryToProduct } from '../../../Redux/actions';
-
-import './editProduct.scss';
+import { editProduct, getDetails, getCategories, addCategoryToProduct } from '../../../../Redux/actions';
 
 export default function EditProduct({ match }) {
     const dispatch = useDispatch();
@@ -33,11 +31,17 @@ export default function EditProduct({ match }) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        for(let key in input) {
+            if(!input[key]) {
+                input[key] = details[key]
+            }
+        };
         dispatch(editProduct(id, input));
         dispatch(addCategoryToProduct(id, input.category));
         alert('The product was edited correctly!');
         setInput({
             name: '',
+            category: '',
             description: '',
             image: '',
             price: '',
@@ -110,7 +114,7 @@ export default function EditProduct({ match }) {
                     onChange={handleInputChange}
                     />
             </div>
-            <input type='submit' value='Edit Product' disabled={!input.name || !input.price || !input.stock || false} className='btnAddProduct'></input>
+            <input type='submit' value='Edit Product' className='btnAddProduct'></input>
         </form>
     )
     

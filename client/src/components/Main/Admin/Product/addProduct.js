@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './addProduct.scss';
-import { getCategories } from '../../../Redux/actions';
-import { addProduct } from '../../../Redux/actions';
+import { getCategories, addProduct } from '../../../../Redux/actions';
 
 
 function AddProduct(){
