@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, FIND_PRODUCT_SUCCESS, ORDER_BY_FILT, GET_PRODUCTS, GET_CATEGORIES, GET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT } from './constants';
+import { ADD_PRODUCT, FIND_PRODUCT_SUCCESS, ORDER_BY_FILT, GET_PRODUCTS, GET_CATEGORIES, GET_DETAILS, DELETE_PRODUCT, EDIT_PRODUCT, ADD_CATEGORY_TO_PRODUCT, REMOVE_CATEGORY_TO_PRODUCT } from './constants';
 import axios from 'axios';
 
 const localhost = 'http://localhost:3001';
@@ -32,6 +32,7 @@ export const findProductBySearchBar = (value) => {
 };
 
 export const orderByFilt = (order) => {
+    if(!order) return getProducts();
     let check = 'ASC';
     check = order === 'highest' ? 'DESC' : (
         order === 'newest' ? 'DESC' : ('ASC')
@@ -60,7 +61,7 @@ export const deleteProduct = (idParams) => {
         axios.delete(`${localhost}/products/${idParams}`)
             .then(data => dispatch ({ type: DELETE_PRODUCT, payload: data.data}))
     }
-}
+};
 
 export const editProduct = (id, input) => {
     let { name, description, image, price, stock } = input;
@@ -68,4 +69,18 @@ export const editProduct = (id, input) => {
         axios.put(`${localhost}/products/${id}`, { name, description, image, price, stock } )
             .then(data => dispatch ({ type: EDIT_PRODUCT, payload: data.data}))
     }
-}
+};
+
+export const addCategoryToProduct = (idP, idC) => {
+    return function (dispatch) {
+        axios.post(`${localhost}/products/${idP}/category/${idC}`)
+            .then(data => dispatch({ type: ADD_CATEGORY_TO_PRODUCT, payload: data.data }))
+    }
+};
+
+export const removeCategoryToProduct = (idP, idC) => {
+    return function (dispatch) {
+        axios.delete(`${localhost}/products/${idP}/category/${idC}`)
+            .then(data => dispatch({ type: REMOVE_CATEGORY_TO_PRODUCT, payload: data.data }))
+    }
+};

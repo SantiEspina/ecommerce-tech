@@ -22,7 +22,7 @@ server.get('/', (req, res, next) => {
     order && (order = JSON.parse(order));
     where && (where = parseWhere(where));
 
-	Product.findAll({limit, offset, order, where})
+	Product.findAll({limit, offset, order, where, include: Category})
 		.then(products => {
 			res.send(products);
 		})
@@ -51,8 +51,8 @@ server.get('/search',(req,res) => {
 	Product.findAll({
     where: {
 		[Op.or]: [
-		    { name: { [Op.substring]: value } },
-		    { description: { [Op.substring]: value } },
+		    { name: { [Op.iLike]: `%${value}%` } },
+		    { description: { [Op.iLike]: `%${value}%` } },
 		],
 	  },
 	})
