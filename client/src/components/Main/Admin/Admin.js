@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, deleteProduct } from '../../../Redux/actions';
+import { getProducts, deleteProduct, removeCategoryToProduct } from '../../../Redux/actions';
 
 import './Admin.scss';
 import './deleteProduct.scss';
@@ -11,7 +11,7 @@ export default function Admin() {
     const { products } = useSelector(state => state);
     const dispatch = useDispatch();
     let [ input, setInput ] = useState({
-        edit: false,
+        remove: false,
         delete: false,
         id: 0
     });
@@ -32,11 +32,17 @@ export default function Admin() {
             ...input,
             [name]: !input[name]
         })
+    };
+
+    const deleteCategory = (e, id) => {
+        let { value, name } = e.target;
+        dispatch(removeCategoryToProduct(id, value));
+        window.location.reload()
     }
 
     useEffect(() => {
         dispatch(getProducts());
-    }, [dispatch, products]);
+    }, [dispatch, input]);
 
     if(!products) return (<h1>Loading...</h1>)
     return (
@@ -60,7 +66,17 @@ export default function Admin() {
                             <td className='img'>{p.image}</td>
                             <td className='price'>{p.price}</td>
                             <td className='stock'>{p.stock}</td>
-                            <td className='categories'>{p.categories}</td>
+                            <td className='categories'>{
+                                p.categories ? (
+                                    p.categories.map(c => (
+                                        <div key={c.id} className='categCnt'>
+                                            <span>{c.name} </span>
+                                            <button value={c.id} name='remove' onClick={(e) => deleteCategory(e, p.id)}>&times;</button>
+                                        </div>
+                                    ))
+                                ) : null
+                            }
+                            </td>
                             <div className='btnsCRUD'>
                                 <Link to={`/admin/editProduct/${p.id}`}>
                                     <button className='edit' name='edit' value={p.id}>Edit Product</button>   
@@ -79,10 +95,14 @@ export default function Admin() {
                     <button className='addCategory' onClick={e => {}}>Add New Category</button>
                 </Link>
             </div>
-            {/* <div className={`editCnt-${input.edit}`}>
-                <div className='editBox'>
-                    <button className='closeBtn' name='edit' onClick={handleToggle}>&times;</button>
-                    <p>hola</p>
+            {/* <div className={`removeCnt-${input.removeCategory}`}>
+                <div className='removeBox'>
+                    <button className='closeBtn' name='removeCategory' onClick={handleToggle}>&times;</button>
+                    <p>Are you sure you want to remove this category?</p>
+                    <div className='buttons'>
+                        <button className='yes' name='removeCategory' value={input.id} onClick={deleteCategory}>Yes</button>
+                        <button className='no' name='removeCategory' onClick={handleToggle}>No</button>
+                    </div>
                 </div>
             </div> */}
             <div className={`deleteCnt-${input.delete}`}>

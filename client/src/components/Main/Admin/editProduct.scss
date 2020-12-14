@@ -1,8 +1,8 @@
-.editCnt-false{
+.removeCnt-false{
     display: none;
 }
 
-.editCnt-true{
+.removeCnt-true{
     position: fixed;
     z-index: 1;
     left: 0;
@@ -13,7 +13,7 @@
     background-color: rgba(0, 0, 0, 0.3);
     color: red;
     font-size: 2rem;
-    .editBox{
+    .removeBox{
         width: 70%;
         background-color: #f4f4f4;
         margin: 20% auto;
