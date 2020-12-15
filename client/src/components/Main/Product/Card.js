@@ -13,7 +13,10 @@ export default function Card ({ id, name, description, image, price, stock }) {
                     </Link>
                 </div>
                 <div className='info'>
-                    <button className='btn-primary'>Add to Cart <span>$ {price}</span></button>
+                    {stock > 0 ? <button className='btn-primary'>Add to Cart <span>$ {price}</span></button> :
+                    <span>Sin stock</span>}
+                   
+                    
                 </div>             
             </div>
         </div>
