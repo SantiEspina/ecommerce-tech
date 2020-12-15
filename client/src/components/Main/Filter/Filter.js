@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { orderByFilt } from '../../../Redux/actions';
+import { Link } from 'react-router-dom';
 
 import './Filter.scss';
 
@@ -24,6 +25,13 @@ function Filter () {
                     <option value='lowest'>Lowest</option>
                     <option value='highest'>Highest</option>
                 </select>
+            </div>
+            <div ClassName= "Carrito">
+                <Link to={`/cart`} className='Cartlink'>
+                    <button className='buttonCart'  >
+                     Cart
+                    </button>   
+                 </Link>    
             </div>
         </div>
     )
