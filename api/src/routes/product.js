@@ -15,24 +15,24 @@ function parseWhere(where){
 		}
 	}
     return where;
-}
+};
 
 server.get('/', (req, res, next) => {
     let { limit, offset, order, where } = req.query;
     order && (order = JSON.parse(order));
     where && (where = parseWhere(where));
 
-	Product.findAll({limit, offset, order, where, include: Category})
+	Product.findAll({ limit, offset, order, where, include: Category })
 		.then(products => {
 			res.send(products);
 		})
 		.catch(next);
-	});
+});
 
 
-	server.get('/categoria/:nombreCat', (req, res) => {
-	const {nombreCat} = req.params
-	 Product.findAll({include: {
+server.get('/categoria/:nombreCat', (req, res) => {
+	const { nombreCat } = req.params
+	Product.findAll({include: {
 		model: Category, where: {
 			name: nombreCat 
 		}
@@ -46,7 +46,7 @@ server.get('/', (req, res, next) => {
 });
 	
 server.get('/search',(req,res) => {
-	let  { value } =req.query;
+	let  { value } = req.query;
 
 	Product.findAll({
     where: {
@@ -67,7 +67,7 @@ server.get('/search',(req,res) => {
 server.get('/:id', (req, res)=>{
 	const { id }  = req.params
  
-	Product.findOne({where: {id}, include: Category})
+	Product.findOne({where: { id }, include: Category})
 	.then(product => {
 		res.status(201).json(product)
 	})
@@ -78,30 +78,30 @@ server.get('/:id', (req, res)=>{
 
 
 server.post('/:idProduct/category/:idCategory', async (req, res) => {
-	const {idProduct, idCategory} = req.params;
+	const { idProduct, idCategory } = req.params;
 	
-	const product= await Product.findByPk(idProduct, {include:[Category]})
-	const category= await Category.findByPk(idCategory)
+	const product = await Product.findByPk(idProduct, { include: [Category] })
+	const category = await Category.findByPk(idCategory)
 	await product.addCategory(category)
 	res.status(201).json(product)
 	
 });
 
 server.post('/', (req,res)=>{
-	const {name, description, image, price, stock} = req.body
+	const { name, description, image, price, stock } = req.body
 
 	if(name && description && image && price && stock){
-		Product.findOrCreate({where:{
+		Product.findOrCreate({ where:{
 			name, description, image, price, stock
 		}})
-	.then((obj) =>{
+		.then((obj) => {
 			res.status(201).json(obj)
-		  })
-	.catch(err=>{
-			 
-			  res.status(400).json(err)
-	})
+		})
+		.catch(err=>{		 
+			res.status(400).json(err)
 
+		})
+    
 	}else{
 		res.status(400).send('Faltan datos')
 	}
@@ -110,50 +110,50 @@ server.post('/', (req,res)=>{
 
 
 server.delete('/:idProduct/category/:idCategory', async (req, res) => {
-	const {idProduct, idCategory} = req.params;
+	const { idProduct, idCategory } = req.params;
 	
-	const product= await Product.findByPk(idProduct, {include:[Category]})
-	const category= await Category.findByPk(idCategory)
-	await product.removeCategory(category)
-	res.status(201).json(product)
-	
+	const product= await Product.findByPk(idProduct, { include:[Category] });
+	const category= await Category.findByPk(idCategory);
+
+	await product.removeCategory(category);
+
+	res.status(201).json(product);
 });
 
 server.delete('/:idParams',(req, res) => {
 	const { idParams } = req.params;
 
-	Product.destroy({where:{id:idParams}})
-    .then(()=>{
+	Product.destroy({ where: { id:idParams } })
+    .then(() => {
         res.status(200).send('Producto eliminado exitosamente')
     })
-    .catch(err=>{
+    .catch(err => {
         res.status(400).json(err)
     })
 });
 
 server.put('/:id',(req,res)=>{
-	const { id }= req.params
-	const {name, description, image, price, stock } = req.body
+	const { id } = req.params;
+	const { name, description, image, price, stock } = req.body;
 
-	if(name && description && image && price && stock){
+	if(name && description && image && price && stock) {
 	
 	    Product.update({name, description, image, price, stock},
-		    {where: {id}})
-  .then(()=>{
-	  
-	return Product.findOne({where: {id}})
-	  .then(product => {
-		  res.status(201).json(product)
-	  })
-	  .catch(err =>{
-		  res.status(404).json(err)
-	  })
-   })
+		    { where: { id } })
+  			.then(() => {
+				return Product.findOne({ where: { id } })
+	  			.then(product => {
+		  			res.status(201).json(product)
+	  			})
+	  			.catch(err =>{
+		  			res.status(404).json(err)
+	  			})
+   			})
   
    
-  }else{
-	  res.status(400).send('Datos incorrectos')
-  }
+  	} else {
+		res.status(400).send('Datos incorrectos')
+  	}
 })
 
 
