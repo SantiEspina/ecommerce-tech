@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { User, Order } = require('../db.js');
+const { User, Order, Product } = require('../db.js');
 const { Op } =require ('sequelize');
 
 function parseWhere(where){
@@ -11,7 +11,6 @@ function parseWhere(where){
 				[Op[splitProp[0]]]:where[prop],
 			};
 			delete where[prop];
-			
 		}
 	}
     return where;
@@ -108,10 +107,12 @@ server.delete('/:id', (req, res, next) => {
 server.get('/:id/cart', (req, res, next) => {
     const { id } = req.params;
 
-    User.findByPk(id, { include: [Order] })
+    User.findByPk(id, { include: [{ model: Order, include: [Product] }] })
         .then(user => res.status(201).json(user))
         .catch(err => res.status(400).send(err))
 }); 
+
+//! /order/:idOrder/product/:idProduct -> body: { quantity, price }
 
 server.post('/:id/cart', async (req, res, next) => {
     const { id } = req.params;
@@ -129,20 +130,16 @@ server.put('/:id/cart', (req, res, next) => {
     const { id } = req.params;
     const { quantity } = req.body;
     
-    Order.findAll({ include: {
-        model: User,
-        where: { id }
-    }})
-        .then(order => order.update({ quantity }))
-        .then(newOrder => res.status(201).json(newOrder))
+    Order.update({ quantity }, { where: { userId: id } })
+        .then(() => User.findByPk(id, { include: [Order] }))
+        .then(user => res.status(201).json(user))
         .catch(err => res.status(400).send(err))
 }); 
 
 server.delete('/:id/cart', (req, res, next) => {
     const { id } = req.params;
 
-    User.findByPk(id, { include: [Order] })
-        .then(user => user.removeOrder())
+    Order.destroy({ where: { userId: id } })
         .then(() => res.status(201).send('Carrito eliminado'))
         .catch(err => res.status(400).send(err))
 }); 
