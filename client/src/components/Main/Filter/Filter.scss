@@ -1,6 +1,7 @@
 .filterCnt{
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     margin: 1rem;
     padding: 1rem;
     border-bottom: .1rem gray solid;
@@ -11,15 +12,22 @@
         }
     }
     .buttonCart{
-        border-radius: 1.5rem;
-        padding: 10px 30px;
-        background-color: #2980b9;
+        border-radius: 2.3rem;
+        display: flex;
+        padding: 1rem;
+        background-color:transparent;
         color: white;
-        border: none;
+        border: 0;
         font-family: 'Montserrat', sans-serif;
         cursor: pointer;
         &:hover{
-            background-color: rgb(112, 95, 0);
+            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.15);
+            transition: 200ms;
+        }
+        img{
+            width: 4.5rem;
+            max-height: 4rem;
+            object-fit: contain;
         }
     }
 }

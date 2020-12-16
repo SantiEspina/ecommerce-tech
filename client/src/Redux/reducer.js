@@ -11,6 +11,8 @@ import {
     GET_PRODUCT_BY_CATEGORY,
     DELETE_CATEGORY,
     EDIT_CATEGORY,
+    ADD_TO_CART,
+    GET_ORDERS
 } from './constants';
 
 let initialState = {};
@@ -75,6 +77,16 @@ export default function findProductReducer(state = initialState, action) {
                 ...state,
                 categories: state.categories
             }
+        case ADD_TO_CART:
+            return {
+                ...state,
+                product: action.payload
+            }
+        case GET_ORDERS:
+            return {
+                ...state,
+                product:action.payload
+            } 
         default: return state;
     }
 }

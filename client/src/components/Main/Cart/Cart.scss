@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
+
+.deleteCart-false{
+    display: none;
+}
+
+.deleteCart-true{
+
+    transition: 300ms;
+    position: fixed;
+    z-index: 1;
+    top: 8%;
+    width: 28%;
+    height: 50%;
+    overflow: auto;
+    //background-color: rgba(0, 0, 0, 0.3);
+    color: #000000;
+    font-size: 2rem;
+    .deleteCartBox{
+        overflow-y:scroll;
+        width: 55%;
+        background-color: #e6fff2;
+        margin: 15% auto;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.15);
+        .closeCartBtn{
+            color: red;
+            border: 0;
+            float: right;
+            font-size: 1.8rem;
+            &:hover{
+                cursor: pointer;
+                color: #000000;   
+            }
+            &:focus{
+                text-decoration: none;
+            }
+        }
+        p{
+            text-align: center;
+            text-decoration: underline;
+            margin-bottom: 3rem;
+        }
+    }
+}

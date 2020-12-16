@@ -13,11 +13,13 @@ export default function Card ({ id, name, description, image, price, stock }) {
                     </Link>
                 </div>
                 <div className='info'>
-                <button className='btn-primary' 
-                    disabled={stock>0 ? false : true} >
-                    Add to Cart <span> {stock>0 ? "$ " + price : "Sin Stock"}</span>
-                    onClick={addItemToCart}
-                </button>
+                    <button 
+                        className='btn-primary' 
+                        disabled={stock > 0 ? false : true} 
+                        // onClick={addToCart}
+                    >
+                        Add to Cart <span>{stock > 0 ? "$ " + price : "Sin Stock"}</span>
+                    </button>
                 </div>             
             </div>
         </div>
