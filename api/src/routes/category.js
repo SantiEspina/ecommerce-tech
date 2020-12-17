@@ -30,6 +30,19 @@ Category.findAll({limit, offset, order, where})
 	.catch(next);
 });
 
+server.get('/:id', (req, res, next) => {
+    const { id } = req.params;
+
+    Category.findByPk(id)
+        .then(category => {
+            res.status(201).json(category)
+        })
+        .catch(err =>{
+            res.status(404).json(err)
+        })
+});
+
+
 server.post('/',(req, res) => {
 	const { name } = req.body;
 	Category.findOrCreate({where:{name}})

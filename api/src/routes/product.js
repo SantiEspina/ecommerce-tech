@@ -32,11 +32,14 @@ server.get('/', (req, res, next) => {
 
 server.get('/categoria/:nombreCat', (req, res) => {
 	const { nombreCat } = req.params
-	Product.findAll({include: {
-		model: Category, where: {
-			name: nombreCat 
+	Product.findAll({
+		include: {
+			model: Category, 
+			where: {
+				name: nombreCat 
+			}
 		}
-	}})
+	})
 	.then((products)=>{
 		res.status(201).json(products)
 	})

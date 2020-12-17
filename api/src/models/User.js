@@ -26,12 +26,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       required: true
     },
-    state: {
-      type: DataTypes.ENUM,
-      values:['admin', 'invited', 'client']
-    },
     isAdmin: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   })
 }

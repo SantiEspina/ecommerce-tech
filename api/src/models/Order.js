@@ -5,16 +5,6 @@ module.exports = (sequelize) => {
   // defino el modelo
   //
   sequelize.define('order',{
-    quantity:{
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    price:{
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
     state:{
       type: DataTypes.ENUM,
       values: ['pending','complete'],
