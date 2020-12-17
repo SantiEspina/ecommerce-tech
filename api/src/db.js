@@ -34,14 +34,14 @@ const { Product } = sequelize.models;
 const{ Order } =sequelize.models;
 const { Category }=sequelize.models;
 const { User } =sequelize.models;
-const { CommandLine } = sequelize.models;
+const { OrderProduct } = sequelize.models;
 
 // Aca vendrian las relaciones
 Product.belongsToMany(Category, {through: "category_products"});
 Category.belongsToMany(Product, {through: "category_products"});
 
-Product.belongsToMany(Order, {through: CommandLine });
-Order.belongsToMany(Product, {through: CommandLine });
+Product.belongsToMany(Order, {through: OrderProduct });
+Order.belongsToMany(Product, {through: OrderProduct });
 
 Order.belongsTo(User);
 User.hasMany(Order);

@@ -1,7 +1,11 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('commandLine', {
+    sequelize.define('orderProduct', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         quantity: {
             type: DataTypes.INTEGER,
             allowNull: false
