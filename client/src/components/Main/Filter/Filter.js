@@ -21,6 +21,12 @@ function Filter () {
             [name]: !input[name]
         });
     };
+    const disClick = (e) =>{
+        setInput({
+            ...input,
+            openCart:false
+        })
+    }
   
 
     if(!products) return (<h1></h1>)
@@ -57,6 +63,21 @@ function Filter () {
                                 <li>Hola</li>
                                 <li>Hola</li>
                                 <li>Hola</li>
+                                <li>Hola</li>
+                                <li>Hola</li>
+                                <li>Hola</li>
+                                <li>Hola</li>
+                                <li>Hola</li>
+                                <li>Hola</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
+                                <li>chau</li>
                                 <li>Hola</li>
                                 <li>Hola</li>
                                 <li>Hola</li>

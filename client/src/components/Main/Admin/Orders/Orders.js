@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 
 
 export default function Orders() {
-    // const [input , setInput]=useState({
-       var lista=[
+    const [input , setInput]=useState({
+        lista:[
             {name :'jorge',id:'1',description:'flaquito',price:5000,stock:1,categories:'klasnfjkfnasdbnjabsfa',img:'hola'},
             {name :'cristian',id:'2',description:'no lo se rick',price:4999,stock:2,categories:'klasnfjkfnasdbnjabsfa',img:'hola'},
             {name :'pablo',id:'3',description:'gordito',price:6000,stock:1,categories:'klasnfjkfnasdbnjabsfa',img:'hola'}
         ]
-    // })
+    })
 
     return (
         
@@ -26,7 +26,7 @@ export default function Orders() {
                 </tr>
                 {
                     
-                    lista.map((p,i) => (
+                    input.lista.map((p,i) => (
                         <tr key={i}>
                             <td className='id'>{p.id}</td>
                             <td className='name'>{p.name}</td>

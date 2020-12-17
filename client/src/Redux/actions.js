@@ -20,12 +20,19 @@ import axios from 'axios';
 
 const localhost = 'http://localhost:3001';
 
-export const getProducts = () => {
+export const getProducts = (limit,offset) => {
     return function(dispatch) {
-        axios.get(`${localhost}/products/`)
+        if(limit && offset){
+            axios.get(`${localhost}/products/?limit=${limit}&offset=${offset}`)
             .then(data => dispatch ({ type: GET_PRODUCTS, payload: data.data }))
+        }else {
+            axios.get(`${localhost}/products/`)
+            .then(data => dispatch ({ type: GET_PRODUCTS, payload: data.data }))
+        }
+            
     }
 };
+
 
 export const getDetails = (id) => {
     return function(dispatch) {
