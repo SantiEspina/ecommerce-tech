@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, deleteProduct, removeCategoryToProduct, getCategories, deleteCategory } from '../../../Redux/actions';
+import { getProducts, deleteProduct, removeCategoryToProduct, getCategories, deleteCategory, addUser } from '../../../Redux/actions';
 
 import './Admin.scss';
 import './Product/deleteProduct.scss';
@@ -11,7 +11,7 @@ import './Category/removeCategory.scss';
 export default function Admin() {
     const { products, categories } = useSelector(state => state);
     const dispatch = useDispatch();
-    let [ input, setInput ] = useState({
+    let [input, setInput] = useState({
         removeCategory: false,
         delete: false,
         id: 0
@@ -27,9 +27,9 @@ export default function Admin() {
     };
 
     const handleInputChange = function (e) {
-        setInput ({
+        setInput({
             ...input,
-            id: e.target.value      
+            id: e.target.value
         });
     }
 
@@ -62,7 +62,7 @@ export default function Admin() {
         dispatch(getCategories());
     }, [dispatch, input]);
 
-    if(!products || !categories) return (<h1>Loading...</h1>)
+    if (!products || !categories) return (<h1>Loading...</h1>)
     return (
         <>
             <div className='btnAdd'>
@@ -70,14 +70,17 @@ export default function Admin() {
                     <button>Add New Product</button>
                 </Link>
                 <Link to='/admin/addCategory' >
-                    <button className='addCategory' onClick={e => {}}>Add New Category</button>
+                    <button className='addCategory' onClick={e => { }}>Add New Category</button>
                 </Link>
                 <button name='removeCategory' onClick={handleToggle}>Delete A Category</button>
                 <Link to='/admin/editCategory' >
-                    <button className='addCategory' onClick={e => {}}>Edit A Category</button>
+                    <button className='addCategory' onClick={e => { }}>Edit A Category</button>
                 </Link>
                 <Link to='/orders' >
-                    <button className='addCategory' onClick={e => {}}>TableOrders</button>
+                    <button className='addCategory' onClick={e => { }}>TableOrders</button>
+                </Link>
+                <Link to='/user'>
+                    <button className='addCategory' onClick={e => { }}>add New User</button>
                 </Link>
             </div>
             <div className={`removeCnt-${input.removeCategory}`}>
@@ -85,15 +88,15 @@ export default function Admin() {
                     <button className='closeBtn' name='removeCategory' onClick={handleToggle}>&times;</button>
                     <p>Select a category to remove: </p>
                     <div className='infoCategories'>
-                        <select name='category' 
-                            value={input.id} 
+                        <select name='category'
+                            value={input.id}
                             onChange={handleInputChange} >
-                                <option value=''>Categories...</option>
-                            {   
+                            <option value=''>Categories...</option>
+                            {
                                 categories.map((c, i) => (
                                     <option value={c.id} key={c.id}>{c.name}</option>
-                                    ))
-                                }
+                                ))
+                            }
                         </select>
                     </div>
                     <div className='buttons'>
@@ -123,7 +126,7 @@ export default function Admin() {
                     <th className='categories'>categories</th>
                 </tr>
                 {
-                    products.map((p,i) => (
+                    products.map((p, i) => (
                         <tr key={i}>
                             <td className='id'>{p.id}</td>
                             <td className='name'>{p.name}</td>
@@ -144,7 +147,7 @@ export default function Admin() {
                             </td>
                             <div className='btnsCRUD'>
                                 <Link to={`/admin/editProduct/${p.id}`}>
-                                    <button className='edit' name='edit' value={p.id}>Edit Product</button>   
+                                    <button className='edit' name='edit' value={p.id}>Edit Product</button>
                                 </Link>
                                 <button className='danger' name='delete' value={p.id} onClick={handleToggle}>Delete Product</button>
                             </div>

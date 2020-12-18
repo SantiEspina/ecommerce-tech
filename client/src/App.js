@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Header/Header.js';
 import Main from './components/Main/Main.js';
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Footer from './components/Footer/Footer.js';
 import Admin from './components/Main/Admin/Admin';
 import AddProduct from './components/Main/Admin/Product/addProduct';
@@ -10,11 +10,15 @@ import ProductID from './components/Main/Product/ProductID';
 import EditProduct from './components/Main/Admin/Product/EditProduct';
 import EditCategory from './components/Main/Admin/Category/EditCategory';
 import Orders from './components/Main/Admin/Orders/Orders.js';
+import User from './components/Main/Admin/User';
+import Card from './components/Main/Product/Card.js';
+
 
 
 
 function App() {
   return (
+
     <>
       <Route path="/" render={() => <Header />} />
       <Route exact path="/" render={() => <Main />} />
@@ -24,9 +28,12 @@ function App() {
       <Route exact path="/admin/editproduct/:id" component={EditProduct} />
       <Route exact path="/product/:id" component={ProductID} />
       <Route exact path="/admin/editcategory" component={EditCategory} />
-      <Route exact path="/orders/" render = {() => <Orders />} />
+      <Route exact path="/orders/" render={() => <Orders />} />
+      <Route exact path="/user/" render={() => <User />} />
+      <Route exact path="/order/" render={() => <Card />} />
       <Route path="/" render={() => <Footer />} />
     </>
+
   );
 }
 
