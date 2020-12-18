@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
 
 .categoriesCnt{
-    width: 15%;
+    width: 10%;
     min-height: 100vh;
-    max-height: 150vh;
+    max-height: 130vh;
+    margin-top: 1rem;
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
@@ -20,11 +21,13 @@
         transition: 200ms;
     }
     h2{
-        text-decoration: underline;
+        text-decoration: none;
         margin: 0;
         margin-bottom: .5rem;
     }
     button{
+        text-transform: capitalize;
+        font-size: 20px;
         display: flex;
         align-items: flex-start;
         background-color: transparent;

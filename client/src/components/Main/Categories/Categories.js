@@ -20,7 +20,7 @@ export default function Categories() {
     if(!categories) return (<h1></h1>)
     return (
         <div className='categoriesCnt'>
-            <h2>Categories:</h2>
+            <h2>Categories</h2>
             <button value='' onClick={filterCategory}>All Products</button>
             {
                 categories.map(c => (

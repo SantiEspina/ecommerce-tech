@@ -11,19 +11,28 @@ import {
     REMOVE_CATEGORY_TO_PRODUCT, 
     GET_PRODUCT_BY_CATEGORY, 
     DELETE_CATEGORY,
-    EDIT_CATEGORY 
+    EDIT_CATEGORY,
+    ADD_TO_CART,
+    GET_ORDERS
 } from './constants';
 
 import axios from 'axios';
 
 const localhost = 'http://localhost:3001';
 
-export const getProducts = () => {
+export const getProducts = (limit,offset) => {
     return function(dispatch) {
-        axios.get(`${localhost}/products/`)
+        if(limit && offset){
+            axios.get(`${localhost}/products/?limit=${limit}&offset=${offset}`)
             .then(data => dispatch ({ type: GET_PRODUCTS, payload: data.data }))
+        }else {
+            axios.get(`${localhost}/products/`)
+            .then(data => dispatch ({ type: GET_PRODUCTS, payload: data.data }))
+        }
+            
     }
 };
+
 
 export const getDetails = (id) => {
     return function(dispatch) {
@@ -112,13 +121,27 @@ export const getProductByCategory = (nombreCat) => {
 export const deleteCategory = (idParams) => {
     return function (dispatch) {
         axios.delete(`${localhost}/categories/${idParams}`)
-            .then(data => dispatch ({ type: DELETE_CATEGORY, payload: data.data}))
+            .then(data => dispatch ({ type: DELETE_CATEGORY, payload: data.data }))
     }
 };
 
 export const editCategory = (idC, name) => {
     return function (dispatch) {
-        axios.put(`${localhost}/categories/${idC}`, {name})
-            .then(data => dispatch ({ type: EDIT_CATEGORY, payload: data.data}))
+        axios.put(`${localhost}/categories/${idC}`, { name })
+            .then(data => dispatch ({ type: EDIT_CATEGORY, payload: data.data }))
     }
 };
+
+export const addToCart = (idU, price, quantity) => {
+    return function (dispatch) {
+        axios.post(`${localhost}/user/${idU}/cart`, { price, quantity })
+            .then(data => dispatch ({ type: ADD_TO_CART, payload: data.data }))
+    }
+};
+
+export const getOrders = (status) => {
+    return function (dispatch) {
+            axios.get(`${localhost}/orders`,{status})
+            .then(data => dispatch ({ type: GET_ORDERS, payload: data.data }))
+    }
+}

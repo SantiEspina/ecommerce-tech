@@ -9,6 +9,8 @@ import AddCategory from './components/Main/Admin/Category/addCategory';
 import ProductID from './components/Main/Product/ProductID';
 import EditProduct from './components/Main/Admin/Product/EditProduct';
 import EditCategory from './components/Main/Admin/Category/EditCategory';
+import Orders from './components/Main/Admin/Orders/Orders.js';
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
       <Route exact path="/admin/editproduct/:id" component={EditProduct} />
       <Route exact path="/product/:id" component={ProductID} />
       <Route exact path="/admin/editcategory" component={EditCategory} />
+      <Route exact path="/orders/" render = {() => <Orders />} />
       <Route path="/" render={() => <Footer />} />
     </>
   );
