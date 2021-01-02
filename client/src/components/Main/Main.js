@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Product from './Product/Product.js';
-import Categories from './Categories/Categories';
-import Filter from './Filter/Filter.js';
+import Categories from './Categories';
+import Filter from './Filter';
 import { useDispatch } from 'react-redux';
-import { getProducts } from '../../Redux/actions';
+import { getProducts } from '../../redux/actions';
 
 
 import './Main.scss';

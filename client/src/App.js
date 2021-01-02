@@ -2,14 +2,14 @@ import React from 'react';
 import Header from './components/Header/Header.js';
 import Main from './components/Main/Main.js';
 import { Route, Switch } from "react-router-dom";
-import Footer from './components/Footer/Footer.js';
+import Footer from './components/Footer/index.js';
 import Admin from './components/Main/Admin/Admin';
 import AddProduct from './components/Main/Admin/Product/addProduct';
 import AddCategory from './components/Main/Admin/Category/addCategory';
 import ProductID from './components/Main/Product/ProductID';
 import EditProduct from './components/Main/Admin/Product/EditProduct';
 import EditCategory from './components/Main/Admin/Category/EditCategory';
-import Orders from './components/Main/Admin/Orders/Orders.js';
+import Orders from './components/Main/Admin/Orders/index.js';
 import User from './components/Main/Admin/User';
 import Card from './components/Main/Product/Card.js';
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { orderByFilt } from '../../../Redux/actions';
+import { orderByFilt } from '../../../redux/actions';
 
 
 import '../Cart/Cart.scss';
