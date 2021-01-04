@@ -147,7 +147,8 @@ export const addUser = (input) => {
     let { name, username, email, password, direction } = input;
     return function (dispatch) {
         axios.post(`${localhost}/user/`, { name, username, email, password, direction })
-            .then(data => dispatch({ type: ADD_USER, payload: data.data }))
+            .then(data => dispatch({ type: ADD_USER, payload: data.data }) && alert("The user has been created !!"))
+            .catch(error => alert(error.message))
     }
 };
 
@@ -173,6 +174,7 @@ export const addProductToOrder = (input, idProduct) => {
         let cart = window.localStorage.getItem("cart")
         if (cart) {
             cart = JSON.parse(cart);
+            //falta ver los productos duplicados.
             cart.products = [
                 ...cart.products,
                 {

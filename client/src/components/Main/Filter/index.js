@@ -24,6 +24,14 @@ function Filter() {
     };
     const items = JSON.parse(window.localStorage.getItem("cart"));
 
+    // const removeItem = (itemToBeDeleted) => {
+    //     setInput(items.filter((item) => itemToBeDeleted !== item));
+    // };
+
+    const handleDelete = (e) => {
+
+    }
+
 
     // useEffect(() => {
     //     const itemsLocal = JSON.parse(localStorage.getItem('cart'));
@@ -63,21 +71,31 @@ function Filter() {
                     <div className='deleteCartBox'>
                         <button className='closeCartBtn' name='openCart' onClick={handleToggle}>&times;</button>
                         <p>Cart</p>
-                        <div>
+                        <div className='cartCnt'>
                             <ul>
                                 {
-                                    items.products.map(p => {
+                                    items && items.products.map(p => {
                                         cont += p.orderProduct.price;
                                         return (
-                                            <li>{p.orderProduct.name}
-                                                <br />
-                                                <span>{p.orderProduct.quantity} x ${p.orderProduct.price}</span>
+                                            <li key={p.id} className='cartItems'>
+                                                <div className='infoCart'>
+                                                    <p>{p.orderProduct.name}</p>
+                                                    <span>{p.orderProduct.quantity} x ${p.orderProduct.price}</span>
+                                                </div>
+                                                {/* <button onClick={() => removeItem(item.products)}>X</button> */}
+                                                <button value={p.id} onClick={(e) => items.products.filter(p => p.id !== e.target.value)} >X</button>
                                             </li>
                                         )
                                     })
                                 }
                             </ul>
                             <span>TOTAL: $ {cont}</span>
+                            <button onClick={() => {
+                                //window.localStorage.clear();
+                                //return window.localStorage.getItem('cart');
+                                window.localStorage.removeItem('cart');
+                                return ''
+                            }}>Empty Cart</button>
                         </div>
                     </div>
                 </div>

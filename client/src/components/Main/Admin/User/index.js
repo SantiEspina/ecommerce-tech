@@ -19,9 +19,16 @@ function AddUser() {
             [e.target.name]: e.target.value
         });
     };
+
     const handleSubmit = function (e) {
         e.preventDefault();
         dispatch(addUser(input));
+        // try {
+        //     window.alert("The user has been created !!");
+        // } catch (error) {
+
+        //     window.alert(error);
+        // }
         setInput({
             name: '',
             username: '',
@@ -29,7 +36,7 @@ function AddUser() {
             password: '',
             direction: '',
         });
-        window.alert("The user has been created !!");
+
     };
     return (
         <form onSubmit={handleSubmit} className='formaddUser'>
