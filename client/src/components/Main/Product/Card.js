@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addProductToOrder } from '../../../redux/actions';
 
@@ -7,8 +7,9 @@ import './Card.scss';
 
 
 export default function Card({ id, name, description, image, price, stock }) {
-    const [ input, setInput ] = useState({
-        idOrder: 0,
+
+    const [input, setInput] = useState({
+        idOrder: 1,
         name,
         price,
         quantity: 1
@@ -18,7 +19,7 @@ export default function Card({ id, name, description, image, price, stock }) {
 
     const handleButton = function (e) {
         e.preventDefault();
-        dispatch(addProductToOrder(input, e.target.value))
+        dispatch(addProductToOrder(input, id))
     }
 
     return (

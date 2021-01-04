@@ -14,3 +14,4 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_ORDERS = 'GET_ORDERS';
 export const ADD_USER = 'ADD_USER';
 export const ADD_PRODUCT_TO_ORDER = 'ADD_PRODUCT_TO_ORDER';
+export const GET_PRODUCTS_TO_ORDER = 'GET_PRODUCTS_TO_ORDER';

@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { orderByFilt } from '../../../redux/actions';
+import { orderByFilt, getProductToOrder } from '../../../redux/actions';
 
 
 import '../Cart/Cart.scss';
 import './Filter.scss';
 
 function Filter() {
+
     const { products } = useSelector(state => state);
-    const { order } = useSelector(state=>state);
+    const { user } = useSelector(state => state);
+    const { order } = useSelector(state => state);
     const dispatch = useDispatch();
 
     let [input, setInput] = useState({
         openCart: false,
+
     });
+    // let [inputUserOrder, setInputUserOrder] = useState({
+    //     idUser: user.id,
+    //     idOrder: 
+    // })
 
     const handleToggle = (e) => {
         let { name } = e.target;
@@ -22,12 +29,13 @@ function Filter() {
             [name]: !input[name]
         });
     };
-    const disClick = (e) => {
-        setInput({
-            ...input,
-            openCart: false
-        })
-    }
+
+    useEffect(() => {
+        //console.log(order.userId);
+        dispatch((getProductToOrder(1)));
+    }, []);
+
+
 
 
     if (!products) return (<h1></h1>)
@@ -51,11 +59,17 @@ function Filter() {
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
                         <button className='closeCartBtn' name='openCart' onClick={handleToggle}>&times;</button>
-                        <p>the products:</p>
+                        <p>the products</p>
                         <div>
-                            <ul>
-                                <li>Hola</li>
-                            </ul>
+                            {
+                                order.products && order.products.map((p, i) =>
+                                    <tr>
+                                        <td>{p.name}</td>
+                                        <td>{p.quantity}</td>
+                                        <td>{p.price}</td>
+                                    </tr>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

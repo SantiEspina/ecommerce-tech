@@ -14,7 +14,8 @@ import {
     EDIT_CATEGORY,
     GET_ORDERS,
     ADD_USER,
-    ADD_PRODUCT_TO_ORDER
+    ADD_PRODUCT_TO_ORDER,
+    GET_PRODUCTS_TO_ORDER
 } from './constants';
 
 import axios from 'axios';
@@ -169,4 +170,11 @@ export const addProductToOrder = (input, idProduct) => {
             .then(data => dispatch({ type: ADD_PRODUCT_TO_ORDER, payload: data.data }))
     }
 };
+
+export const getProductToOrder = (idOrder) => {
+    return function (dispatch) {
+        axios.get(`${localhost}/order/${idOrder}`)
+            .then(data => dispatch({ type: GET_PRODUCTS_TO_ORDER, payload: data.data }))
+    }
+}
 

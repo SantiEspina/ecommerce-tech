@@ -13,7 +13,8 @@ import {
     EDIT_CATEGORY,
     GET_ORDERS,
     ADD_USER,
-    ADD_PRODUCT_TO_ORDER
+    ADD_PRODUCT_TO_ORDER,
+    GET_PRODUCTS_TO_ORDER
 } from './constants';
 
 let initialState = {};
@@ -89,6 +90,11 @@ export default function findProductReducer(state = initialState, action) {
                 user: action.payload
             }
         case ADD_PRODUCT_TO_ORDER:
+            return {
+                ...state,
+                order: action.payload
+            }
+        case GET_PRODUCTS_TO_ORDER:
             return {
                 ...state,
                 order: action.payload
