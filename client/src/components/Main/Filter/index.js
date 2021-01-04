@@ -8,6 +8,7 @@ import './Filter.scss';
 
 function Filter() {
     const { products } = useSelector(state => state);
+    const { order } = useSelector(state=>state);
     const dispatch = useDispatch();
 
     let [input, setInput] = useState({
@@ -43,14 +44,14 @@ function Filter() {
                 </select>
             </div>
             {/** Empieza nuestro carrito*/}
-            <div ClassName="Carrito">
+            <div className="Carrito">
                 <button className='buttonCart' onClick={handleToggle}>
                     <img src='https://icons555.com/images/icons-green/image_icon_shopping_cart_pic_512x512.png' name='openCart' />
                 </button>
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
                         <button className='closeCartBtn' name='openCart' onClick={handleToggle}>&times;</button>
-                        <p>the products</p>
+                        <p>the products:</p>
                         <div>
                             <ul>
                                 <li>Hola</li>

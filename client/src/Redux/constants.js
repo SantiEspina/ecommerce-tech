@@ -13,4 +13,4 @@ export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const GET_ORDERS = 'GET_ORDERS';
 export const ADD_USER = 'ADD_USER';
-export const ADD_ORDER = 'ADD_ORDER';
+export const ADD_PRODUCT_TO_ORDER = 'ADD_PRODUCT_TO_ORDER';

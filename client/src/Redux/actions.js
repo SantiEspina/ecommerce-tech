@@ -14,7 +14,7 @@ import {
     EDIT_CATEGORY,
     GET_ORDERS,
     ADD_USER,
-    ADD_ORDER
+    ADD_PRODUCT_TO_ORDER
 } from './constants';
 
 import axios from 'axios';
@@ -149,10 +149,24 @@ export const addUser = (input) => {
     }
 };
 
-export const addOrder = (id) => {
+// !CREAR UNA ORDEN A UN USUARIO EN ESPECIFICO 
+// !cambiar nombre de funcion y de type
+
+// export const createOrderToUser = (userId) => {
+//     return function (dispatch) {
+//         //81
+//         axios.post(`${localhost}/order/`, { userId })
+//             .then(data => dispatch({ type: ADD_PRODUCT_IN_ORDER, payload: data.data }))
+//     }
+// };
+
+//! AÑADIR PRODUCTOS A UNA ORDEN
+export const addProductToOrder = (input, idProduct) => {
+    let { idOrder, name, price, quantity } = input;
     return function (dispatch) {
-        axios.post(`${localhost}/order/`, { id })
-            .then(data => dispatch({ type: ADD_USER, payload: data.data }))
+        //106
+        axios.post(`${localhost}/order/${idOrder}/product/${idProduct}`, { name, price, quantity })
+            .then(data => dispatch({ type: ADD_PRODUCT_TO_ORDER, payload: data.data }))
     }
 };
 

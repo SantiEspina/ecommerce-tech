@@ -1,17 +1,24 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addOrder } from '../../../Redux/actions';
+import { addProductToOrder } from '../../../redux/actions';
+
 import './Card.scss';
-import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function Card({ id, name, description, image, price, stock }) {
-    const { user } = useSelector(state => state);
+    const [ input, setInput ] = useState({
+        idOrder: 0,
+        name,
+        price,
+        quantity: 1
+    });
+    // const { user } = useSelector(state => state); OJO!!
     const dispatch = useDispatch();
 
     const handleButton = function (e) {
-        dispatch(addOrder())
-        //falta el id del usuario
+        e.preventDefault();
+        dispatch(addProductToOrder(input, e.target.value))
     }
 
     return (
@@ -26,6 +33,7 @@ export default function Card({ id, name, description, image, price, stock }) {
                 <div className='info'>
                     <button
                         className='btn-primary'
+                        value={id}
                         disabled={stock > 0 ? false : true}
                         onClick={handleButton}
                     >
