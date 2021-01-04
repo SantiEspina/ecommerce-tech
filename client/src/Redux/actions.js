@@ -15,7 +15,8 @@ import {
     GET_ORDERS,
     ADD_USER,
     ADD_PRODUCT_TO_ORDER,
-    GET_PRODUCTS_TO_ORDER
+    GET_PRODUCTS_TO_ORDER,
+    CREATE_ORDER_TO_USER
 } from './constants';
 
 import axios from 'axios';
@@ -150,31 +151,76 @@ export const addUser = (input) => {
     }
 };
 
-// !CREAR UNA ORDEN A UN USUARIO EN ESPECIFICO 
-// !cambiar nombre de funcion y de type
+// !CREAR UNA ORDEN A UN USUARIO EN ESPECIFICO
 
-// export const createOrderToUser = (userId) => {
-//     return function (dispatch) {
-//         //81
-//         axios.post(`${localhost}/order/`, { userId })
-//             .then(data => dispatch({ type: ADD_PRODUCT_IN_ORDER, payload: data.data }))
-//     }
-// };
-
-//! AÑADIR PRODUCTOS A UNA ORDEN
-export const addProductToOrder = (input, idProduct) => {
-    let { idOrder, name, price, quantity } = input;
+export const createOrderToUser = (userId) => {
     return function (dispatch) {
-        //106
-        axios.post(`${localhost}/order/${idOrder}/product/${idProduct}`, { name, price, quantity })
-            .then(data => dispatch({ type: ADD_PRODUCT_TO_ORDER, payload: data.data }))
+        //81
+        axios.post(`${localhost}/order/`, { userId })
+            .then(data => dispatch({ type: CREATE_ORDER_TO_USER, payload: data.data }))
     }
 };
 
+// AÑADIR PRODUCTOS A UNA ORDEN
+export const addProductToOrder = (input, idProduct) => {
+    let { idOrder, name, price, quantity } = input;
+    // return function (dispatch) {
+    //     //106
+    //     axios.post(`${localhost}/order/${idOrder}/product/${idProduct}`, { name, price, quantity })
+    //         .then(data => dispatch({ type: ADD_PRODUCT_TO_ORDER, payload: data.data }))
+    // }
+    return function (dispatch) {
+        let cart = window.localStorage.getItem("cart")
+        if (cart) {
+            cart = JSON.parse(cart);
+            cart.products = [
+                ...cart.products,
+                {
+                    id: idProduct,
+                    orderProduct: {
+                        name,
+                        price,
+                        quantity
+                    }
+                }
+            ]
+        }
+        else {
+            cart = {
+                products: [
+                    {
+                        id: idProduct,
+                        orderProduct: {
+                            name,
+                            price,
+                            quantity
+                        }
+                    }
+                ]
+            }
+        }
+        window.localStorage.setItem("cart", JSON.stringify(cart))
+        dispatch({ type: CREATE_ORDER_TO_USER, payload: cart })
+    }
+
+
+};
+//devolver una orden
 export const getProductToOrder = (idOrder) => {
     return function (dispatch) {
         axios.get(`${localhost}/order/${idOrder}`)
             .then(data => dispatch({ type: GET_PRODUCTS_TO_ORDER, payload: data.data }))
+    }
+}
+
+export const getPendingOrder = () => {
+    //preguntar si el usuario esta logueado
+    return function (dispatch) {
+        let cart = window.localStorage.getItem("cart")
+        if (cart) {
+            cart = JSON.parse(cart);
+        }
+        dispatch({ type: CREATE_ORDER_TO_USER, payload: cart })
     }
 }
 

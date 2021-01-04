@@ -14,7 +14,7 @@ export default function Card({ id, name, description, image, price, stock }) {
         price,
         quantity: 1
     });
-    // const { user } = useSelector(state => state); OJO!!
+
     const dispatch = useDispatch();
 
     const handleButton = function (e) {

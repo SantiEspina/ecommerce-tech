@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header/Header.js';
 import Main from './components/Main/Main.js';
 import { Route, Switch } from "react-router-dom";
@@ -12,11 +12,20 @@ import EditCategory from './components/Main/Admin/Category/EditCategory';
 import Orders from './components/Main/Admin/Orders/index.js';
 import User from './components/Main/Admin/User';
 import Card from './components/Main/Product/Card.js';
+import { useDispatch } from 'react-redux';
+import { getPendingOrder } from './redux/actions.js';
 
-
+//armar la accion para eliminar el producto de la orden.
+//accion para cambiar la cantidad de un producto.
+//cuando quiero agregar de vuelta se agregue en la cantidad.
 
 
 function App() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch((getPendingOrder()));
+  }, []);
   return (
 
     <>

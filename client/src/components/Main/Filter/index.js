@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { orderByFilt, getProductToOrder } from '../../../redux/actions';
+import { orderByFilt, getProductToOrder, createOrderToUser } from '../../../redux/actions';
 
 
 import '../Cart/Cart.scss';
 import './Filter.scss';
 
 function Filter() {
-
+    // const { user } = useSelector(state => state);
+    const { cart } = useSelector(state => state);
     const { products } = useSelector(state => state);
-    const { user } = useSelector(state => state);
-    const { order } = useSelector(state => state);
     const dispatch = useDispatch();
-
     let [input, setInput] = useState({
         openCart: false,
-
     });
-    // let [inputUserOrder, setInputUserOrder] = useState({
-    //     idUser: user.id,
-    //     idOrder: 
-    // })
-
+    let cont = 0;
     const handleToggle = (e) => {
         let { name } = e.target;
         setInput({
@@ -29,15 +22,25 @@ function Filter() {
             [name]: !input[name]
         });
     };
-
-    useEffect(() => {
-        //console.log(order.userId);
-        dispatch((getProductToOrder(1)));
-    }, []);
+    const items = JSON.parse(window.localStorage.getItem("cart"));
 
 
+    // useEffect(() => {
+    //     const itemsLocal = JSON.parse(localStorage.getItem('cart'));
+    //     if (itemsLocal) {
+    //         setItems(itemsLocal);
+    //     }
+    // }, []);
+    // useEffect(() => {
+    //     localStorage.setItem('cart', JSON.stringify(items));
+    // }, [items]);
 
-
+    // useEffect(() => {
+    //     dispatch((createOrderToUser(1)));
+    // }, []);
+    // useEffect(() => {
+    //     dispatch((getProductToOrder(2)));
+    // }, []);
     if (!products) return (<h1></h1>)
     return (
         <div className='filterCnt'>
@@ -59,17 +62,22 @@ function Filter() {
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
                         <button className='closeCartBtn' name='openCart' onClick={handleToggle}>&times;</button>
-                        <p>the products</p>
+                        <p>Cart</p>
                         <div>
-                            {
-                                order.products && order.products.map((p, i) =>
-                                    <tr>
-                                        <td>{p.name}</td>
-                                        <td>{p.quantity}</td>
-                                        <td>{p.price}</td>
-                                    </tr>
-                                )
-                            }
+                            <ul>
+                                {
+                                    items.products.map(p => {
+                                        cont += p.orderProduct.price;
+                                        return (
+                                            <li>{p.orderProduct.name}
+                                                <br />
+                                                <span>{p.orderProduct.quantity} x ${p.orderProduct.price}</span>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                            <span>TOTAL: $ {cont}</span>
                         </div>
                     </div>
                 </div>
