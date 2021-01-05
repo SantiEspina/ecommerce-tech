@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { orderByFilt, getProductToOrder, createOrderToUser } from '../../../redux/actions';
+import { ADD_PRODUCT_TO_ORDER } from '../../../redux/constants';
 
 
 import '../Cart/Cart.scss';
 import './Filter.scss';
 
 function Filter() {
-    // const { user } = useSelector(state => state);
-    const { cart } = useSelector(state => state);
     const { products } = useSelector(state => state);
     const dispatch = useDispatch();
     let [input, setInput] = useState({
@@ -24,31 +23,6 @@ function Filter() {
     };
     const items = JSON.parse(window.localStorage.getItem("cart"));
 
-    // const removeItem = (itemToBeDeleted) => {
-    //     setInput(items.filter((item) => itemToBeDeleted !== item));
-    // };
-
-    const handleDelete = (e) => {
-
-    }
-
-
-    // useEffect(() => {
-    //     const itemsLocal = JSON.parse(localStorage.getItem('cart'));
-    //     if (itemsLocal) {
-    //         setItems(itemsLocal);
-    //     }
-    // }, []);
-    // useEffect(() => {
-    //     localStorage.setItem('cart', JSON.stringify(items));
-    // }, [items]);
-
-    // useEffect(() => {
-    //     dispatch((createOrderToUser(1)));
-    // }, []);
-    // useEffect(() => {
-    //     dispatch((getProductToOrder(2)));
-    // }, []);
     if (!products) return (<h1></h1>)
     return (
         <div className='filterCnt'>
@@ -75,15 +49,24 @@ function Filter() {
                             <ul>
                                 {
                                     items && items.products.map(p => {
-                                        cont += p.orderProduct.price;
+                                        cont += p.orderProduct.price * p.orderProduct.quantity;
                                         return (
                                             <li key={p.id} className='cartItems'>
                                                 <div className='infoCart'>
                                                     <p>{p.orderProduct.name}</p>
                                                     <span>{p.orderProduct.quantity} x ${p.orderProduct.price}</span>
                                                 </div>
-                                                {/* <button onClick={() => removeItem(item.products)}>X</button> */}
-                                                <button value={p.id} onClick={(e) => items.products.filter(p => p.id !== e.target.value)} >X</button>
+                                                <button value={p.id} onClick={(e) => {
+                                                    const order = {...items,
+                                                        products:items.products.filter(p => p.id !== parseInt(e.target.value))
+                                                    }
+                                                    window.localStorage.setItem("cart",JSON.stringify(order))
+                                                    dispatch({
+                                                        type:ADD_PRODUCT_TO_ORDER,
+                                                        payload:order
+                                                    })
+                                                    
+                                                    }} >X</button>
                                             </li>
                                         )
                                     })
@@ -91,10 +74,11 @@ function Filter() {
                             </ul>
                             <span>TOTAL: $ {cont}</span>
                             <button onClick={() => {
-                                //window.localStorage.clear();
-                                //return window.localStorage.getItem('cart');
-                                window.localStorage.removeItem('cart');
-                                return ''
+                                window.localStorage.clear()
+                                dispatch({
+                                    type:ADD_PRODUCT_TO_ORDER,
+                                    payload:[]
+                                })
                             }}>Empty Cart</button>
                         </div>
                     </div>

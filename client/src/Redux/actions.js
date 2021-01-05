@@ -148,7 +148,7 @@ export const addUser = (input) => {
     return function (dispatch) {
         axios.post(`${localhost}/user/`, { name, username, email, password, direction })
             .then(data => dispatch({ type: ADD_USER, payload: data.data }) && alert("The user has been created !!"))
-            .catch(error => alert(error.message))
+            .catch(error => alert(error.response.data))
     }
 };
 
@@ -174,18 +174,33 @@ export const addProductToOrder = (input, idProduct) => {
         let cart = window.localStorage.getItem("cart")
         if (cart) {
             cart = JSON.parse(cart);
-            //falta ver los productos duplicados.
-            cart.products = [
-                ...cart.products,
-                {
-                    id: idProduct,
-                    orderProduct: {
-                        name,
-                        price,
-                        quantity
+            const result = cart.products.find(({ id }) => id === parseInt(idProduct));
+            // console.log(result)
+            // //falta ver los productos duplicados.
+            // let res = cart.products.forEach(p => {
+            //     if(p.id === parseInt(idProduct)) return;
+            //     return false;
+            // });
+            if(result) {
+                cart.products = cart.products.filter(p => p.id !== parseInt(idProduct));
+                result.orderProduct.quantity++;
+                cart.products = [
+                    ...cart.products,
+                    result
+                ]
+            } else {
+                cart.products = [
+                    ...cart.products,
+                    {
+                        id: idProduct,
+                        orderProduct: {
+                            name,
+                            price,
+                            quantity
+                        }
                     }
-                }
-            ]
+                ]
+            }
         }
         else {
             cart = {

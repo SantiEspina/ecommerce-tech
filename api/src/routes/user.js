@@ -52,8 +52,9 @@ server.post('/', (req, res, next) => {
         .then(user => res.status(201).json(user))
         .catch(err => {
             if(err.parent){
+                
                 switch(err.parent.code){
-                    case "23505" : return res.status(400).send("username o email duplicado")
+                    case "23505" : return res.status(400).send(err.parent.detail)
                     default:return next(err.parent)
                 }
             }
