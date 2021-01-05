@@ -15,20 +15,15 @@ function Main () {
     })
     const dispatch = useDispatch();
     useEffect(() => {
-        
-        dispatch(getProducts(input.limit,input.offset));
-    }, [dispatch,input]);
+        dispatch(getProducts(input.limit, input.offset));
+    }, [dispatch, input]);
 
     const handleInput = (e) => {
-        
         setInput({
             ...input,
-            
-            offset:e.target.value
+            offset: e.target.value
         })
-    }
-
-    
+    }    
 
     return (
         <div className='main'>
