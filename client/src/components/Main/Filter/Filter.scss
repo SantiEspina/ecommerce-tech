@@ -1,33 +1,50 @@
-.filterCnt{
+.filterCnt {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  border-bottom: 0.1rem gray solid;
+  .selectFilter {
+    cursor: pointer;
+    &:hover {
+      border: solid black 0.13rem;
+    }
+  }
+  .buttonCart {
+    border-radius: 2.3rem;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 1rem;
     padding: 1rem;
-    border-bottom: .1rem gray solid;
-    .selectFilter{
-        cursor: pointer;
-        &:hover {
-            border: solid black .13rem;
-        }
+    background-color: transparent;
+    color: white;
+    border: 0;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2),
+        0 7px 20px 0 rgba(0, 0, 0, 0.15);
+      transition: 200ms;
     }
-    .buttonCart{
-        border-radius: 2.3rem;
-        display: flex;
-        padding: 1rem;
-        background-color:transparent;
-        color: white;
-        border: 0;
-        font-family: 'Montserrat', sans-serif;
-        cursor: pointer;
-        &:hover{
-            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.15);
-            transition: 200ms;
-        }
-        img{
-            width: 4.5rem;
-            max-height: 4rem;
-            object-fit: contain;
-        }
+    img {
+      width: 4.5rem;
+      max-height: 4rem;
+      object-fit: contain;
     }
+  }
+  .cartCnt {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 90%;
+    font-size: 1.4rem;
+    text-decoration: none;
+    .cartItems {
+      display: flex;
+      padding: 1rem;
+      height: 3rem;
+      .infoCart {
+        width: 70%;
+      }
+    }
+  }
 }

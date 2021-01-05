@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories, editCategory } from '../../../../Redux/actions';
+import { getCategories, editCategory } from '../../../../redux/actions';
 
 import './EditCategory.scss';
 

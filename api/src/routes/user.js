@@ -50,7 +50,15 @@ server.post('/', (req, res, next) => {
         isAdmin
     })
         .then(user => res.status(201).json(user))
-        .catch(err => res.status(400).send(err))
+        .catch(err => {
+            if(err.parent){
+                
+                switch(err.parent.code){
+                    case "23505" : return res.status(400).send(err.parent.detail)
+                    default:return next(err.parent)
+                }
+            }
+            next(err)})
 });
 
 server.put('/:id', (req, res, next) => {

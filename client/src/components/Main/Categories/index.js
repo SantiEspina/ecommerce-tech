@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Categories.scss';
-import { getCategories, getProductByCategory } from '../../../Redux/actions';
+import { getCategories, getProductByCategory } from '../../../redux/actions';
 
 export default function Categories() {
     const dispatch = useDispatch();
