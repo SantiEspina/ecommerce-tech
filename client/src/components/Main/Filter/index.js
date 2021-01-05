@@ -43,10 +43,12 @@ function Filter() {
                 </button>
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
-                        <button className='closeCartBtn' name='openCart' onClick={handleToggle}>&times;</button>
-                        <p>Cart</p>
+                        <div className='titleCart'>
+                            <button className='closeCartBtn' name='openCart' onClick={handleToggle}>&times;</button>
+                            <p>Your Cart</p>
+                        </div>
                         <div className='cartCnt'>
-                            <ul>
+                            <ul className='products-cart'>
                                 {
                                     items && items.products.map(p => {
                                         cont += p.orderProduct.price * p.orderProduct.quantity;
@@ -66,20 +68,22 @@ function Filter() {
                                                         payload:order
                                                     })
                                                     
-                                                    }} >X</button>
+                                                    }} >&times;</button>
                                             </li>
                                         )
                                     })
                                 }
                             </ul>
-                            <span>TOTAL: $ {cont}</span>
-                            <button onClick={() => {
-                                window.localStorage.clear()
-                                dispatch({
-                                    type:ADD_PRODUCT_TO_ORDER,
-                                    payload:[]
-                                })
-                            }}>Empty Cart</button>
+                            <div className='total-cart'>
+                                <span>TOTAL: $ {cont}</span>
+                                <button onClick={() => {
+                                    window.localStorage.clear()
+                                    dispatch({
+                                        type:ADD_PRODUCT_TO_ORDER,
+                                        payload:[]
+                                    })
+                                }}>Empty Cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>

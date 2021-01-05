@@ -219,8 +219,6 @@ export const addProductToOrder = (input, idProduct) => {
         window.localStorage.setItem("cart", JSON.stringify(cart))
         dispatch({ type: CREATE_ORDER_TO_USER, payload: cart })
     }
-
-
 };
 //devolver una orden
 export const getProductToOrder = (idOrder) => {
