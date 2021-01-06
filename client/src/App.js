@@ -14,10 +14,8 @@ import User from './components/Main/Admin/User';
 import Card from './components/Main/Product/Card.js';
 import { useDispatch } from 'react-redux';
 import { getPendingOrder } from './redux/actions.js';
-
-//armar la accion para eliminar el producto de la orden.
-//accion para cambiar la cantidad de un producto.
-//cuando quiero agregar de vuelta se agregue en la cantidad.
+import Login from './components/Main/login';
+import Users from './components/Main/users';
 
 
 function App() {
@@ -37,9 +35,11 @@ function App() {
       <Route exact path="/admin/editproduct/:id" component={EditProduct} />
       <Route exact path="/product/:id" component={ProductID} />
       <Route exact path="/admin/editcategory" component={EditCategory} />
-      <Route exact path="/orders/" render={() => <Orders />} />
-      <Route exact path="/user/" render={() => <User />} />
-      <Route exact path="/order/" render={() => <Card />} />
+      <Route exact path="/orders" render={() => <Orders />} />
+      <Route exact path="/user" render={() => <User />} />
+      <Route exact path="/order" render={() => <Card />} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/users" component={Users} />
       <Route path="/" render={() => <Footer />} />
     </>
 

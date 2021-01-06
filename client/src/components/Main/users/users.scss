@@ -1,0 +1,22 @@
+.usersCnt{
+    height: 100%;
+    margin: 3rem 0 3rem 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    tr{
+        height: 5rem;
+        display: flex;
+        th, td{
+            display: flex;
+            width: 20%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1rem;
+            border-right: 1px solid #e3e3e3;
+            border-bottom: 1px solid #e3e3e3;
+            border-top: 1px solid #e3e3e3;
+        }
+    }
+}
