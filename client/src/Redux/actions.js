@@ -144,9 +144,9 @@ export const getOrders = (status) => {
 }
 
 export const addUser = (input) => {
-    let { name, username, email, password, direction } = input;
+    let { name, username, email, password, adress } = input;
     return function (dispatch) {
-        axios.post(`${localhost}/user/`, { name, username, email, password, direction })
+        axios.post(`${localhost}/user/`, { name, username, email, password, adress })
             .then(data => dispatch({ type: ADD_USER, payload: data.data }) && alert("The user has been created !!"))
             .catch(error => alert(error.response.data))
     }
