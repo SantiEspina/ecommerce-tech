@@ -37,16 +37,16 @@ server.get('/:id', (req, res, next) => {
 });
 
 server.post('/', (req, res, next) => {
-    const { name, username, email, password, direction, isAdmin } = req.body;
+    const { name, username, email, password, adress, isAdmin } = req.body;
 
-    if(!name || !email || !direction) return res.status(401).send('Faltan datos');
+    if(!name || !email || !adress) return res.status(401).send('Faltan datos');
 
     User.create({
         name,
         username,
         email,
         password,
-        direction,
+        adress,
         isAdmin
     })
         .then(user => res.status(201).json(user))
@@ -63,12 +63,12 @@ server.post('/', (req, res, next) => {
 
 server.put('/:id', (req, res, next) => {
     const { id } = req.params;
-    const { name, username, email, password, direction, isAdmin } = req.body;
+    const { name, username, email, password, adress, isAdmin } = req.body;
 
     User.update({
         name,
         email,
-        direction,
+        adress,
         isAdmin,
         username,
         password
