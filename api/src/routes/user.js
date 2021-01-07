@@ -2,6 +2,7 @@ const server = require('express').Router();
 const { User, Order, Product } = require('../db.js');
 const { Op } =require ('sequelize');
 
+
 function parseWhere(where){
 	where = JSON.parse(where)
 	for (let prop in where){
@@ -84,5 +85,22 @@ server.delete('/:id', (req, res, next) => {
         .then(data => res.status(201).send('Eliminado'))
         .catch(err => res.status(400).json(err))
 });
+
+server.put("/:id/passwordReset" , (req , res , next ) => {
+    let { id } =req.params;
+    // let { newPassword} = req.body;
+
+    User.update(req.body,{where:{id}})
+    .then(() => User.findByPk(id))
+    .then(user => res.status(201).json(user))
+    .catch(err => res.status(400).send(err))
+    // User.findByPk(id )
+    
+    // .then(user => {
+    //     user.password=newPassword;
+    //     res.status(200).json(user)
+    // })
+    // .catch(err => res.status(400).send(err))
+})
 
 module.exports = server;

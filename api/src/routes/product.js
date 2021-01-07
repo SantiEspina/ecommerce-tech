@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product, Category } = require('../db.js');
+const { Product, Category , Review } = require('../db.js');
 const { Op } =require ('sequelize');
 
 function parseWhere(where){
@@ -64,8 +64,12 @@ server.get('/search',(req,res) => {
 
 
 server.get('/:id', (req, res)=>{
-	const { id }  = req.params
-	Product.findOne({where: { id }, include: Category})
+	const { id }   = req.params;
+	Product.findOne({
+		where: {
+		 id, 
+	},include:[{model:Category},{model:Review}],
+})
 	.then(product => {
 		res.status(201).json(product)
 	})
