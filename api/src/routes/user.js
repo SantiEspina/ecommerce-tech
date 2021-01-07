@@ -18,11 +18,10 @@ function parseWhere(where){
 
 server.get('/', (req, res, next) => {
     try {
-        if (req.user){
+        if (req.user.isAdmin){
             let { limit, offset, order, where } = req.query;
             order && (order = JSON.parse(order));
             where && (where = parseWhere(where));
-        
             User.findAll({ limit, offset, order, where, include: Order })
                 .then((users) => {
                     res.json(users);
@@ -35,7 +34,6 @@ server.get('/', (req, res, next) => {
 
 server.get('/:id', (req, res, next) => {
     const { id } = req.params;
-
     User.findByPk(id, { include: [Order] })
         .then(user => res.status(201).json(user))
         .catch(err => next(err))
@@ -43,9 +41,7 @@ server.get('/:id', (req, res, next) => {
 
 server.post('/', (req, res, next) => {
     const { name, username, email, password, adress, isAdmin } = req.body;
-
     if(!name || !email || !adress) return res.status(401).send('Faltan datos');
-
     User.create({
         name,
         username,
@@ -69,7 +65,6 @@ server.post('/', (req, res, next) => {
 server.put('/:id', (req, res, next) => {
     const { id } = req.params;
     const { name, username, email, password, adress, isAdmin } = req.body;
-
     User.update({
         name,
         email,
@@ -85,11 +80,9 @@ server.put('/:id', (req, res, next) => {
 
 server.delete('/:id', (req, res, next) => {
     const { id } = req.params;
-
     User.destroy({ where: { id } })
         .then(data => res.status(201).send('Eliminado'))
         .catch(err => res.status(400).json(err))
 });
-
 
 module.exports = server;
