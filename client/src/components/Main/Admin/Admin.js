@@ -79,8 +79,8 @@ export default function Admin() {
                 <Link to='/orders' >
                     <button className='addCategory' onClick={e => { }}>TableOrders</button>
                 </Link>
-                <Link to='/user'>
-                    <button className='addCategory' onClick={e => { }}>add New User</button>
+                <Link to='/users'>
+                    <button className='addCategory' onClick={e => { }}>All Users</button>
                 </Link>
             </div>
             <div className={`removeCnt-${input.removeCategory}`}>

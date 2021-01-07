@@ -16,7 +16,8 @@ import {
     ADD_USER,
     ADD_PRODUCT_TO_ORDER,
     GET_PRODUCTS_TO_ORDER,
-    CREATE_ORDER_TO_USER
+    CREATE_ORDER_TO_USER,
+    GET_USER
 } from './constants';
 
 import axios from 'axios';
@@ -238,4 +239,11 @@ export const getPendingOrder = () => {
         dispatch({ type: CREATE_ORDER_TO_USER, payload: cart })
     }
 }
+
+export const getUsers = () => {
+    return function (dispatch) {
+        axios.get(`${localhost}/user/`)
+            .then(data => dispatch({ type: GET_USER, payload: data.data }))
+    }
+};
 

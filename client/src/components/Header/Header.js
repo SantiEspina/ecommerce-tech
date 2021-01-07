@@ -14,8 +14,14 @@ function Header ({ prueba, findProductBySearchBar }) {
             </Link>
             <SearchBar filterSearchBar={findProductBySearchBar} products={prueba}/>
             <div className='adds'>
-                <Link to='/admin/' className='link'>
-                    <button>Admin Panel</button>
+                {/* <Link to='/admin/' className='link'>
+                    <button></button>
+                </Link> */}
+                <Link to='/login' className='link'>
+                    <button>Login</button>
+                </Link>
+                <Link to='/user' className='link'>
+                    <button>Sign up</button>
                 </Link>
             </div>
         </header>
