@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import jwt from 'jwt-decode';
 import Header from './components/Header/Header.js';
 import Main from './components/Main/Main.js';
 import { Route, Switch } from "react-router-dom";
@@ -12,18 +13,29 @@ import EditCategory from './components/Main/Admin/Category/EditCategory';
 import Orders from './components/Main/Admin/Orders/index.js';
 import User from './components/Main/Admin/User';
 import Card from './components/Main/Product/Card.js';
-import { useDispatch } from 'react-redux';
-import { getPendingOrder } from './redux/actions.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe, getPendingOrder, getProductToOrder } from './redux/actions.js';
 import Login from './components/Main/login';
 import Users from './components/Main/users';
+import axios from 'axios';
+
 
 
 function App() {
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
+  
   useEffect(() => {
-    dispatch((getPendingOrder()));
-  }, []);
+    let token = window.localStorage.getItem('token');
+    if(token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      dispatch(getMe());
+    } else {
+      dispatch((getPendingOrder()));
+    }
+    // preg si existe token en ls
+    // si existe agregar a axios 
+    // decodificar con jwt y mandar a redux
+  }, [dispatch]);
   return (
 
     <>

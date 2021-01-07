@@ -17,7 +17,11 @@ import {
     GET_PRODUCTS_TO_ORDER,
     CREATE_ORDER_TO_USER,
     GET_USER,
-    LOGIN_USER
+    LOGIN_USER,
+    GET_ME,
+    LOG_OUT,
+    DELETE_ORDER,
+    DELETE_PRODUCT_ORDER
 } from './constants';
 
 let initialState = {};
@@ -95,17 +99,17 @@ export default function findProductReducer(state = initialState, action) {
         case ADD_PRODUCT_TO_ORDER:
             return {
                 ...state,
-                order: action.payload
+                cart: action.payload
             }
         case GET_PRODUCTS_TO_ORDER:
             return {
                 ...state,
-                order: action.payload
+                cart: action.payload
             }
         case CREATE_ORDER_TO_USER:
             return {
                 ...state,
-                cart: action.payload
+                order: action.payload
             }
         case GET_USER:
             return {
@@ -116,6 +120,24 @@ export default function findProductReducer(state = initialState, action) {
             return {
                 ...state,
                 token: action.payload
+            }
+        case GET_ME:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOG_OUT:
+            return {
+                ...state,
+                user: ''
+            }
+        case DELETE_ORDER:
+            return {
+                ...state,
+            }
+        case DELETE_PRODUCT_ORDER:
+            return {
+                ...state,
             }
         default: return state;
     }

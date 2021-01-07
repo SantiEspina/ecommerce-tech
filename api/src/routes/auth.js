@@ -28,7 +28,7 @@ server.post("/login",function (req, res, next){
 server.post("/register", async function (req, res, next) {
     try {
       const user = await User.create(req.body);
-      const { id ,name, username, email, adress, photoURL, isAdmin, password } = user;
+      const { id ,name, username, email, adress, photoURL, isAdmin = false, password } = user;
       return res.send(
         jwt.sign(
           {

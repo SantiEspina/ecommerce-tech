@@ -43,8 +43,9 @@ function AddUser() {
             <form onSubmit={handleSubmit} className='userBox'>
                 <h2>Create User</h2>
                 <div className='div'>
-                    <label>Name: </label>
+                    <label >Name: </label>
                     <input
+                        autoComplete="off"
                         type='text'
                         name='name'
                         value={input.name}
@@ -53,6 +54,7 @@ function AddUser() {
                 <div className='div'>
                     <label>Username: </label>
                     <textarea
+                        autoComplete="off"
                         type='text'
                         name='username'
                         value={input.username}
@@ -62,6 +64,7 @@ function AddUser() {
                 <div className='div'>
                     <label>Email: </label>
                     <textarea
+                        autoComplete="off"
                         type='email'
                         name='email'
                         value={input.email}
@@ -71,6 +74,7 @@ function AddUser() {
                 <div className='div'>
                     <label>Password: </label>
                     <input
+                        autoComplete="off"
                         type='password'
                         name='password'
                         value={input.password}
@@ -80,6 +84,7 @@ function AddUser() {
                 <div className='div'>
                     <label>Adress: </label>
                     <input
+                        autoComplete="off"
                         type='text'
                         name='adress'
                         value={input.adress}
