@@ -4,7 +4,6 @@ const { Op } =require ('sequelize');
 
 function parseWhere(where){
     where = JSON.parse(where)
-    
 	for (let prop in where){
 		const splitProp = prop.split("_");
 		if(splitProp.length === 2){
@@ -15,14 +14,12 @@ function parseWhere(where){
 		}
 	}
     return where;
-
 }
 
 server.get('/', (req, res, next) => {
     let { limit, offset, order, where } = req.query;
     order && (order = JSON.parse(order));
     where && (where = parseWhere(where));
-
 Category.findAll({limit, offset, order, where})
 	.then(categories => {
 		res.send(categories);
@@ -32,7 +29,6 @@ Category.findAll({limit, offset, order, where})
 
 server.get('/:id', (req, res, next) => {
     const { id } = req.params;
-
     Category.findByPk(id)
         .then(category => {
             res.status(201).json(category)
@@ -45,7 +41,7 @@ server.get('/:id', (req, res, next) => {
 
 server.post('/',(req, res, next) => {
     try {
-        if(req.user){
+        if(req.user.isAdmin){
             const { name } = req.body;
             Category.findOrCreate({where:{name}})
             .then(()=>{
@@ -56,12 +52,11 @@ server.post('/',(req, res, next) => {
     } catch (error) {
         next (error)
     }
-
 });
 
 server.delete('/:idParams',(req, res , next) => {
     try {
-        if(req.user){
+        if(req.user.isAdmin){
             const { idParams } = req.params;
             Category.destroy({where:{id:idParams}})
             .then(()=>{
@@ -71,12 +66,11 @@ server.delete('/:idParams',(req, res , next) => {
     } catch (error) {
         next(error)
     }
-
 });
 
 server.put('/:idParams',(req, res, next) => {
     try {
-        if(req.user){
+        if(req.user.isAdmin){
             const { idParams } = req.params;
             const { name } =req.body;
             Category.update({name}, {where: {id:idParams}})
@@ -87,8 +81,6 @@ server.put('/:idParams',(req, res, next) => {
     } catch (error) {
         next(error)
     }
-
-
 });
 
 module.exports = server;

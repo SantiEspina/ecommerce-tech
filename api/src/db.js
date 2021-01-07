@@ -2,8 +2,9 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`, {
@@ -35,6 +36,7 @@ const{ Order } =sequelize.models;
 const { Category }=sequelize.models;
 const { User } =sequelize.models;
 const { OrderProduct } = sequelize.models;
+const { Review } =sequelize.models;
 
 // Aca vendrian las relaciones
 Product.belongsToMany(Category, {through: "category_products"});
