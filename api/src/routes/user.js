@@ -17,15 +17,20 @@ function parseWhere(where){
 };
 
 server.get('/', (req, res, next) => {
-    let { limit, offset, order, where } = req.query;
-    order && (order = JSON.parse(order));
-    where && (where = parseWhere(where));
-
-    User.findAll({ limit, offset, order, where, include: Order })
-        .then((users) => {
-            res.json(users);
-        })
-        .catch(err => res.status(400).send(err));
+    try {
+        if (req.user){
+            let { limit, offset, order, where } = req.query;
+            order && (order = JSON.parse(order));
+            where && (where = parseWhere(where));
+        
+            User.findAll({ limit, offset, order, where, include: Order })
+                .then((users) => {
+                    res.json(users);
+                })
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error);
+    }
 });
 
 server.get('/:id', (req, res, next) => {
