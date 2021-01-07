@@ -17,12 +17,18 @@ import {
     ADD_PRODUCT_TO_ORDER,
     GET_PRODUCTS_TO_ORDER,
     CREATE_ORDER_TO_USER,
-    GET_USER
+    GET_USER,
+    LOGIN_USER,
+    GET_ME
 } from './constants';
 
 import axios from 'axios';
 
 const localhost = 'http://localhost:3001';
+const token = window.localStorage.getItem('token');
+const config = {
+    headers: { Authorization: `Bearer ${token}` }
+};
 
 export const getProducts = (limit, offset) => {
     return function (dispatch) {
@@ -148,7 +154,7 @@ export const addUser = (input) => {
     let { name, username, email, password, adress } = input;
     return function (dispatch) {
         axios.post(`${localhost}/user/`, { name, username, email, password, adress })
-            .then(data => dispatch({ type: ADD_USER, payload: data.data }) && alert("The user has been created !!"))
+            .then(data => dispatch({ type: ADD_USER, payload: data.data }) && window.location.replace('/'))
             .catch(error => alert(error.response.data))
     }
 };
@@ -247,3 +253,27 @@ export const getUsers = () => {
     }
 };
 
+export const loginUser = (input) => {
+    const { email, password } = input;
+    return function (dispatch) {
+        axios.post(`${localhost}/auth/login`, { email, password })
+            .then(data => {
+                window.localStorage.setItem("token", JSON.stringify(data.data));
+                // window.location.replace('/');
+                dispatch({ type: LOGIN_USER, payload: data.data });
+                return getMe();
+            })
+            .catch(err => alert('Email or password are incorrect'))  
+    }
+};
+
+export const getMe = () => {
+    console.log('entro')
+    return function (dispatch) {
+        axios.get(`${localhost}/auth/me`)
+            .then(data => {
+                // dispatch({ type: GET_ME, payload: data.data })
+                console.log(data.data)
+            })
+    }
+};

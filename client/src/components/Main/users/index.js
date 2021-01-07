@@ -28,7 +28,7 @@ function Users() {
                         <td>{u.name}</td>
                         <td>{u.username}</td>
                         <td>{u.email}</td>
-                        <td>{u.direction}</td>
+                        <td>{u.adress}</td>
                         <td>{u.isAdmin.toString()}</td>
                     </tr>
                 ))

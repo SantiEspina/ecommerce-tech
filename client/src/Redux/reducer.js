@@ -16,7 +16,8 @@ import {
     ADD_PRODUCT_TO_ORDER,
     GET_PRODUCTS_TO_ORDER,
     CREATE_ORDER_TO_USER,
-    GET_USER
+    GET_USER,
+    LOGIN_USER
 } from './constants';
 
 let initialState = {};
@@ -110,6 +111,11 @@ export default function findProductReducer(state = initialState, action) {
             return {
                 ...state,
                 users: action.payload,
+            }
+        case LOGIN_USER:
+            return {
+                ...state,
+                token: action.payload
             }
         default: return state;
     }

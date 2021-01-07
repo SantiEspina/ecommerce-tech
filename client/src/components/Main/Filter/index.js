@@ -77,7 +77,7 @@ function Filter() {
                             <div className='total-cart'>
                                 <span>TOTAL: $ {cont}</span>
                                 <button onClick={() => {
-                                    window.localStorage.clear()
+                                    window.localStorage.removeItem('cart')
                                     dispatch({
                                         type:ADD_PRODUCT_TO_ORDER,
                                         payload:[]

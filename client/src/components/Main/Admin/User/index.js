@@ -78,17 +78,17 @@ function AddUser() {
                         />
                 </div>
                 <div className='div'>
-                    <label>Direction: </label>
+                    <label>Adress: </label>
                     <input
                         type='text'
-                        name='direction'
-                        value={input.direction}
+                        name='adress'
+                        value={input.adress}
                         onChange={handleInputChange}
                         />
                 </div>
                 <input type='submit'
                     value='Add User'
-                    disabled={!input.name || !input.username || !input.email || !input.password || !input.direction || false} className='btnAddUser'></input>
+                    disabled={!input.name || !input.username || !input.email || !input.password || !input.adress || false} className='btnAddUser'></input>
             </form>
         </div>
     )
