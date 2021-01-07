@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { editProduct, getDetails, getCategories, addCategoryToProduct } from '../../../../Redux/actions';
+import { editProduct, getDetails, getCategories, addCategoryToProduct } from '../../../../redux/actions';
 
 export default function EditProduct({ match }) {
     const dispatch = useDispatch();

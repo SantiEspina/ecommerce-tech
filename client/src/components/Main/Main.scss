@@ -6,4 +6,26 @@
     .categoriesProduct{
         display: flex;
     }
+    .contButton{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center; 
+        border-top: .1rem solid gray;
+        button{
+            margin: 2rem;
+        } 
+        
+    }
+    .btn-primary{
+        border-radius: 1.5rem;
+        padding: 10px 30px;
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(112, 95, 0);
+        }
+    }    
 }

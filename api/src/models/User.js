@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
-  sequelize.define('user', {
+  const User = sequelize.define('user', {
     name: {
       type: DataTypes.STRING, 
       required: true ,
@@ -10,6 +11,7 @@ module.exports = (sequelize) => {
     username: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -18,10 +20,20 @@ module.exports = (sequelize) => {
         isEmail:true,
       }
     },
-    password: {
+    photoURL: {
       type: DataTypes.STRING,
     },
-    direction: {
+    password: {
+      type: DataTypes.STRING,
+      set(value){
+        if(value){
+          const salt = bcrypt.genSaltSync(10);
+          const hash = bcrypt.hashSync(value, salt);
+          this.setDataValue('password', hash)
+        }
+      }
+    },
+    adress: {
       type: DataTypes.TEXT,
       allowNull: false,
       required: true
@@ -31,4 +43,8 @@ module.exports = (sequelize) => {
       defaultValue: false
     }
   })
+  User.prototype.compare = function(pass){
+    return bcrypt.compareSync(pass, this.password);
+  }
+  return User;
 }

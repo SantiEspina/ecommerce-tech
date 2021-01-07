@@ -1,0 +1,33 @@
+.admin{
+    display: grid;
+    font-family: 'Montserrat', sans-serif;
+    width: 75%;
+    tr{
+        display: flex;
+        th, td{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1rem;
+            border-right: 1px solid #e3e3e3;
+            border-bottom: 1px solid #e3e3e3;
+        }
+        .id{
+            width: .6rem;
+        }
+        .name{
+            width: 10rem;
+        }
+        .descr {
+            width: 45rem;
+        }
+        .img{
+            width: 40rem;
+        }
+        }
+        .stock{
+            width: 3rem;
+        }
+    }

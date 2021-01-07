@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar/SearchBar';
-import { findProductBySearchBar } from '../../Redux/actions';
+import SearchBar from './SearchBar';
+import { findProductBySearchBar } from '../../redux/actions';
 import { connect } from 'react-redux';
 
 import './Header.scss';
