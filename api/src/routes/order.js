@@ -16,119 +16,144 @@ function parseWhere(where){
     return where;
 };
 
-
 server.get('/', (req, res, next) => {
-    let { limit, offset, order, where } = req.query;
-    let { state } = req.body;
-    order && (order = JSON.parse(order));
-    where && (where = parseWhere(where));
-    if(!state) {
-        Order.findAll({ include: [User] })
-            .then(orders => res.status(201).json(orders))
-            .catch(err => next(err))
-    } else {   
-        Order.findAll({ where: { state } }, { include: [User] })
-        .then(orders => res.status(201).json(orders))
-        .catch(err => next(err))
+    try {
+        if(req.user.isAdmin){
+            let { limit, offset, order, where, state } = req.query;
+            order && (order = JSON.parse(order));
+            where && (where = parseWhere(where));
+            if(!state) {
+                Order.findAll({ include: [User] })
+                    .then(orders => res.status(201).json(orders))
+                    .catch(err => next(err))
+            } else {   
+                Order.findAll({ where: { state } }, { include: [User] })
+                .then(orders => res.status(201).json(orders))
+                .catch(err => next(err))
+            }
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
     }
 });
 
 server.get('/user/:idUser', (req, res, next) => {
-    let { limit, offset, order, where } = req.query;
-    const { idUser } = req.params;
-    order && (order = JSON.parse(order));
-    where && (where = parseWhere(where));
-
-    Order.findAll({
-        include: [{
-            model: User,
-            where: {
-                id: idUser
-            }
-        }]
-    })
-        .then(orders => res.status(201).json(orders))
-        .catch(err => next(err))
+    try {
+        if(req.user){
+            let { limit, offset, order, where } = req.query;
+            const { idUser } = req.params;
+            order && (order = JSON.parse(order));
+            where && (where = parseWhere(where));
+            Order.findAll({
+                include: [{
+                    model: User,
+                    where: {
+                        id: idUser
+                    }
+                }]
+            })
+                .then(orders => res.status(201).json(orders))
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 });
 
 server.get('/:idOrder', (req, res, next) => {
-    let { limit, offset, order, where } = req.query;
-    const { idOrder } = req.params;
-    order && (order = JSON.parse(order));
-    where && (where = parseWhere(where));
-
-    Order.findByPk(idOrder, { include: [Product] })
-        .then(order => res.status(201).json(order))
-        .catch(err => next(err))
+    try {
+        if(req.user){
+            let { limit, offset, order, where } = req.query;
+            const { idOrder } = req.params;
+            order && (order = JSON.parse(order));
+            where && (where = parseWhere(where));
+            Order.findByPk(idOrder, { include: [Product] })
+                .then(order => res.status(201).json(order))
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 });
 
 server.put('/:idOrder', (req, res, next) => {
-    const { idOrder } = req.params;
-
-    Order.update(req.body, { where: { id: idOrder } })
-        .then(() => Order.findByPk(idOrder))
-        .then(order => res.status(201).json(order))
-        .catch(err => next(err))
+    try {
+        if (req.user.isAdmin){
+            const { idOrder } = req.params;
+            Order.update(req.body, { where: { id: idOrder } })
+                .then(() => Order.findByPk(idOrder))
+                .then(order => res.status(201).json(order))
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 });
 
 server.delete('/:idOrder', (req, res, next) => {
-    const { idOrder } = req.params;
-    
-    Order.destroy({ where: { id: idOrder } })
-        .then(data => res.status(201).send('Eliminado'))
-        .catch(err => next(err))
+    try {
+        if(req.user.isAdmin){
+            const { idOrder } = req.params;
+            Order.destroy({ where: { id: idOrder } })
+                .then(data => res.status(201).send('Eliminado'))
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 });
 
 server.post('/', async (req, res, next) => {
-    const { userId } = req.body;
-
-    let order = await Order.findOne({ 
-        where: {
-            userId,
-            state: 'pending'
-        }
-    });
-
-    if(!order) {   
-        const user = await User.findByPk(userId, { include: [Order] });
-        
-        await user.createOrder();
-        order = await Order.findOne({ 
-            where: {
-                userId,
-                state: 'pending'
+    try {
+        if(req.user){
+            const { userId } = req.body;
+            let order = await Order.findOne({ 
+                where: {
+                    userId,
+                    state: 'pending'
+                }
+            });
+            if(!order) {   
+                const user = await User.findByPk(userId, { include: [Order] });
+                await user.createOrder();
+                order = await Order.findOne({ 
+                    where: {
+                        userId,
+                        state: 'pending'
+                    }
+                });
             }
-        });
+            res.status(201).json(order);
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
     }
-
-    res.status(201).json(order);
 });
 
 server.post('/:idOrder/product/:idProduct', async (req, res, next) => {
-    const { idOrder, idProduct } = req.params;
-    const { name, price, quantity } = req.body;
-
-    let order = await Order.findByPk(idOrder, { include: [Product] });
-
-
-    const product = await Product.findByPk(idProduct);
-    console.log(order.products.find(x => x.id === idProduct))
-    await order.addProduct(product, { through: { name, quantity, price } });
-
-    order = await Order.findByPk(idOrder, { include: [Product] });
-
-    res.status(201).json(order)
+    try {
+        if(req.user){
+            const { idOrder, idProduct } = req.params;
+            const { name, price, quantity } = req.body;
+            let order = await Order.findByPk(idOrder, { include: [Product] });
+            const product = await Product.findByPk(idProduct);
+            await order.addProduct(product, { through: { name, quantity, price } });
+            order = await Order.findByPk(idOrder, { include: [Product] });
+            res.status(201).json(order)
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 });
 
 server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
-    const { idOrder, idProduct } = req.params;
-
-    const order = await Order.findByPk(idOrder, { include: [Product] });
-    const product = await Product.findByPk(idProduct);
-
-    await order.removeProduct(product)
-
-    res.status(201).send('Deletea2')
+    try {
+        if(req.user){
+            const { idOrder, idProduct } = req.params;
+            const order = await Order.findByPk(idOrder, { include: [Product] });
+            const product = await Product.findByPk(idProduct);
+            await order.removeProduct(product)
+            res.status(201).send('Deletea2')
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 });
 
 // ! HACER post /:idOrder/complete -> traer order -> recorrer products y preguntar si hay stock ->
@@ -153,6 +178,5 @@ server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
 
 //     res.json(order)
 // });
-
 
 module.exports = server;

@@ -3,6 +3,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const BearerStrategy = require("passport-http-bearer").Strategy;
 const { User } = require('./db.js');
 const jwt = require("jsonwebtoken");
+const {
+    SECRETO
+    } = process.env;
 
 passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password", session: false},
     async(email, password, done) => {
@@ -23,11 +26,11 @@ passport.use(new LocalStrategy({ usernameField: "email", passwordField: "passwor
 ));
 passport.use(
     new BearerStrategy((token, done) => {
-      jwt.verify(token, "secreto", function (err, user) {
+    jwt.verify(token, SECRETO, function (err, user) {
         if (err) return done(err);
         return done(null, user ? user : false);
-      });
+    });
     })
-  );
-  
+);
+
 module.exports = passport;
