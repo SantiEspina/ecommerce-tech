@@ -18,6 +18,11 @@ import { getMe, getPendingOrder, getProductToOrder } from './redux/actions.js';
 import Login from './components/Main/login';
 import Users from './components/Main/users';
 import axios from 'axios';
+import AddUserAdmin from './components/Main/Admin/User/admin';
+import UserID from './components/Main/Admin/User/userID';
+import OrdersUser from './components/Main/Admin/User/ordersUser';
+import EditUser from './components/Main/Admin/User/editUser';
+import OrderID from './components/Main/Admin/Orders/orderId';
 
 
 
@@ -49,9 +54,14 @@ function App() {
       <Route exact path="/admin/editcategory" component={EditCategory} />
       <Route exact path="/orders" render={() => <Orders />} />
       <Route exact path="/user" render={() => <User />} />
+      <Route exact path="/user/:id" component={UserID} />
+      <Route exact path="/orders/user/:id" component={OrdersUser} />
+      <Route exact path="/edit/user/:id" component={EditUser} />
+      <Route exact path="/order/:id" component={OrderID} />
       <Route exact path="/order" render={() => <Card />} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/users" component={Users} />
+      <Route exact path="/addUserAdmin" component={AddUserAdmin} />
       <Route path="/" render={() => <Footer />} />
     </>
 

@@ -40,9 +40,6 @@ function Header () {
             </Link>
             <SearchBar/>
             <div className='adds'>
-                {/* <Link to='/admin/' className='link'>
-                    <button></button>
-                </Link> */}
                 {
                     user ? (
                         <>
@@ -52,6 +49,15 @@ function Header () {
                                 <Link to={`/user/${user.id}`} className='link'>
                                     <button name='user' onClick={handleToggle}>View Profile</button>
                                 </Link>
+                                {
+                                    user.isAdmin ? (
+                                        <div>
+                                            <Link to='/admin/' className='link'>
+                                                <button name='user' onClick={handleToggle}>Admin Panel</button>
+                                            </Link>
+                                        </div>
+                                    ) : null
+                                }
                                 <button className='logout' name='logout' onClick={handleToggle}>Logout</button>
                                 <div className={`logout-${input.logout}`}>
                                     <p>Are you sure you want to logout?</p>

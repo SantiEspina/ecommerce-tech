@@ -21,7 +21,12 @@ import {
     GET_ME,
     LOG_OUT,
     DELETE_ORDER,
-    DELETE_PRODUCT_ORDER
+    DELETE_PRODUCT_ORDER,
+    DELETE_USER,
+    ADD_USER_ADMIN,
+    GET_DETAILS_USER,
+    GET_ORDERS_USER,
+    EDIT_USER
 } from './constants';
 
 let initialState = {};
@@ -138,6 +143,31 @@ export default function findProductReducer(state = initialState, action) {
         case DELETE_PRODUCT_ORDER:
             return {
                 ...state,
+            }
+        case DELETE_USER:
+            return {
+                ...state,
+            }
+        case ADD_USER_ADMIN:
+            let users = state.users;
+            return {
+                ...state,
+                users: [...users, action.payload]
+            }
+        case GET_DETAILS_USER:
+            return {
+                ...state,
+                detailsUser: action.payload
+            }
+        case GET_ORDERS_USER:
+            return {
+                ...state,
+                ordersUser: action.payload
+            }
+        case EDIT_USER:
+            return {
+                ...state,
+                user: action.payload
             }
         default: return state;
     }

@@ -18,7 +18,8 @@ function parseWhere(where){
 
 
 server.get('/', (req, res, next) => {
-    let { limit, offset, order, where, state } = req.query;
+    let { limit, offset, order, where } = req.query;
+    let { state } = req.body;
     order && (order = JSON.parse(order));
     where && (where = parseWhere(where));
     if(!state) {
@@ -108,8 +109,10 @@ server.post('/:idOrder/product/:idProduct', async (req, res, next) => {
     const { name, price, quantity } = req.body;
 
     let order = await Order.findByPk(idOrder, { include: [Product] });
-    const product = await Product.findByPk(idProduct);
 
+
+    const product = await Product.findByPk(idProduct);
+    console.log(order.products.find(x => x.id === idProduct))
     await order.addProduct(product, { through: { name, quantity, price } });
 
     order = await Order.findByPk(idOrder, { include: [Product] });

@@ -63,13 +63,12 @@ server.post('/', (req, res, next) => {
 
 server.put('/:id', (req, res, next) => {
     const { id } = req.params;
-    const { name, username, email, password, adress, isAdmin } = req.body;
+    const { name, username, email, password, adress } = req.body;
 
     User.update({
         name,
         email,
         adress,
-        isAdmin,
         username,
         password
     }, { where: { id } })

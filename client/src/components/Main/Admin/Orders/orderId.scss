@@ -1,14 +1,13 @@
-.usersCnt{
+.productsCnt{
     margin: 3rem 0 3rem 0;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     min-height: 100vh;
     tr{
-        height: 5rem;
         display: flex;
         th, td{
             display: flex;
-            width: 15%;
+            width: 10%;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -17,6 +16,18 @@
             border-right: 1px solid #e3e3e3;
             border-bottom: 1px solid #e3e3e3;
             border-top: 1px solid #e3e3e3;
+        }
+        .products{
+            width: 30%;
+            ul{
+                list-style: none;
+                padding: 0;
+                width: 100%;
+                li{
+                    width: 100%;
+                    border-bottom: .1rem solid #e3e3e3;
+                }
+            }
         }
     }
 }

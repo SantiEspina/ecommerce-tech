@@ -22,7 +22,12 @@ import {
     GET_ME,
     LOG_OUT,
     DELETE_ORDER,
-    DELETE_PRODUCT_ORDER
+    DELETE_PRODUCT_ORDER,
+    DELETE_USER,
+    ADD_USER_ADMIN,
+    GET_DETAILS_USER,
+    GET_ORDERS_USER,
+    EDIT_USER
 } from './constants';
 
 
@@ -150,9 +155,9 @@ export const editCategory = (idC, name) => {
 };
 
 
-export const getOrders = (status) => {
+export const getOrders = (state = undefined) => {
     return function (dispatch) {
-        axios.get(`${localhost}/order`, { status })
+        axios.get(`${localhost}/order`, { state })
             .then(data => dispatch({ type: GET_ORDERS, payload: data.data }))
     }
 }
@@ -163,6 +168,7 @@ export const addUser = (input) => {
         axios.post(`${localhost}/auth/register`, { name, username, email, password, adress })
             // .then(data => dispatch({ type: ADD_USER, payload: data.data }) && window.location.replace('/'))
             .then(data => {
+                window.localStorage.removeItem('cart');
                 window.localStorage.setItem("token", data.data);
                 window.location.replace('/');
                 dispatch({ type: LOGIN_USER, payload: data.data });
@@ -305,5 +311,50 @@ export const deleteProductToOrder = (idOrder, idProduct) => {
     return function (dispatch) {
         axios.delete(`${localhost}/order/${idOrder}/product/${idProduct}`)
             .then(data => dispatch({ type: DELETE_PRODUCT_ORDER }))
+    }
+};
+
+export const deleteUser = (userId) => {
+    return function (dispatch) {
+        axios.delete(`${localhost}/user/${userId}`)
+            .then(data => dispatch ({ type: DELETE_USER }))
+    }
+};
+
+export const addUserAdmin = (input) => {
+    let { name, username, email, password, adress, isAdmin } = input;
+
+    return function (dispatch) {
+        axios.post(`${localhost}/user/`, { name, username, email, password, adress, isAdmin })
+            .then(data => {
+                dispatch({ type: ADD_USER_ADMIN, payload: data.data });
+                window.location.replace('/admin');
+            })
+            .catch(err => alert(err))
+    }
+};
+
+export const getDetailsUser = (idUser) => {
+    return function (dispatch) {
+        axios.get(`${localhost}/user/${idUser}`)
+            .then(data => dispatch({ type: GET_DETAILS_USER, payload: data.data }))
+    }
+};
+
+export const getOrdersUser = (idUser) => {
+    return function (dispatch) {
+        axios.get(`${localhost}/order/user/${idUser}`)
+            .then(data => dispatch({ type: GET_ORDERS_USER, payload: data.data }))
+    }
+};
+
+export const editUser = (id, input) => {
+    let { name, username, email, adress, password } = input;
+    return function (dispatch) {
+        axios.put(`${localhost}/user/${id}`, {  name, username, email, adress, password })
+            .then(data => {
+                dispatch({ type: EDIT_USER, payload: data.data });
+                window.location.replace(`/user/${id}`);
+            })
     }
 };
