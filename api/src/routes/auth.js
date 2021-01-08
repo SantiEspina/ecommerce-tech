@@ -2,6 +2,9 @@ const server = require('express').Router();
 const { User } = require('../db.js');
 const passport = require('passport');
 const jwt = require("jsonwebtoken");
+const {
+  SECRETO
+} = process.env;
 
 server.get("/me", async (req, res, next) => {
   try {
@@ -14,21 +17,20 @@ server.get("/me", async (req, res, next) => {
     next(error);
   }
 });
-// /login -> post S63 ruta POST/auth/login
 
 server.post("/login",function (req, res, next){
   passport.authenticate("local",function (err,user){
     if(err) return next (err);
     else if (!user) return  res.sendStatus(401);
-    else return res.send(jwt.sign(user,"secreto")) 
+    else return res.send(jwt.sign(user,SECRETO)) 
   })(req, res, next)
 });
-
 
 server.post("/register", async function (req, res, next) {
     try {
       const user = await User.create(req.body);
-      const { id ,name, username, email, adress, photoURL, isAdmin, password } = user;
+      const { id ,name, username, email, adress, photoURL, password } = user;
+      if(!username || !email || !adress || !password || !name) return res.status(401).send('Faltan datos');
       return res.send(
         jwt.sign(
           {
@@ -38,20 +40,33 @@ server.post("/register", async function (req, res, next) {
             email,
             adress,
             photoURL,
-            isAdmin,
             password,
           },
-          "secreto"
+          SECRETO
         )
       );
     } catch (error) {
-      res.sendStatus(500).send(error);
+        if(error.parent){
+            
+            switch(error.parent.code){
+                case "23505" : return res.status(400).send(error.parent.detail)
+                default:return next(error.parent)
+            }
+        }else next(error)
     }
   });
 
-
-
-
+  server.post("/promote/:id",  function (req , res , next) {
+    let { id } = req.params;
+    //const promote = { isAdmin:true }
+      User.update(req.body,{where:{id}})
+      .then(() => User.findByPk(id))
+      .then(user => res.status(201).json(user))
+      .catch(err => res.status(400).send(err))
+      
+   })
+     
+  
 // /me -> get
 // /login/google -> get
 // /login/google/cb -> get
