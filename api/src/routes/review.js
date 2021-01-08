@@ -43,7 +43,7 @@ server.get("/:idProduct",(req , res, next ) => {
         where:{
             productId:idProduct
         },
-        include:[{model:Product}]
+        include:[{model:User}]
     })
     .then(reviews => {
         res.status(200).json(reviews)

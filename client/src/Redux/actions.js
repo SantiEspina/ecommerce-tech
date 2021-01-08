@@ -27,7 +27,12 @@ import {
     ADD_USER_ADMIN,
     GET_DETAILS_USER,
     GET_ORDERS_USER,
-    EDIT_USER
+    EDIT_USER,
+    PROMOTE_TO_ADMIN,
+    ADD_REVIEW,
+    EDIT_REVIEW,
+    DELETE_REVIEW,
+    GET_REVIEWS
 } from './constants';
 
 
@@ -317,7 +322,10 @@ export const deleteProductToOrder = (idOrder, idProduct) => {
 export const deleteUser = (userId) => {
     return function (dispatch) {
         axios.delete(`${localhost}/user/${userId}`)
-            .then(data => dispatch ({ type: DELETE_USER }))
+            .then(data => {
+                dispatch(getUsers());
+                dispatch ({ type: DELETE_USER });
+            })
     }
 };
 
@@ -358,3 +366,39 @@ export const editUser = (id, input) => {
             })
     }
 };
+
+export const promoteToAdmin = (id) => {
+    return function (dispatch) {
+        axios.post(`${localhost}/auth/promote/${id}`, { isAdmin: true })
+            .then(data => dispatch({ type: PROMOTE_TO_ADMIN, payload: data.data }))
+            .catch(err => alert(err))
+    }
+};
+
+export const getReviews = (idProduct) => {
+    return function (dispatch) {
+        axios.get(`${localhost}/review/${idProduct}`)
+            .then(data => dispatch({ type: GET_REVIEWS, payload: data.data }))
+            .catch(err => alert(err))
+    }
+};
+
+export const addReview = (input) => {
+    let { commentary, rating, idUser, idProduct } = input;
+    return function (dispatch) {
+        axios.post(`${localhost}/review/`, { commentary, rating, idUser, idProduct })
+            .then (data => dispatch({ type: ADD_REVIEW, payload: data.data}))
+            .catch(err => alert(err))
+    }
+};
+
+export const deleteReview = (idReview) => {
+    return function (dispatch) {
+        axios.delete(`${localhost}/review/${idReview}`)
+            .then(data => {
+                dispatch({ type: DELETE_REVIEW })
+            })
+            .catch(err => alert(err))
+    }
+};  
+

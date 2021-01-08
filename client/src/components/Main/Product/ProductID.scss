@@ -2,37 +2,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
 .productID{
     font-family: 'Montserrat', sans-serif;
-    height: 100%;
-    margin: .5% auto;
-    width: 70%;
     display: flex;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .idBox{
-        text-align: center;
-        padding: .5rem;
-        h3{
-            text-decoration: underline;
-            font-size: 2rem;
-            font-family: 'Montserrat Alternates', sans-serif;
-        }
-        img{
-            width: 25rem;
-            max-height: 22rem;
-            object-fit: contain;
-        }
-    }
-    .info{
+    min-height: 100vh;
+    width: 80%;
+    margin: 1% auto;
+    justify-content: space-between;
+    .cartCnt {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        .details{
+        height: 100%;
+        font-size: 1.4rem;
+        text-decoration: none;
+        .total-cart{
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding: 1rem;
+          border-top: .1rem solid #e3e3e3;
+          button {
+            box-shadow: inset 0px 1px 0px 0px #ffffff;
+            background: linear-gradient(to bottom, #ffffff 5%,#f6f6f6 100% );
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #dcdcdc;
+            display: inline-block;
+            cursor: pointer;
+            color: #666666;
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none; 
+            text-shadow: 0px 1px 0px #ffffff;
+          }
+          button:hover {
+            background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+              background-color:#f6f6f6;
+          }
+        }
+        .products-cart{
+          display: flex;
+          flex-direction: column;
+          list-style: none;
+          .cartItems{
+            font-size: 1.2rem;
             display: flex;
-            width: 70%;
             justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: .1rem solid #e1e1e1;
+            .infoCart{
+              width: 80%;
+              span{
+                margin-left: 2rem;
+              }
+            }
+          }
+        }
+    }
+    .box{
+        width: 40%;
+        .stars{
+            input[type='radio']{
+                display: none;
+            }
+            label{
+                color: grey;
+            }
+        }
+        .idBox{
+            padding: 3rem;
+            text-align: center;
+            h3{
+                text-align: start;
+                text-decoration: underline;
+                font-size: 2rem;
+                font-family: 'Montserrat Alternates', sans-serif;
+            }
+            img{
+                width: 35rem;
+                max-height: 30rem;
+                object-fit: contain;
+                margin: 5rem;
+            }
+        }
+        .info{
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            width: 100%;
+            .details{
+                display: flex;
+                flex-direction: column;
+                width: 70%;
+                justify-content: space-between;
+                span{
+                    margin: 2rem;
+                }
+            }
         }
     }
 }
+
