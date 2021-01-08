@@ -29,7 +29,8 @@ server.post("/login",function (req, res, next){
 server.post("/register", async function (req, res, next) {
     try {
       const user = await User.create(req.body);
-      const { id ,name, username, email, adress, photoURL, isAdmin, password } = user;
+      const { id ,name, username, email, adress, photoURL, password } = user;
+      if(!username || !email || !adress || !password || !name) return res.status(401).send('Faltan datos');
       return res.send(
         jwt.sign(
           {
@@ -39,14 +40,19 @@ server.post("/register", async function (req, res, next) {
             email,
             adress,
             photoURL,
-            isAdmin,
             password,
           },
           SECRETO
         )
       );
     } catch (error) {
-      res.sendStatus(500).send(error);
+        if(error.parent){
+            
+            switch(error.parent.code){
+                case "23505" : return res.status(400).send(error.parent.detail)
+                default:return next(error.parent)
+            }
+        }else next(error)
     }
   });
 

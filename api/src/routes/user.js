@@ -1,7 +1,10 @@
 const server = require('express').Router();
 const { User, Order, Product } = require('../db.js');
 const { Op } =require ('sequelize');
-
+const jwt = require("jsonwebtoken");
+const {
+    SECRETO
+} = process.env;
 
 function parseWhere(where){
 	where = JSON.parse(where)
@@ -101,6 +104,25 @@ server.put("/:id/passwordReset" , (req , res , next ) => {
     //     res.status(200).json(user)
     // })
     // .catch(err => res.status(400).send(err))
+})
+
+server.post("/confirmEmail" , async (req , res , next ) => {
+    let { email } =req.body;
+    const user = await User.findOne({where : { email }})
+    let {id} = user;
+    if(!user) {
+        return res.status(400).send("Not User")
+    }
+    return res.send(
+        jwt.sign(
+        {
+            id,
+            email
+        },
+        SECRETO
+        )
+    );
+    
 })
 
 module.exports = server;
