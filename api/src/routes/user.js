@@ -73,7 +73,6 @@ server.put('/:id', (req, res, next) => {
         name,
         email,
         adress,
-        isAdmin,
         username,
         password
     }, { where: { id } })

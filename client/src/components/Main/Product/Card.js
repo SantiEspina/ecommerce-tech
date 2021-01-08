@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addProductToOrder } from '../../../redux/actions';
+import { addProductToOrder, getMe } from '../../../redux/actions';
 
 import './Card.scss';
 
 
 export default function Card({ id, name, description, image, price, stock }) {
+    const { order, token } = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState({
-        idOrder: 1,
+        idOrder: order?.id,
         name,
         price,
         quantity: 1
     });
-
-    const dispatch = useDispatch();
+    useEffect(() => {
+        setInput({
+            ...input,
+            idOrder: order?.id
+        })
+    }, [order])
 
     const handleButton = function (e) {
         e.preventDefault();
+        if(token) {
+            dispatch(getMe());
+        }
         dispatch(addProductToOrder(input, id))
     }
-
     return (
         <div>
             <div className='cardCnt'>

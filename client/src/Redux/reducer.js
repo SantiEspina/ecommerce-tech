@@ -16,7 +16,17 @@ import {
     ADD_PRODUCT_TO_ORDER,
     GET_PRODUCTS_TO_ORDER,
     CREATE_ORDER_TO_USER,
-    GET_USER
+    GET_USER,
+    LOGIN_USER,
+    GET_ME,
+    LOG_OUT,
+    DELETE_ORDER,
+    DELETE_PRODUCT_ORDER,
+    DELETE_USER,
+    ADD_USER_ADMIN,
+    GET_DETAILS_USER,
+    GET_ORDERS_USER,
+    EDIT_USER
 } from './constants';
 
 let initialState = {};
@@ -94,22 +104,70 @@ export default function findProductReducer(state = initialState, action) {
         case ADD_PRODUCT_TO_ORDER:
             return {
                 ...state,
-                order: action.payload
+                cart: action.payload
             }
         case GET_PRODUCTS_TO_ORDER:
             return {
                 ...state,
-                order: action.payload
+                cart: action.payload
             }
         case CREATE_ORDER_TO_USER:
             return {
                 ...state,
-                cart: action.payload
+                order: action.payload
             }
         case GET_USER:
             return {
                 ...state,
                 users: action.payload,
+            }
+        case LOGIN_USER:
+            return {
+                ...state,
+                token: action.payload
+            }
+        case GET_ME:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOG_OUT:
+            return {
+                ...state,
+                user: ''
+            }
+        case DELETE_ORDER:
+            return {
+                ...state,
+            }
+        case DELETE_PRODUCT_ORDER:
+            return {
+                ...state,
+            }
+        case DELETE_USER:
+            return {
+                ...state,
+            }
+        case ADD_USER_ADMIN:
+            let users = state.users;
+            return {
+                ...state,
+                users: [...users, action.payload]
+            }
+        case GET_DETAILS_USER:
+            return {
+                ...state,
+                detailsUser: action.payload
+            }
+        case GET_ORDERS_USER:
+            return {
+                ...state,
+                ordersUser: action.payload
+            }
+        case EDIT_USER:
+            return {
+                ...state,
+                user: action.payload
             }
         default: return state;
     }

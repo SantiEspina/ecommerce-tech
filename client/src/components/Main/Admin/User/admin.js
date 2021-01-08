@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../../../../redux/actions';
-import './user.scss';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addUserAdmin } from '../../../../redux/actions';
 
-
-function AddUser() {
+export default function AddUserAdmin() {
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         name: '',
         username: '',
         email: '',
+        isAdmin: false,
         password: '',
         adress: '',
     });
@@ -20,23 +19,26 @@ function AddUser() {
         });
     };
 
+    const handleToggle = (e) => {
+        let { name } = e.target;
+        setInput({
+            ...input,
+            [name]: !input[name]
+        });
+    };
+    
     const handleSubmit = function (e) {
         e.preventDefault();
-        dispatch(addUser(input));
-        // try {
-        //     window.alert("The user has been created !!");
-        // } catch (error) {
-
-        //     window.alert(error);
-        // }
+        dispatch(addUserAdmin(input));
         setInput({
             name: '',
             username: '',
             email: '',
             password: '',
             adress: '',
+            isAdmin: false
         });
-
+        
     };
     return (
         <div className='formaddUser'>
@@ -72,6 +74,15 @@ function AddUser() {
                         />
                 </div>
                 <div className='div'>
+                    <label>Is Admin?</label>
+                    <input
+                        type='checkbox'
+                        className='checkbox'
+                        name='isAdmin'
+                        onClick={handleToggle}
+                        />
+                </div>
+                <div className='div'>
                     <label>Password: </label>
                     <input
                         autoComplete="off"
@@ -97,6 +108,4 @@ function AddUser() {
             </form>
         </div>
     )
-}
-
-export default AddUser
+};

@@ -18,4 +18,12 @@ export const GET_PRODUCTS_TO_ORDER = 'GET_PRODUCTS_TO_ORDER';
 export const CREATE_ORDER_TO_USER = 'CREATE_ORDER_TO_USER';
 export const GET_USER = 'GET_USER';
 export const DELETE_USER = 'DELETE_USER';
-
+export const LOGIN_USER = 'LOGIN_USER';
+export const GET_ME= 'GET_ME';
+export const LOG_OUT= 'LOG_OUT';
+export const DELETE_ORDER = ' DELETE_ORDER';
+export const DELETE_PRODUCT_ORDER = 'DELETE_PRODUCT_ORDER';
+export const ADD_USER_ADMIN = 'ADD_USER_ADMIN';
+export const GET_DETAILS_USER = 'GET_DETAILS_USER';
+export const GET_ORDERS_USER = 'GET_ORDERS_USER';
+export const EDIT_USER = 'EDIT_USER';
