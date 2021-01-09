@@ -26,11 +26,11 @@ module.exports = (sequelize) => {
     password: {
       type: DataTypes.STRING,
       set(value){
-        if(value){
-          const salt = bcrypt.genSaltSync(10);
-          const hash = bcrypt.hashSync(value, salt);
-          this.setDataValue('password', hash)
-        }
+      if (value){
+           const salt = bcrypt.genSaltSync(10);
+           const hash = bcrypt.hashSync(value, salt);
+           this.setDataValue('password', hash)
+         }
       }
     },
     adress: {

@@ -57,15 +57,32 @@ server.post("/register", async function (req, res, next) {
   });
 
   server.post("/promote/:id",  function (req , res , next) {
-    let { id } = req.params;
-    //const promote = { isAdmin:true }
-      User.update(req.body,{where:{id}})
-      .then(() => User.findByPk(id))
-      .then(user => res.status(201).json(user))
-      .catch(err => res.status(400).send(err))
-      
-   })
-     
+    try {
+      if(req.user.isAdmin){
+        let { id } = req.params;
+        const promote = { isAdmin:true }
+          User.update(promote,{where:{id}})
+          .then(() => User.findByPk(id))
+          .then(user => res.status(201).json(user))
+      }else res.sendStatus(401);
+    } catch (error) {
+      next(error)
+    } 
+  })
+
+server.post("/degrade/:id",  function (req , res , next) {
+  try {
+    if(req.user.isAdmin){
+      let { id } = req.params;
+      const degrade = { isAdmin:false }
+        User.update(degrade,{where:{id}})
+        .then(() => User.findByPk(id))
+        .then(user => res.status(201).json(user))
+    }else res.sendStatus(401);
+  } catch (error) {
+    next (error)
+  }  
+})
   
 // /me -> get
 // /login/google -> get

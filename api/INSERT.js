@@ -9,8 +9,6 @@ VALUES ('laptop', '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 ('sound', '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00');
 
 
-
-
 INSERT INTO "products" ("name", "description", "image", "price", "stock", "createdAt", "updatedAt")
 VALUES ('Notebook Lenovo S145', 'Notebook Lenovo S145 Intel Celeron N4000 15.6 4gb 1tb', 'https://http2.mlstatic.com/D_NQ_NP_677579-MLA43915970146_102020-O.webp', 48999 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 ('Notebook Cx Cloudbook', 'Notebook Cx Cloudbook 4gb 64gb 14 Pulgadas Windows 10 Ips', 'https://http2.mlstatic.com/D_NQ_NP_730258-MLA42306517708_062020-O.webp', 31999 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
@@ -47,4 +45,9 @@ VALUES ('Notebook Lenovo S145', 'Notebook Lenovo S145 Intel Celeron N4000 15.6 4
 ('Sistema De Sonido Genius Gx Gaming Sw-g2.1 3000 70w' , 'Potencia total (watts): 70watts , Subwoofer: 40 W , Subwoofer: 6.5 pulgadas; 8 , Frecuencia: 35 Hz – 20K Hz  , Satelites: 15 W x 2 Satelites: 99 x 143 x 115 mm , Satelites: 60 x 170 x 154 mm' , 'https://www.codigo-binario.com.ar/wp-content/uploads/2020/09/924806-MLA43463080885_092020-150x150.jpg' , 38000 , 100 , '2020-12-10 00:00:00 -3:00' , '2020-12-10 00:00:00 -3:00');
 
 
+
 `);
+
+/*INSERT INTO "users" ("name", "username", "email", "photoURL", "password", "adress", "isAdmin", "createdAt", "updatedAt")
+VALUES('admin', 'admin', 'admin@admin.com', 'admin', 'admin', 'admin', 'true', '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00');
+*/

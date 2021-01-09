@@ -52,29 +52,59 @@ server.get("/:idProduct",(req , res, next ) => {
 })
 
 server.put("/:idReview",(req , res , next) =>{
-    let {idReview} = req.params;
-    let { commentary , rating } = req.body;
-        Review.update({
-            commentary,
-            rating
-        },
-        {where:{id:idReview}
-    })
-    .then(review =>{
-        res.status(200).send("Modification success!!")
-    })
-    .catch(err => res.status(400).send(err))
+    try {
+        if(req.user){
+            let {idReview} = req.params;
+            let { commentary , rating } = req.body;
+            if(commentary && rating){
+                Review.update({
+                    commentary,
+                    rating
+                },
+                {where:{id:idReview}
+            })
+            .then(review =>{
+                res.status(200).send("Modification success!!")
+            })
+            }else {
+               res.send("faltan datos") 
+            }
+            
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 })
 
 server.delete("/:idReview" , (req , res , next ) => {
-    let {idReview} = req.params;
-    Review.destroy({
-        where:{id:idReview}
-    })
-    .then(review => {
-        res.status(200).send("Review deleted")
-    })
-    .catch(err => res.status(400).send(err) )
+    try {
+        if(req.user.isAdmin){
+            let {idReview} = req.params;
+            Review.destroy({
+                where:{id:idReview}
+            })
+            .then(review => {
+                res.status(200).send("Review deleted")
+            })
+        }else res.sendStatus(401);
+    } catch (error) {
+        next(error)
+    }
 })
+
+server.get('/', (req, res, next) => {
+    try{ 
+        if(req.user.isAdmin){ 
+            Review.findAll({include:[{model:Product},{model: User}]})
+		    .then(review => {
+			    res.send(review)
+            })
+        }else res.sendStatus(401);
+        
+     }catch (error) {
+         next(error)
+    }
+});
+
 
 module.exports = server;
