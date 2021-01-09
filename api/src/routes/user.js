@@ -130,10 +130,12 @@ server.post("/updatePassword" , (req , res, next ) => {
 server.post("/confirmEmail" , async (req , res , next ) => {
     let { email } =req.body;
     const user = await User.findOne({where : { email }})
-    let {id} = user;
+    
     if(!user) {
         return res.status(400).send("Not User")
-    }
+    }else{
+        let {id} = user;
+    
     return res.send(
         jwt.sign(
         {
@@ -142,7 +144,8 @@ server.post("/confirmEmail" , async (req , res , next ) => {
         },
         SECRETO, console.log("http://localhost:3001/auth/confirmEmail ? token =",jwt.sign({id,email},SECRETO))
         )
-    );
+    )
+    }
 })
 
 

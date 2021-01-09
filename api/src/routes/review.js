@@ -56,6 +56,7 @@ server.put("/:idReview",(req , res , next) =>{
         if(req.user){
             let {idReview} = req.params;
             let { commentary , rating } = req.body;
+            if(commentary && rating){
                 Review.update({
                     commentary,
                     rating
@@ -65,6 +66,10 @@ server.put("/:idReview",(req , res , next) =>{
             .then(review =>{
                 res.status(200).send("Modification success!!")
             })
+            }else {
+               res.send("faltan datos") 
+            }
+            
         }else res.sendStatus(401);
     } catch (error) {
         next(error)
@@ -85,7 +90,21 @@ server.delete("/:idReview" , (req , res , next ) => {
     } catch (error) {
         next(error)
     }
-
 })
+
+server.get('/', (req, res, next) => {
+    try{ 
+        if(req.user.isAdmin){ 
+            Review.findAll({include:[{model:Product},{model: User}]})
+		    .then(review => {
+			    res.send(review)
+            })
+        }else res.sendStatus(401);
+        
+     }catch (error) {
+         next(error)
+    }
+});
+
 
 module.exports = server;
