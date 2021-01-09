@@ -1,32 +1,33 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../../../../redux/actions';
+import { getOrdersUser, getProductToOrder } from '../../../../redux/actions';
 import { Link } from 'react-router-dom';
 
-function Orders () {
+import './orderUsers.scss';
+
+function OrdersUser ({ match }) {
+    const { id } = match.params;
     const dispatch = useDispatch();
-    const { orders } = useSelector(state => state);
+    const { ordersUser } = useSelector(state => state);
 
     useEffect(() => {
-        dispatch(getOrders());
+        dispatch(getOrdersUser(id));
     }, [dispatch]);
 
-    if(!orders) return <h4>loading...</h4>;
+    if(!ordersUser) return <h4>loading...</h4>;
     return (
         <table className='usersCnt'>
             <tr>
-                <th>ORDER ID</th>
+                <th>Order ID</th>
                 <th>Date</th>
                 <th>State</th>
-                <th>UserID</th>
             </tr>
             {
-                orders.map(o => (
+                ordersUser.map(o => (
                     <tr key={o.id}>
                         <td>{o.id}</td>
                         <td>{o.date}</td>
                         <td>{o.state}</td>
-                        <td>{o.userId ? o.userId : 'Guest'}</td>
                         <Link to={`/order/${o.id}`}>
                             <button>View Order</button>
                         </Link>
@@ -37,4 +38,4 @@ function Orders () {
     )
 };
 
-export default Orders;
+export default OrdersUser;

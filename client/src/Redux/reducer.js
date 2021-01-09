@@ -15,7 +15,21 @@ import {
     ADD_USER,
     ADD_PRODUCT_TO_ORDER,
     GET_PRODUCTS_TO_ORDER,
-    CREATE_ORDER_TO_USER
+    CREATE_ORDER_TO_USER,
+    GET_USER,
+    LOGIN_USER,
+    GET_ME,
+    LOG_OUT,
+    DELETE_ORDER,
+    DELETE_PRODUCT_ORDER,
+    DELETE_USER,
+    ADD_USER_ADMIN,
+    GET_DETAILS_USER,
+    GET_ORDERS_USER,
+    EDIT_USER,
+    PROMOTE_TO_ADMIN,
+    GET_REVIEWS,
+    ADD_REVIEW
 } from './constants';
 
 let initialState = {};
@@ -83,7 +97,7 @@ export default function findProductReducer(state = initialState, action) {
         case GET_ORDERS:
             return {
                 ...state,
-                orders: action.payload
+                orders: action.payload.sort((a, b) => a.id - b.id)
             }
         case ADD_USER:
             return {
@@ -93,17 +107,85 @@ export default function findProductReducer(state = initialState, action) {
         case ADD_PRODUCT_TO_ORDER:
             return {
                 ...state,
-                order: action.payload
+                cart: action.payload
             }
         case GET_PRODUCTS_TO_ORDER:
             return {
                 ...state,
-                order: action.payload
+                cart: action.payload
             }
         case CREATE_ORDER_TO_USER:
             return {
                 ...state,
-                cart: action.payload
+                order: action.payload
+            }
+        case GET_USER:
+            return {
+                ...state,
+                users: action.payload.sort((a, b) => a.id - b.id)
+            }
+        case LOGIN_USER:
+            return {
+                ...state,
+                token: action.payload
+            }
+        case GET_ME:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOG_OUT:
+            return {
+                ...state,
+                user: ''
+            }
+        case DELETE_ORDER:
+            return {
+                ...state,
+            }
+        case DELETE_PRODUCT_ORDER:
+            return {
+                ...state,
+            }
+        case DELETE_USER:
+            return {
+                ...state,
+                users: [].concat(state.users)
+            }
+        case ADD_USER_ADMIN:
+            return {
+                ...state,
+                users: [].concat(action.payload, state.users)
+            }
+        case GET_DETAILS_USER:
+            return {
+                ...state,
+                detailsUser: action.payload
+            }
+        case GET_ORDERS_USER:
+            return {
+                ...state,
+                ordersUser: action.payload
+            }
+        case EDIT_USER:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case PROMOTE_TO_ADMIN:
+            return {
+                ...state,
+                users: [].concat(action.payload, state.users)
+            }
+        case GET_REVIEWS:
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case ADD_REVIEW:
+            return {
+                ...state,
+                reviews: [].concat(action.payload, state.reviews)
             }
         default: return state;
     }

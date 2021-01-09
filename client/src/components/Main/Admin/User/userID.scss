@@ -1,0 +1,29 @@
+.userIDcnt{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    .info{
+        width: 50%;
+    }
+    .actions{
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        .link{
+            width: 100%;
+            margin-top  : 3rem;
+            button{
+                width: 100%;
+                margin: 3rem;
+                padding: .8rem;
+                cursor: pointer;
+            }
+        }
+        button{
+            width: 100%;
+            margin: 3rem;
+            padding: .8rem;
+            cursor: pointer;
+        }
+    }
+}
