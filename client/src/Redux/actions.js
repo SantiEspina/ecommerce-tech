@@ -32,7 +32,12 @@ import {
     ADD_REVIEW,
     EDIT_REVIEW,
     DELETE_REVIEW,
-    GET_REVIEWS
+    GET_REVIEWS,
+    DEGRADE_ADMIN,
+    GET_ALL_REVIEWS,
+    GET_REVIEWS_USER,
+    CONFIRM_EMAIL,
+    RESET_PASSWORD
 } from './constants';
 
 
@@ -396,9 +401,78 @@ export const deleteReview = (idReview) => {
     return function (dispatch) {
         axios.delete(`${localhost}/review/${idReview}`)
             .then(data => {
-                dispatch({ type: DELETE_REVIEW })
+                dispatch({ type: DELETE_REVIEW });
+                dispatch(getAllReviews());
             })
             .catch(err => alert(err))
     }
 };  
 
+export const degradeAdmin = (id) => {
+    return function (dispatch) {
+        axios.post(`${localhost}/auth/degrade/${id}`)
+            .then(data => dispatch({ type: DEGRADE_ADMIN, payload: data.data }))
+            .catch(err => alert(err))
+    }
+};
+
+export const getAllReviews = () => {
+    return function (dispatch) {
+        axios.get(`${localhost}/review`)
+            .then(data => dispatch({ type: GET_ALL_REVIEWS, payload: data.data }))
+            .catch(err => alert(err))
+    }
+};
+
+export const getReviewsUser = (idUser) => {
+    return function (dispatch) {
+        axios.get(`${localhost}/review/user/${idUser}`)
+            .then(data => {
+                dispatch({ type: GET_REVIEWS_USER, payload: data.data })
+            })
+            .catch(err => alert(err))
+    }
+};
+
+export const editReview = (input, idUser) => {
+    let { idReview, commentary, rating } = input;
+    return function (dispatch) {
+        axios.put(`${localhost}/review/${idReview}`, { commentary, rating })
+        .then(data => {
+            dispatch({ type: EDIT_REVIEW });
+            dispatch(getReviewsUser(idUser));
+        })
+        .catch(err => alert(err))
+    }
+};
+
+export const confirmEmail = (email) => {
+    return function (dispatch) {
+        axios.post(`${localhost}/user/confirmEmail`, { email })
+            .then(data => {
+                dispatch({ type: CONFIRM_EMAIL, payload: data.data });
+                window.location.replace(`/resetPassword?token=${data.data}`);
+            })
+            .catch(err => alert('Email incorrect'))
+    }
+};
+
+export const resetPassword = (token, input) => {
+    let { password } = input;
+    return function (dispatch) {
+        axios.post(`${localhost}/user/updatePassword?token=${token}`, { password }, {
+            headers: { Authorization: "Bearer " + token }
+        })
+            .then(data => {
+                dispatch({ type: RESET_PASSWORD, payload: data.data });
+                alert('Password was changed');
+                let aux = window.localStorage.getItem('token');
+                if(aux) {
+                    window.location.replace('/')
+                } else {
+                    window.location.replace('/login');
+                }
+            })
+            .catch(err => alert(err))
+    }
+};

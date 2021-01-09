@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { deleteUser, getUsers, promoteToAdmin } from '../../../redux/actions';
+import { degradeAdmin, deleteUser, getUsers, promoteToAdmin } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './users.scss';
@@ -44,6 +44,15 @@ function Users() {
             [name]: !input[name]
         });
     };
+
+    const degradeFunction = (e) => {
+        let { name, value } = e.target;
+        dispatch(degradeAdmin(value));
+        setInput({
+            ...input,
+            [name]: !input[name]
+        });
+    }
     
     if(!users) return <h2>Loading...</h2>;
     return(
@@ -65,7 +74,7 @@ function Users() {
                             <td>{u.adress}</td>
                             <td>
                                 {u.isAdmin.toString()}
-                                <button name='check' value={u.id} onClick={u.isAdmin ? null : promoteFunction}>{u.isAdmin ? 'Degrade' : 'Promote'}</button>
+                                <button name='check' value={u.id} onClick={u.isAdmin ? degradeFunction : promoteFunction}>{u.isAdmin ? 'Degrade' : 'Promote'}</button>
                             </td>
                             <div>
                                 <button name='delete' value={u.id} onClick={handleToggle}>Delete User</button>

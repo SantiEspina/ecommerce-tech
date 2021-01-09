@@ -102,9 +102,29 @@ server.get('/', (req, res, next) => {
         }else res.sendStatus(401);
         
      }catch (error) {
-         next(error)
+        next(error)
     }
 });
+
+server.get("/user/:idUser",(req , res, next ) => {
+    let { idUser } = req.params;
+    try{
+        if(req.user) {
+            Review.findAll({
+                where: {
+                    userId: idUser
+                },
+                include: [{ model: Product }]
+            })
+                .then(reviews => {
+                    res.status(200).json(reviews)
+                })
+                .catch(err => res.status(400).send(err))
+        }
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 module.exports = server;

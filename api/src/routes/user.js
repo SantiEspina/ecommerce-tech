@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { User, Order, Product } = require('../db.js');
+const { User, Order, Review } = require('../db.js');
 const { Op } =require ('sequelize');
 const jwt = require("jsonwebtoken");
 const {
@@ -40,7 +40,7 @@ server.get('/:id', (req, res, next) => {
     try {
         if(req.user){
             const { id } = req.params;
-            User.findByPk(id, { include: [Order] })
+            User.findByPk(id, {include:[{model:Order},{model: Review}]})
                 .then(user => res.status(201).json(user))
         }else res.sendStatus(401);
     } catch (error) {

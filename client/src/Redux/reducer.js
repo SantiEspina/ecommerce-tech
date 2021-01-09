@@ -29,7 +29,13 @@ import {
     EDIT_USER,
     PROMOTE_TO_ADMIN,
     GET_REVIEWS,
-    ADD_REVIEW
+    ADD_REVIEW,
+    DEGRADE_ADMIN,
+    GET_ALL_REVIEWS,
+    GET_REVIEWS_USER,
+    EDIT_REVIEW,
+    CONFIRM_EMAIL,
+    RESET_PASSWORD
 } from './constants';
 
 let initialState = {};
@@ -173,9 +179,11 @@ export default function findProductReducer(state = initialState, action) {
                 user: action.payload
             }
         case PROMOTE_TO_ADMIN:
+            let arr2 = [].concat(state.users);
+            arr2 = arr2.filter(u => u.id !== action.payload.id);
             return {
                 ...state,
-                users: [].concat(action.payload, state.users)
+                users: [].concat(arr2, action.payload)
             }
         case GET_REVIEWS:
             return {
@@ -186,6 +194,35 @@ export default function findProductReducer(state = initialState, action) {
             return {
                 ...state,
                 reviews: [].concat(action.payload, state.reviews)
+            }
+        case DEGRADE_ADMIN:
+            let arr = [].concat(state.users);
+            arr = arr.filter(u => u.id !== action.payload.id);
+            return {
+                ...state,
+                users: [].concat(arr, action.payload)
+            }
+        case GET_ALL_REVIEWS:
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case GET_REVIEWS_USER:
+            return {
+                ...state,
+                reviews: action.payload
+            }
+        case EDIT_REVIEW:
+            return { ...state }
+        case CONFIRM_EMAIL:
+            return {
+                ...state,
+                tokenPassword: action.payload
+            }
+        case RESET_PASSWORD:
+            return {
+                ...state,
+                users: [].concat(action.payload)
             }
         default: return state;
     }
