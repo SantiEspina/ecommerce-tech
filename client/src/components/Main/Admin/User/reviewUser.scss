@@ -1,0 +1,34 @@
+.add-Review-false{
+    display: none;
+}
+.add-Review-true{
+    position: fixed;
+    width: 20rem;
+    height: 20rem;
+    background-color: blue;
+    .add-ReviewBox{
+        .form{
+            width: 250px;
+            margin: 0 auto;
+            height: 50px;
+            .clasification{
+                text-align: center;
+                direction: rtl;
+                unicode-bidi: bidi-override;
+                label{
+                    color: grey;
+                    font-size: 2rem;
+                    &:hover ~ label{
+                        color: orange;
+                    }
+                }
+                input{
+                    display: none;
+                    &:checked ~ label{
+                        color: orange;
+                    }
+                }
+            }
+        }
+    }
+}

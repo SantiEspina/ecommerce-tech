@@ -60,9 +60,9 @@ export default function OrderID({ match }) {
     if(!cart) return <h3>loading...</h3>;
     return (
         <div>
-            <div className={`addReview-${input.review}`}>
-                <div className='addReviewBox'>
-                    <form onSubmit={handleSubmit}>
+            <div className={`add-Review-${input.review}`}>
+                <div className='add-ReviewBox'>
+                    <form onSubmit={handleSubmit} className='form'>
                         <div>
                             <label>Commentary</label>
                             <input 
@@ -72,19 +72,19 @@ export default function OrderID({ match }) {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
-                            <label value='1'>&#9733;</label>
-                            <input type='radio' value='1' name='rating' onClick={handleInputChange}/>
-                            <label>&#9733;</label>
-                            <input type='radio' value='2' name='rating' onClick={handleInputChange}/>
-                            <label>&#9733;</label>
-                            <input type='radio' value='3' name='rating' onClick={handleInputChange}/>
-                            <label>&#9733;</label>
-                            <input type='radio' value='4' name='rating' onClick={handleInputChange}/>
-                            <label>&#9733;</label>
-                            <input type='radio' value='5' name='rating' onClick={handleInputChange}/>
-                        </div>
-                        <input type='submit' value='Add Review' />
+                        <p className='clasification'>
+                            <input id='radio1' type='radio' value='5' name='rating' onClick={handleInputChange}/>
+                            <label for='radio1'>&#9733;</label>
+                            <input id='radio2' type='radio' value='4' name='rating' onClick={handleInputChange}/>
+                            <label for='radio2'>&#9733;</label>
+                            <input id='radio3' type='radio' value='3' name='rating' onClick={handleInputChange}/>
+                            <label for='radio3'>&#9733;</label>
+                            <input id='radio4' type='radio' value='2' name='rating' onClick={handleInputChange}/>
+                            <label for='radio4'>&#9733;</label>
+                            <input id='radio5' type='radio' value='1' name='rating' onClick={handleInputChange}/>
+                            <label  for='radio5'>&#9733;</label>
+                        </p>
+                        <input type='submit' value='Add Review' disabled={!input.commentary || !input.rating} />
                     </form>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from '../../../../redux/actions';
 import { Link } from 'react-router-dom';
+import './Orders.scss'
 
 function Orders () {
     const dispatch = useDispatch();

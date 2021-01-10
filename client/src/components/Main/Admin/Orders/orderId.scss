@@ -58,4 +58,17 @@
     width: 20rem;
     height: 20rem;
     background-color: orange;
+    .addReviewBox{
+
+        .clasification{
+            direction: rtl;
+            unicode-bidi: bidi-override;
+            label{
+                color: grey;
+            }
+            input{
+                display: none;
+            }
+        }
+    }
 }

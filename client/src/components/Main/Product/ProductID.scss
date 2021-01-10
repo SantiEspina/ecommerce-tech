@@ -65,12 +65,22 @@
     .box{
         width: 40%;
         .stars{
-            input[type='radio']{
-                display: none;
-            }
-            label{
-                color: grey;
-            }
+          width: 250px;
+          margin: 0 auto;
+          height: 50px;
+          .clasification{
+              text-align: center;
+              direction: rtl;
+              unicode-bidi: bidi-override;
+              .label-false{
+                  color: grey;
+                  font-size: 2rem;
+              }
+              .label-true{
+                color: orange;
+                font-size: 2rem;
+              }
+          }
         }
         .idBox{
             padding: 3rem;

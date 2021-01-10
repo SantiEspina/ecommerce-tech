@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetails, getReviews } from '../../../redux/actions';
 import './ProductID.scss';
@@ -35,22 +35,43 @@ export default function ProductID({ match })  {
                 <ul>
                     {
                         reviews && reviews.map(r => {
+                            let input = {};
+                            input = r.rating === '5' ? (
+                                {
+                                    cinco: true,
+                                    cuatro: true,
+                                    tres: true,
+                                    dos: true
+                                }
+                            ) : (
+                                r.rating === '4' ? (
+                                    {
+                                        cuatro: true,
+                                        tres: true,
+                                        dos: true
+                                    }
+                                ) : r.rating === '3' ? (
+                                    {
+                                        tres: true,
+                                        dos: true
+                                    }
+                                ) : r.rating === '2' ? ( 
+                                    { dos: true } 
+                                ) : input
+                            );
                             return (
                                 <li key={r.id}>
                                     <h4>Review for: '{r.user?.username ? r.user.username : 'Anonymous'}'</h4>
                                     <div>
                                         <p>"{r.commentary}"</p>
                                         <form className='stars'>
-                                            <label value='1' onClick={(e) => console.log(e.target.value)}>&#9733;</label>
-                                            <input type='radio' value='1' onClick={(e) => console.log(e.target.value)}/>
-                                            <label>&#9733;</label>
-                                            <input type='radio' value='2' onClick={(e) => console.log(e.target.value)}/>
-                                            <label>&#9733;</label>
-                                            <input type='radio' value='3' onClick={(e) => console.log(e.target.value)}/>
-                                            <label>&#9733;</label>
-                                            <input type='radio' value='4' onClick={(e) => console.log(e.target.value)}/>
-                                            <label>&#9733;</label>
-                                            <input type='radio' value='5' onClick={(e) => console.log(e.target.value)}/>
+                                            <p className='clasification'>
+                                                <label className={`label-${input.cinco ? true : false}`}>&#9733;</label>
+                                                <label className={`label-${input.cuatro ? true : false}`}>&#9733;</label>
+                                                <label className={`label-${input.tres ? true : false}`}>&#9733;</label>
+                                                <label className={`label-${input.dos ? true : false}`}>&#9733;</label>
+                                                <label className={`label-true`}>&#9733;</label>
+                                            </p>
                                         </form>
                                     </div>
                                 </li>
