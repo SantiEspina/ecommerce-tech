@@ -130,9 +130,15 @@ server.post('/:idOrder/product/:idProduct', async (req, res, next) => {
     try {
         if(req.user){
             const { idOrder, idProduct } = req.params;
-            const { name, price, quantity } = req.body;
+            let { name, price, quantity } = req.body;
             let order = await Order.findByPk(idOrder, { include: [Product] });
             const product = await Product.findByPk(idProduct);
+            order.products.map(p => {
+                if(p.id === product.id) {
+                    quantity = p.orderProduct.quantity + 1;
+                    // order.removeProduct(product);
+                } 
+            });
             await order.addProduct(product, { through: { name, quantity, price } });
             order = await Order.findByPk(idOrder, { include: [Product] });
             res.status(201).json(order)

@@ -85,6 +85,9 @@ export default function Admin() {
                 <Link to='/addUserAdmin'>
                     <button className='addCategory' onClick={e => { }}>Add User</button>
                 </Link>
+                <Link to='/reviews'>
+                    <button className='addCategory' onClick={e => { }}>All Reviews</button>
+                </Link>
             </div>
             <div className={`removeCnt-${input.removeCategory}`}>
                 <div className='removeBox'>

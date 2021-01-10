@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getDetailsUser, editUser } from '../../../../redux/actions';
 
 export default function EditProduct({ match }) {
@@ -92,7 +93,9 @@ export default function EditProduct({ match }) {
             </div>
             <div className='div'>
                 <label>Password: </label>
-                <button>Change Password</button>
+                <Link to='/confirmEmail' className='link' >
+                    <button>Change Password</button>
+                </Link>
             </div>
             <input type='submit' value='Edit User' className='btnAddProduct' />
         </form>

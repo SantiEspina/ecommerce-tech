@@ -15,7 +15,7 @@ function UserID ({ match }) {
     }, [dispatch]);
 
     if(!detailsUser) return <h4>loading...</h4>;
-    const { adress, createdAt, email, name, photoURL, username, orders } = detailsUser;
+    const { adress, createdAt, email, name, photoURL, username, orders, reviews } = detailsUser;
     return (
         <div className='userIDcnt'>
             <div className='info'>
@@ -26,10 +26,14 @@ function UserID ({ match }) {
                 <p>Your account was created at: <span>{createdAt}</span></p>
                 <p>Your adress is: <span>{adress}</span></p>
                 <p>You have: <span>{orders.length} order(s)</span></p>
+                <p>You have: <span>{reviews.length} review(s)</span></p>
             </div>
             <div className='actions'>
                 <Link to={`/orders/user/${id}`} className='link'>
                     <button>View my Order(s)</button>
+                </Link>
+                <Link to={`/reviews/user/${id}`} className='link'>
+                    <button>View my Review(s)</button>
                 </Link>
                 <Link to={`/edit/user/${id}`} className='link'>
                     <button>Edit my Profile</button>
