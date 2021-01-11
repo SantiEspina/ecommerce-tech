@@ -1,0 +1,52 @@
+.userIDcnt{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    background: rgb(121,9,96);
+    background: linear-gradient(158deg, rgba(121,9,96,1) 25%, rgba(9,94,121,1) 53%, rgba(0,236,255,1) 92%);
+    .info{
+        width: 50%; 
+        padding: 4rem;
+        background: rgba(0,0,0,.7);
+        box-sizing: border-box;
+        box-shadow: 0 .5rem 2rem rgba(102, 102, 102, 0.6);
+        margin: 2rem 0 2rem 0;
+        border-radius: 1rem;
+        color: #ffffff;
+        p{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: .1rem solid  rgba(102, 102, 102, 0.6);
+            padding-bottom: 1rem;
+        }
+        h3{
+            display: flex;
+            justify-content: center;
+            font-size: 3rem;
+            padding-bottom: 3rem;
+        }
+        .actions{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 10rem;
+            .link{
+                margin-bottom: 3rem;
+                button{
+                    width: 100%;
+                    padding: .9rem;
+                    border-radius: 1rem;
+                    border: 0;
+                    cursor: pointer;
+                    transition: 300ms;
+                    background: rgba(1,1,1,.5);
+                    color: #ffffff;
+                    &:hover{
+                        box-shadow: 0 5px 8px 0 rgba(195, 195, 195, 0.2), 0 7px 20px 0 rgba(158, 158, 158, 0.15);
+                        background: rgba(1,1,1,.7);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,38 +1,50 @@
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
- sequelize.define('user', {
-   name: {
+  const User = sequelize.define('user', {
+    name: {
       type: DataTypes.STRING, 
       required: true ,
       allowNull: false
-     },
-   username: {
-     type: DataTypes.STRING,
-     allowNull: false,
-     unique: true,
-   },
-   email: {
-     type: DataTypes.STRING,
-     allowNull: false,
-     unique: true,
-     validate: {
-     isEmail:true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+        isEmail:true,
       }
     },
+    photoURL: {
+      type: DataTypes.STRING,
+    },
     password: {
-       type: DataTypes.STRING,
-        allowNull: false,
-        required: true,        
+      type: DataTypes.STRING,
+      set(value){
+      if (value){
+           const salt = bcrypt.genSaltSync(10);
+           const hash = bcrypt.hashSync(value, salt);
+           this.setDataValue('password', hash)
+         }
+      }
     },
-    direction: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        required: true
+    adress: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      required: true
     },
-    state: {
-        type: DataTypes.ENUM,
-        values:['admin','invited','client']
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
-})
+  })
+  User.prototype.compare = function(pass){
+    return bcrypt.compareSync(pass, this.password);
+  }
+  return User;
 }

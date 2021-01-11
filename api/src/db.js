@@ -2,8 +2,9 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`, {
@@ -31,21 +32,28 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 const { Product } = sequelize.models;
-//const{Order} =sequelize.models;
-const {Category}=sequelize.models;
-//const {User} =sequelize.models;
+const{ Order } =sequelize.models;
+const { Category }=sequelize.models;
+const { User } =sequelize.models;
+const { OrderProduct } = sequelize.models;
+const { Review } =sequelize.models;
 
 // Aca vendrian las relaciones
-Product.belongsToMany(Category, {through: "category_products"})
-Category.belongsToMany(Product, {through: "category_products"})
-//Product.belongsToMany(Order,{through : 'product_order'})
-//Order.belongsToMany(Product,{through : 'product_order'})
-//Product.belongsToMany(User, {through: Review})
-//Order.hasOne(User)//preguntar
-//User.hasOne(Order)
+Product.belongsToMany(Category, {through: "category_products"});
+Category.belongsToMany(Product, {through: "category_products"});
+
+Product.belongsToMany(Order, {through: OrderProduct });
+Order.belongsToMany(Product, {through: OrderProduct });
+
+Order.belongsTo(User);
+User.hasMany(Order);
 
 
-// Product.hasMany(Reviews);
+Product.hasMany(Review);
+Review.belongsTo(Product);
+
+User.hasMany(Review);
+Review.belongsTo(User);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

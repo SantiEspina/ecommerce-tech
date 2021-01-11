@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Castoro:ital@1&display=swap");
+.formaddUser {
+  height: 100%;
+  // background: rgb(9,120,121);
+  // background: linear-gradient(158deg, rgba(9,120,121,1) 12%, rgba(9,94,121,1) 58%, rgba(0,236,255,1) 96%);
+  background: rgb(9,120,121);
+background: radial-gradient(circle, rgba(9,120,121,1) 7%, rgba(9,94,121,1) 35%, rgba(0,236,255,1) 92%);
+  .userBox{
+    font-family: 'Libre Baskerville', serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60rem;
+    padding: 4rem;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 .5rem 2rem rgba(102, 102, 102, 0.6);
+    color: #ffffff;
+    border-radius: 1rem;
+    text-align: center;
+    h2{
+      margin: 0 0 30px;
+      padding: 0;
+      text-align: center;
+      text-decoration: underline;
+    }
+    input,
+    textarea,
+    select {
+      text-align: center;
+      width: 60%;
+      margin: 1rem;
+    }
+    .div {
+      font-family: "Castoro", serif;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 2rem;
+      span{
+        background-color: transparent;
+        border: 0;
+        font-size: 2.5rem;
+        cursor: pointer;
+        color: #fff;
+      } 
+      .password{
+        position: absolute;
+        left: 37%;
+        width: 50%;
+      }
+    }
+    .btnAddUser {
+      cursor: pointer;
+      padding: .6rem;
+      border: 0;
+      border-radius: 2rem;
+      margin-top: 2rem;
+      background-color: rgb(255, 234, 116);
+      &:hover {
+        background-color: #fffc56;
+        box-shadow: 0 .3rem 2rem rgba(77, 77, 77, 0.6);
+        transition: 300ms ;
+      }
+      &:disabled{
+        background-color: #3e3e3e;
+        color: #cccccc;
+        cursor: no-drop;
+      }
+    }
+  }
+}

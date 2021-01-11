@@ -1,0 +1,121 @@
+.reviewsCnt{
+    margin: 3rem 0 3rem 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    tr{
+        height: 5rem;
+        display: flex;
+        th, td{
+            display: flex;
+            width: 10%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1rem;
+            border-right: 1px solid #e3e3e3;
+            border-bottom: 1px solid #e3e3e3;
+            border-top: 1px solid #e3e3e3;
+            button{
+                border: 0;
+                background-color: rgb(170, 0, 0);
+                color: #ffffff;
+                border-radius: 2rem;
+                height: 3rem;
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: 800ms;
+                &:hover {
+                    background-color: red;
+                }
+            }
+        }
+        .id{
+            width: 3%;
+        }
+        .commentary{
+            width: 35%;
+        }
+        .rating{
+            width: 5%;
+        }
+    }
+}
+.deleteReview-false{
+    display: none;
+}
+.deleteReview-true{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #000000;
+    font-size: 2rem;
+    .deleteBox{
+        width: 55%;
+        background-color: #f4f4f4;
+        margin: 15% auto;
+        padding: 1rem;
+        box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.15);
+        .closeBtn{
+            color: red;
+            border: 0;
+            float: right;
+            font-size: 1.8rem;
+            &:hover{
+                cursor: pointer;
+                color: #000000;   
+            }
+            &:focus{
+                text-decoration: none;
+            }
+        }
+        p{
+            text-align: center;
+            text-decoration: underline;
+            margin-bottom: 3rem;
+        }
+        .buttons{
+            display: flex;
+            text-align: center;
+            width: 100%;
+            justify-content: space-evenly;
+            color: white;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            button{
+                padding: 1rem;
+                border-radius: 1rem;
+                width: 15rem;
+                margin-bottom: 1.3rem;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            .no{
+                background-color: #5f5f5f;
+                &:hover{
+                    box-shadow: 0 0 0 0.05rem;
+                    transition: 200ms;
+                    background-color: #3e3e3e;
+                }
+            }
+            .yes{
+                background-color: #e3e3e3;
+                &:hover{
+                    box-shadow: 0 0 0 0.02rem;
+                    transition: 260ms;
+                    background-color: #b3b3b3;
+                }
+            }
+        }
+    }
+}

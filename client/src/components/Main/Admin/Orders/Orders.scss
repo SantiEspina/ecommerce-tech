@@ -1,0 +1,34 @@
+.usersCnt{
+    margin: 3rem 0 3rem 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    tr{
+        height: 5rem;
+        display: flex;
+        th, td{
+            display: flex;
+            width: 15%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1rem;
+            border-right: 1px solid #e3e3e3;
+            border-bottom: 1px solid #e3e3e3;
+            border-top: 1px solid #e3e3e3;
+        }
+        .link{
+            button{
+                padding: .6rem;
+                background-color: rgba(0, 114, 0, 0.288);
+                transition: 500ms;
+                &:hover{
+                    box-shadow: 0 5px 8px 0 rgba(66, 66, 66, 0.2), 0 7px 20px 0 rgba(66, 66, 66, 0.15);
+                    background-color: green;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+}
