@@ -47,23 +47,21 @@ function Header () {
                             <div className={`user-${input.user}`}>
                                 <h4>Hi again {user.name}!</h4>
                                 <Link to={`/user/${user.id}`} className='link'>
-                                    <button name='user' onClick={handleToggle}>View Profile</button>
+                                    <button name='user' onClick={handleToggle} className='profile'>View Profile</button>
                                 </Link>
                                 {
                                     user.isAdmin ? (
-                                        <div>
-                                            <Link to='/admin/' className='link'>
-                                                <button name='user' onClick={handleToggle}>Admin Panel</button>
-                                            </Link>
-                                        </div>
+                                        <Link to='/admin/' className='link'>
+                                            <button name='user' onClick={handleToggle} className='admin-btn'>Admin Panel</button>
+                                        </Link>
                                     ) : null
                                 }
                                 <button className='logout' name='logout' onClick={handleToggle}>Logout</button>
                                 <div className={`logout-${input.logout}`}>
                                     <p>Are you sure you want to logout?</p>
                                     <div>
-                                        <button onClick={handleLogout}>Yes</button>
-                                        <button name='logout' onClick={handleToggle}>No</button>
+                                        <button onClick={handleLogout} className='yes'>Yes</button>
+                                        <button name='logout' onClick={handleToggle} className='no'>No</button>
                                     </div>
                                 </div>
                             </div>

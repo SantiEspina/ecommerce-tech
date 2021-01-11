@@ -17,6 +17,22 @@
             border-right: 1px solid #e3e3e3;
             border-bottom: 1px solid #e3e3e3;
             border-top: 1px solid #e3e3e3;
+            button{
+                border: 0;
+                background-color: rgb(170, 0, 0);
+                color: #ffffff;
+                border-radius: 2rem;
+                height: 3rem;
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: 800ms;
+                &:hover {
+                    background-color: red;
+                }
+            }
         }
         .id{
             width: 3%;

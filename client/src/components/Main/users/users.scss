@@ -17,6 +17,45 @@
             border-right: 1px solid #e3e3e3;
             border-bottom: 1px solid #e3e3e3;
             border-top: 1px solid #e3e3e3;
+            button{
+                margin-left: 2rem;
+                width: 10rem;
+                border: 0;
+                border-radius: .8rem;
+                padding: .4rem;
+                font-size: 1.3rem;
+                cursor: pointer;
+            }
+            .degrade{
+                background-color: rgb(66, 255, 255);
+                color: #000000;
+                transition: 300ms;
+                &:hover{
+                    background-color: rgb(128, 255, 255);
+                    box-shadow: 0 5px 8px 0 rgba(121, 121, 121, 0.2), 0 7px 20px 0 rgba(151, 151, 151, 0.15);
+                }
+            }
+            .promote{
+                background-color: rgb(159, 75, 255);
+                color: #ffffff;
+                transition: 300ms;
+                &:hover{
+                    background-color: rgb(153, 44, 255);
+                    box-shadow: 0 5px 8px 0 rgba(66, 66, 66, 0.2), 0 7px 20px 0 rgba(66, 66, 66, 0.15);
+                }
+            }
+            .dltUser{
+                border: 0;
+                background-color: rgb(170, 0, 0);
+                color: #ffffff;
+                border-radius: 2rem;
+                padding: 1rem;
+                cursor: pointer;
+                transition: 800ms;
+                &:hover {
+                    background-color: red;
+                }
+            }
         }
     }
 }

@@ -20,17 +20,20 @@ function Orders () {
                 <th>Date</th>
                 <th>State</th>
                 <th>UserID</th>
+                <th>Actions</th>
             </tr>
             {
                 orders.map(o => (
                     <tr key={o.id}>
                         <td>{o.id}</td>
                         <td>{o.date}</td>
-                        <td>{o.state}</td>
+                        <td>{o.state.toUpperCase()}</td>
                         <td>{o.userId ? o.userId : 'Guest'}</td>
-                        <Link to={`/order/${o.id}`}>
-                            <button>View Order</button>
-                        </Link>
+                        <td>
+                            <Link to={`/order/${o.id}`} className='link'>
+                                <button>View Order</button>
+                            </Link>
+                        </td>
                     </tr>
                 ))
             }

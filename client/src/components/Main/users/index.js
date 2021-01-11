@@ -64,6 +64,7 @@ function Users() {
                     <th>Email</th>
                     <th>Adress</th>
                     <th>isAdmin</th>
+                    <th>Actions</th>
                 </tr>
                 {
                     users.map(u => (
@@ -73,12 +74,21 @@ function Users() {
                             <td>{u.email}</td>
                             <td>{u.adress}</td>
                             <td>
-                                {u.isAdmin.toString()}
-                                <button name='check' value={u.id} onClick={u.isAdmin ? degradeFunction : promoteFunction}>{u.isAdmin ? 'Degrade' : 'Promote'}</button>
+                                <p>
+                                    {u.isAdmin.toString().toUpperCase()}
+                                </p>
+                                <button 
+                                    name='check' 
+                                    value={u.id} 
+                                    onClick={u.isAdmin ? degradeFunction : promoteFunction}
+                                    className={u.isAdmin ? 'degrade' : 'promote'}
+                                >
+                                    {u.isAdmin ? 'Degrade' : 'Promote'}
+                                </button>
                             </td>
-                            <div>
-                                <button name='delete' value={u.id} onClick={handleToggle}>Delete User</button>
-                            </div>
+                            <td>
+                                <button name='delete' value={u.id} onClick={handleToggle} className='dltUser'>Delete User</button>
+                            </td>
                         </tr>
                     ))
                 }

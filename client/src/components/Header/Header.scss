@@ -95,6 +95,41 @@
             border-radius: 2rem;
             transition: all 500ms ease-in-out;
             overflow: hidden;
+            .link{
+                width: 90%;
+                border-bottom: .1rem solid #126a6d;
+                padding-bottom: 1rem;
+                .admin-btn{
+                    width: 100%;
+                    padding: .5rem;
+                    transition: 400ms;
+                    &:hover{
+                        box-shadow: 0 5px 8px 0 rgba(141, 141, 141, 0.2), 0 7px 20px 0 rgba(165, 165, 165, 0.15);
+                        background-color: #368F63;
+                    } 
+                }
+                .profile{
+                    padding: .5rem;
+                    width: 100%;  
+                    transition: 400ms;
+                    &:hover{
+                        box-shadow: 0 5px 8px 0 rgba(141, 141, 141, 0.2), 0 7px 20px 0 rgba(165, 165, 165, 0.15);
+                        background-color: #368F63;
+                    }  
+                }
+            }
+            .logout{
+                cursor: pointer;
+                width: 90%;
+                border-radius: 2rem;
+                background-color: rgb(255, 110, 110);
+                padding: .6rem;
+                transition: 500ms;
+                &:hover{
+                    box-shadow: 0 5px 8px 0 rgba(46, 46, 46, 0.2), 0 7px 20px 0 rgba(42, 42, 42, 0.15);
+                    background-color: rgb(255, 52, 52);
+                }   
+            }
             .logout-false{
                 display: none;
             }
@@ -102,14 +137,38 @@
                 position: absolute;
                 z-index: 1;
                 background-color: #368F92;
-
+                width: 100%;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-around;
+                justify-content: space-evenly;
                 height: 90%;
                 div{
                     display: flex;
-                    justify-content: space-around;
+                    justify-content: space-evenly;
+                    .no{
+                        padding: .8rem;
+                        border: 0;
+                        background-color: #5c0000;
+                        width: 35%;
+                        border-radius: 2rem;
+                        transition: 500ms;
+                        &:hover{
+                            box-shadow: 0 5px 8px 0 rgba(46, 46, 46, 0.2), 0 7px 20px 0 rgba(42, 42, 42, 0.15);
+                            background-color: #700000;
+                        }
+                    }
+                    .yes{
+                        padding: .7rem;
+                        border: 0;
+                        width: 35%;
+                        background-color: #b10000;
+                        border-radius: 2rem;
+                        &:hover{
+                            transition: 500ms;
+                            box-shadow: 0 5px 8px 0 rgba(46, 46, 46, 0.2), 0 7px 20px 0 rgba(42, 42, 42, 0.15);
+                            background-color: #d40000;
+                        }
+                    }
                 }
             }
         }

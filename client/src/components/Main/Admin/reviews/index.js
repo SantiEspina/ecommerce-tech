@@ -56,6 +56,7 @@ function Reviews () {
                     <th className='rating'>Rating</th>
                     <th>From User</th>
                     <th>Product</th>
+                    <th>Actions</th>
                 </tr>
                 {
                     reviews.map(r => (
@@ -66,7 +67,7 @@ function Reviews () {
                             <td className='rating'>{r.rating} star(s)</td>    
                             <td>{r.user?.username ? r.user.username : 'Anonymous'}</td>    
                             <td>{r.product?.name}</td>  
-                            <button name='delete' value={r.id} onClick={handleToggle}>Delete Review</button>  
+                            <td><button name='delete' value={r.id} onClick={handleToggle}>Delete Review</button></td>  
                         </tr>
                     ))
                 }
