@@ -21,6 +21,7 @@ function OrdersUser ({ match }) {
                 <th>Order ID</th>
                 <th>Date</th>
                 <th>State</th>
+                <th>Actions</th>
             </tr>
             {
                 ordersUser.map(o => (
@@ -28,9 +29,11 @@ function OrdersUser ({ match }) {
                         <td>{o.id}</td>
                         <td>{o.date}</td>
                         <td>{o.state}</td>
-                        <Link to={`/order/${o.id}`}>
-                            <button>View Order</button>
-                        </Link>
+                        <td>
+                            <Link to={`/order/${o.id}`} className='link'>
+                                <button>View Order</button>
+                            </Link>
+                        </td>
                     </tr>
                 ))
             }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { confirmEmail } from '../../../redux/actions';
 
+import './confirmEmail.scss';
+
 function ConfirmEmail () {
     const dispatch = useDispatch();
     const [ email, setEmail ] = useState('');
@@ -17,12 +19,19 @@ function ConfirmEmail () {
         setEmail('');
     };
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Confirm email: </label>
-                <input  type='email' value={email} onChange={handleChange} name='email'/>
+        <form onSubmit={handleSubmit} className='confirmEmailCnt'>
+            <div className='confirmEmailBox'>
+                <div>
+                    <label>Confirm email: </label>
+                    <input  
+                    type='email' 
+                    value={email} 
+                    autoComplete="off"
+                    onChange={handleChange} 
+                    name='email'/>
+                </div>
+                <input type='submit' value='Submit' className='input' disabled={!email} />
             </div>
-            <input type='submit' />
         </form>
     )
 };

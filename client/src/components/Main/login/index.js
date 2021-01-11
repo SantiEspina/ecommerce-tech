@@ -11,7 +11,8 @@ function Login () {
 
     let [ input, setInput ] = useState({
         email: '',
-        password: ''
+        password: '',
+        visibility: false
     });
 
     const handleChange = (e) => {
@@ -30,6 +31,13 @@ function Login () {
         })
     };
 
+    const handleToggle = () => {
+        setInput({
+            ...input,
+            visibility: input.visibility ? false : true
+        })
+    };
+
     return (
         <>
             {
@@ -39,11 +47,21 @@ function Login () {
                             <h2>Login</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className='user-box'>
-                                    <input type='text' name='email' autoComplete="off" value={input.email} onChange={handleChange} />
+                                    <input 
+                                    type='text' 
+                                    name='email' 
+                                    autoComplete="off" 
+                                    value={input.email} 
+                                    onChange={handleChange} />
                                     <label>E-Mail</label>
                                 </div>
                                 <div className='user-box'>
-                                    <input type='password' name='password' value={input.password} onChange={handleChange} />
+                                    <input 
+                                    type={input.visibility ? 'text' : 'password'} 
+                                    name='password'
+                                    value={input.password}
+                                    onChange={handleChange} />
+                                    <span onClick={handleToggle}>&#128065;</span>
                                     <label>Password</label>
                                 </div>
                                 <input type='submit' value='Submit' disabled={!input.email || !input.password || false} className='loginSubmit'/>

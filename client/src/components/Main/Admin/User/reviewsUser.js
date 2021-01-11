@@ -56,6 +56,7 @@ function ReviewsUser ({ match }) {
                         <div>
                             <label>Commentary</label>
                             <input 
+                                autoComplete="off"
                                 type='textarea'
                                 name='commentary'
                                 value={input.commentary}

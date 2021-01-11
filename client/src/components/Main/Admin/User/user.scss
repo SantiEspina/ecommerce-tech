@@ -39,6 +39,18 @@ background: radial-gradient(circle, rgba(9,120,121,1) 7%, rgba(9,94,121,1) 35%, 
       justify-content: space-between;
       width: 100%;
       margin-bottom: 2rem;
+      span{
+        background-color: transparent;
+        border: 0;
+        font-size: 2.5rem;
+        cursor: pointer;
+        color: #fff;
+      } 
+      .password{
+        position: absolute;
+        left: 37%;
+        width: 50%;
+      }
     }
     .btnAddUser {
       cursor: pointer;

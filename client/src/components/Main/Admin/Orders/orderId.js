@@ -62,6 +62,7 @@ export default function OrderID({ match }) {
         <div>
             <div className={`add-Review-${input.review}`}>
                 <div className='add-ReviewBox'>
+                    <button className='closeBtn' name='review' onClick={handleToggle}>&times;</button>
                     <form onSubmit={handleSubmit} className='form'>
                         <div>
                             <label>Commentary</label>
@@ -84,7 +85,7 @@ export default function OrderID({ match }) {
                             <input id='radio5' type='radio' value='1' name='rating' onClick={handleInputChange}/>
                             <label  for='radio5'>&#9733;</label>
                         </p>
-                        <input type='submit' value='Add Review' disabled={!input.commentary || !input.rating} />
+                        <input type='submit' value='Add Review' className='input' disabled={!input.commentary || !input.rating} />
                     </form>
                 </div>
             </div>

@@ -27,17 +27,17 @@ function UserID ({ match }) {
                 <p>Your adress is: <span>{adress}</span></p>
                 <p>You have: <span>{orders.length} order(s)</span></p>
                 <p>You have: <span>{reviews.length} review(s)</span></p>
-            </div>
-            <div className='actions'>
-                <Link to={`/orders/user/${id}`} className='link'>
-                    <button>View my Order(s)</button>
-                </Link>
-                <Link to={`/reviews/user/${id}`} className='link'>
-                    <button>View my Review(s)</button>
-                </Link>
-                <Link to={`/edit/user/${id}`} className='link'>
-                    <button>Edit my Profile</button>
-                </Link>
+                <div className='actions'>
+                    <Link to={`/orders/user/${id}`} className='link'>
+                        <button>View my Order(s)</button>
+                    </Link>
+                    <Link to={`/reviews/user/${id}`} className='link'>
+                        <button>View my Review(s)</button>
+                    </Link>
+                    <Link to={`/edit/user/${id}`} className='link'>
+                        <button>Edit my Profile</button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

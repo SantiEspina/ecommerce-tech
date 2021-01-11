@@ -12,6 +12,7 @@ function AddUser() {
         email: '',
         password: '',
         adress: '',
+        visibility: false
     });
     const handleInputChange = function (e) {
         setInput({
@@ -35,9 +36,17 @@ function AddUser() {
             email: '',
             password: '',
             adress: '',
-        });
-
+        }); 
     };
+
+
+    const handleToggle = () => {
+        setInput({
+            ...input,
+            visibility: input.visibility ? false : true
+        })
+    };
+    
     return (
         <div className='formaddUser'>
             <form onSubmit={handleSubmit} className='userBox'>
@@ -75,11 +84,13 @@ function AddUser() {
                     <label>Password: </label>
                     <input
                         autoComplete="off"
-                        type='password'
+                        type={input.visibility ? 'text' : 'password'}
                         name='password'
                         value={input.password}
                         onChange={handleInputChange}
+                        className='password'
                         />
+                        <span name='visibility' onClick={handleToggle}>&#128065;</span>
                 </div>
                 <div className='div'>
                     <label>Adress: </label>
