@@ -27,7 +27,7 @@ function Orders () {
                     <tr key={o.id}>
                         <td>{o.id}</td>
                         <td>{o.date}</td>
-                        <td>{o.state.toUpperCase()}</td>
+                        <td>{o.state.toUpperCase()}  </td>
                         <td>{o.userId ? o.userId : 'Guest'}</td>
                         <td>
                             <Link to={`/order/${o.id}`} className='link'>

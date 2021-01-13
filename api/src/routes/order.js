@@ -1,6 +1,6 @@
 const server = require('express').Router();
 const { User, Order, Product, OrderProduct } = require('../db.js');
-const { Op } =require ('sequelize');
+const { Op, where, or } =require ('sequelize');
 
 function parseWhere(where){
 	where = JSON.parse(where)
@@ -166,23 +166,28 @@ server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
 //   notificar q no hay stock -> modificar products con el stock -> agarrar order y ponerla en complete -> devolver order
 // !UTILIZAR PROMISE ALL, AGARRAR TODOS LOS PRODUCTOS Y PONERLOS EN UN ARR Y SOLO PONER AWAIT EN PROMISE ALL
 
-// server.post('/:idOrder/complete', async (req, res, next) => {
-//     const { idOrder } = req.params;
-//     let arr = [];
+server.post('/:idOrder/complete',  (req, res, next) => {
+    const { idOrder } = req.params;
+    let arr = [];
+    let quanty=0;
+    let newStock=[];
 
-//     const order = await Order.findByPk(idOrder, { include: [Product] });
-
-//     order.products.forEach(p => {
-//         if(p.stock < p.orderProduct.quantity) return res.status(400).send('Sin stock');
-//         arr.push(p);
-//         p.stock = p.stock - p.orderProduct.quantity;
-//     });
-
-//     order.state = 'complete';
-
-//     await Promise.all(arr)
-
-//     res.json(order)
-// });
+    Order.findByPk(idOrder, { include: [Product] })
+    .then(order => {
+        order.products.forEach(p => {
+            if(p.stock < p.orderProduct.quantity) return res.status(400).send('Sin stock');
+            arr.push(p.id) ;
+            quanty=p.stock - p.orderProduct.quantity;
+            newStock.push(quanty);
+        });
+        arr.forEach(a => {
+            quanty= newStock.shift();
+            Product.update({stock:quanty} , {where :{id:a}})
+        });
+        Order.update({state:"complete"}, { where: { id: idOrder } })
+        return res.status(201).send('se completo la orden')
+    })
+    .catch(err => next(err))
+});
 
 module.exports = server;

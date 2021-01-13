@@ -27,6 +27,7 @@ import ReviewsUser from './components/Main/Admin/User/reviewsUser';
 import EditUser from './components/Main/Admin/User/editUser';
 import OrderID from './components/Main/Admin/Orders/orderId';
 import Reviews from './components/Main/Admin/reviews';
+import Checkout from './components/Main/checkout';
 
 
 
@@ -70,6 +71,7 @@ function App() {
       <Route exact path="/users" component={Users} />
       <Route exact path="/reviews" component={Reviews} />
       <Route exact path="/addUserAdmin" component={AddUserAdmin} />
+      <Route exact path="/checkout" component={Checkout} />
       <Route path="/" render={() => <Footer />} />
     </>
 
