@@ -67,6 +67,7 @@ function Login () {
                                 <input type='submit' value='Submit' disabled={!input.email || !input.password || false} className='loginSubmit'/>
                             </form>
                             <div className='extras'>
+                                <a href='http://localhost:3001/auth/google' className='google'><img src='https://www.brandchannel.com/wp-content/uploads/2018/09/Google-logo-thumb.jpg' />Login with Google</a>
                                 <Link to='/confirmEmail' className='link'>
                                     <p>Forgot your password?</p>
                                 </Link>

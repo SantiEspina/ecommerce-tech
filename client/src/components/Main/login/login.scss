@@ -24,7 +24,32 @@
         .extras{
             display: flex;
             flex-direction: column;
+            text-align: center;
             margin-top: 2rem;
+            .google{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                color: #aaaaaa;
+                background-color: #fff;
+                border-radius: .5rem;
+                text-decoration: none;
+                margin: 1rem 0 1rem 0;
+                padding: .6rem;
+                transition: 400ms;
+                box-sizing: border-box; 
+                img{
+                    position: absolute;
+                    left: 7rem;
+                    width: 3rem;
+                }
+                &:hover{
+                    color: #3e3e3e;
+                    box-shadow: 0 0 .5rem .5rem rgba(95, 191, 255, 0.6);   
+                    padding: .7rem;  
+                }
+            }
             p{
                 color: #fff;
                 text-align: center;
@@ -32,7 +57,7 @@
             .link{
                 text-decoration: none;
                 p{
-                    width: 100%;
+                    width: 97%;
                     color: black;
                     background-color: #cccccc;
                     border-radius: 2rem;

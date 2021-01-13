@@ -3,8 +3,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const BearerStrategy = require("passport-http-bearer").Strategy;
 const { User } = require('./db.js');
 const jwt = require("jsonwebtoken");
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const {
-    SECRETO
+    SECRETO,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET
     } = process.env;
 
 passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password", session: false},
@@ -32,5 +35,24 @@ passport.use(
     });
     })
 );
+
+passport.use(new GoogleStrategy({
+    clientID:     '246688954399-necalrcdsa7pssscglong5uj2qt637r0.apps.googleusercontent.com',
+    clientSecret: 'mjiWa88PC2Oo0WICuPEAgmY4',
+    callbackURL: "http://localhost:3001/auth/googleCallback",
+    session: false
+  },
+  async function(request, accessToken, refreshToken, profile, done) {
+    const user = await User.findOrCreate({ 
+        where: { email: profile.email },
+        defaults: {
+            name: profile.given_name,
+            username: profile.displayName,
+            email: profile.email,
+            photoURL: profile.picture
+        }
+    });done(null, user[0])
+  }
+));
 
 module.exports = passport;
