@@ -31,6 +31,7 @@ import Reviews from './components/Main/Admin/reviews';
 
 
 function App() {
+  const { user } = useSelector(state => state);
   const dispatch = useDispatch();  
   
   useEffect(() => {

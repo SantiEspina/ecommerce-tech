@@ -193,7 +193,10 @@ export const addUser = (input) => {
 export const createOrderToUser = (userId) => {
     return function (dispatch) {
         axios.post(`${localhost}/order/`, { userId })
-            .then(data => dispatch({ type: CREATE_ORDER_TO_USER, payload: data.data }))
+            .then(data => {
+                dispatch({ type: CREATE_ORDER_TO_USER, payload: data.data });
+                dispatch(getProductToOrder(data.data.id));
+            })
     }
 };
 
@@ -313,7 +316,10 @@ export const logout = () => {
 export const deleteOrder = (idOrder) => {
     return function (dispatch) {
         axios.delete(`${localhost}/order/${idOrder}`)
-            .then(data => dispatch({ type: DELETE_ORDER }))
+            .then(data => {
+                dispatch({ type: DELETE_ORDER });
+                dispatch(getMe());
+            })
     }
 };
 
