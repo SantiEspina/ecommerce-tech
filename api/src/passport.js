@@ -37,8 +37,8 @@ passport.use(
 );
 
 passport.use(new GoogleStrategy({
-    clientID:     '246688954399-necalrcdsa7pssscglong5uj2qt637r0.apps.googleusercontent.com',
-    clientSecret: 'mjiWa88PC2Oo0WICuPEAgmY4',
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3001/auth/googleCallback",
     session: false
   },
