@@ -249,8 +249,11 @@ export const addProductToOrder = (input, idProduct) => {
         }
     } else {
         return function (dispatch) {
+            dispatch(createOrderToUser(jwt(token).id));
             axios.post(`${localhost}/order/${idOrder}/product/${idProduct}`, { name, price, quantity })
-                .then(data => dispatch({ type: ADD_PRODUCT_TO_ORDER, payload: data.data }))
+                .then(data => {
+                    dispatch({ type: ADD_PRODUCT_TO_ORDER, payload: data.data })
+                })
         }
     }
 };
@@ -300,7 +303,6 @@ export const getMe = () => {
         axios.get(`${localhost}/auth/me`)
             .then(data => {
                 dispatch({ type: GET_ME, payload: data.data });
-                dispatch(createOrderToUser(jwt(token).id));
             })
             .catch(err => console.log(err))
     }
@@ -456,8 +458,7 @@ export const confirmEmail = (email) => {
     return function (dispatch) {
         axios.post(`${localhost}/user/confirmEmail`, { email })
             .then(data => {
-                dispatch({ type: CONFIRM_EMAIL, payload: data.data });
-                window.location.replace(`/resetPassword?token=${data.data}`);
+                alert('Check your email!');
             })
             .catch(err => alert('Email incorrect'))
     }

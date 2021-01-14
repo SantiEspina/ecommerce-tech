@@ -143,7 +143,8 @@ export default function findProductReducer(state = initialState, action) {
         case LOG_OUT:
             return {
                 ...state,
-                user: ''
+                user: '',
+                cart: []
             }
         case DELETE_ORDER:
             return {
@@ -214,11 +215,6 @@ export default function findProductReducer(state = initialState, action) {
             }
         case EDIT_REVIEW:
             return { ...state }
-        case CONFIRM_EMAIL:
-            return {
-                ...state,
-                tokenPassword: action.payload
-            }
         case RESET_PASSWORD:
             return {
                 ...state,
