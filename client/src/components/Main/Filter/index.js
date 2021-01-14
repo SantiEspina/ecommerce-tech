@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { orderByFilt, getProductToOrder, createOrderToUser, deleteOrder, deleteProductToOrder } from '../../../redux/actions';
 import { ADD_PRODUCT_TO_ORDER } from '../../../redux/constants';
+import { Link } from 'react-router-dom';
 
 
 import '../Cart/Cart.scss';
 import './Filter.scss';
 
 function Filter() {
-    const { products, cart, order } = useSelector(state => state);
+    const { products, cart, order, user } = useSelector(state => state);
     const dispatch = useDispatch();
     let cont = 0;
 
@@ -16,6 +17,7 @@ function Filter() {
         openCart: false,
         idOrder: order?.id
     });
+    
 
     useEffect(() => {
         setInput({
@@ -106,6 +108,14 @@ function Filter() {
                                         payload:[]
                                     })
                                 }}>Empty Cart</button>
+                                {
+                                    user?(  <Link to='/checkout'>
+                                                <button className='total-cart' onClick={e => { }}>Checkout</button>
+                                            </Link>):
+                                            (<Link to='/login'>
+                                                <button className='total-cart' onClick={e => { }}>Login</button>
+                                            </Link>)
+                                }
                             </div>
                         </div>
                     </div>
