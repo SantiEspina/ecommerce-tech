@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUserAdmin } from '../../../../redux/actions';
 
 export default function AddUserAdmin() {
+    const { user } = useSelector(state => state);
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         name: '',
@@ -40,6 +41,8 @@ export default function AddUserAdmin() {
         });
         
     };
+
+    if (!user?.isAdmin) return window.location.replace('/login');
     return (
         <div className='formaddUser'>
             <form onSubmit={handleSubmit} className='userBox'>

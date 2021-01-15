@@ -108,15 +108,15 @@ function Filter() {
                                         payload:[]
                                     })
                                 }}>Empty Cart</button>
+                            </div>
                                 {
-                                    user?(  <Link to='/checkout'>
-                                                <button className='total-cart' onClick={e => { }}>Checkout</button>
+                                    user?(  <Link to='/checkout' className='link'>
+                                                <button className='btn-check' onClick={e => { }}>Checkout</button>
                                             </Link>):
-                                            (<Link to='/login'>
-                                                <button className='total-cart' onClick={e => { }}>Login</button>
+                                            (<Link to='/login' className='link'>
+                                                <button className='btn-check' onClick={e => { }}>Login</button>
                                             </Link>)
                                 }
-                            </div>
                         </div>
                     </div>
                 </div>

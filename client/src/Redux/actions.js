@@ -165,10 +165,15 @@ export const editCategory = (idC, name) => {
 };
 
 
-export const getOrders = (state = undefined) => {
+export const getOrders = (estado) => {
     return function (dispatch) {
-        axios.get(`${localhost}/order`, { state })
-            .then(data => dispatch({ type: GET_ORDERS, payload: data.data }))
+        if(!estado) {
+            axios.get(`${localhost}/order`)
+                .then(data => dispatch({ type: GET_ORDERS, payload: data.data }))
+        } else {
+            axios.get(`${localhost}/order?state=${estado}`)
+                .then(data => dispatch({ type: GET_ORDERS, payload: data.data }))
+        }
     }
 }
 
@@ -178,7 +183,6 @@ export const addUser = (input) => {
         axios.post(`${localhost}/auth/register`, { name, username, email, password, adress })
             // .then(data => dispatch({ type: ADD_USER, payload: data.data }) && window.location.replace('/'))
             .then(data => {
-                window.localStorage.removeItem('cart');
                 window.localStorage.setItem("token", data.data);
                 window.location.replace('/');
                 dispatch({ type: LOGIN_USER, payload: data.data });
@@ -261,7 +265,22 @@ export const addProductToOrder = (input, idProduct) => {
 export const getProductToOrder = (idOrder) => {
     return function (dispatch) {
         axios.get(`${localhost}/order/${idOrder}`)
-            .then(data => dispatch({ type: GET_PRODUCTS_TO_ORDER, payload: data.data }))
+            .then(data => {
+                dispatch({ type: GET_PRODUCTS_TO_ORDER, payload: data.data });
+                let cart = JSON.parse(window.localStorage.getItem('cart'));
+                window.localStorage.removeItem('cart');
+                if(data.data.products.length < 1 && cart) {
+                    for(const p of cart.products) {
+                        let input = {
+                            idOrder,
+                            name: p.orderProduct.name,
+                            price: p.orderProduct.price,
+                            quantity: p.orderProduct.quantity,
+                        };
+                        dispatch(addProductToOrder(input, p.id));
+                    }
+                }
+            })
     }
 };
 
@@ -288,7 +307,9 @@ export const loginUser = (input) => {
     return function (dispatch) {
         axios.post(`${localhost}/auth/login`, { email, password })
             .then(data => {
-                window.localStorage.removeItem('cart');
+                // cart = window.localStorage.getItem('cart');
+                // console.log(cart)
+                // window.localStorage.removeItem('cart');
                 window.localStorage.setItem("token", data.data);
                 window.location.replace('/');
                 dispatch({ type: LOGIN_USER, payload: data.data });
@@ -481,5 +502,21 @@ export const resetPassword = (token, input) => {
                 }
             })
             .catch(err => alert(err))
+    }
+};
+
+
+export const confirmPurchase = (input) => {
+    let { username, email, adress, idOrder } = input;
+    return function (dispatch) {
+        axios.post(`${localhost}/order/${idOrder}/complete`, { username, email, adress })
+            .then(data => {
+                alert('Your purchase was made successfully')
+                window.location.replace('/');
+            })
+            .catch(err => {
+                alert(err.response.data)
+                window.location.replace('/');
+            })
     }
 };

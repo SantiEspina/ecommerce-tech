@@ -32,3 +32,27 @@
         }
     }
 }
+.btn-orders{
+    display: flex;
+    background: #e3e3e3;
+    height: 10vh;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: .1rem solid #cccccc;
+    button{
+        background-color: #cccccc;
+        border: 0;
+        border-radius: 1rem;
+        cursor: pointer;
+        padding: 2rem;
+        transition: 300ms;
+        &:hover{
+            box-shadow: 0 5px 8px 0 rgba(66, 66, 66, 0.2), 0 7px 10px 0 rgba(66, 66, 66, 0.15);
+            background-color: saturate($color: #ffffff, $amount: 2rem);
+        }
+        &:focus{
+            background-color: #6b6b6b;
+            color: #ffffff;
+        }
+    }
+}
