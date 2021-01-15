@@ -10,11 +10,11 @@ VALUES ('laptop', '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 
 
 INSERT INTO "products" ("name", "description", "image", "price", "stock", "createdAt", "updatedAt")
-VALUES ('Notebook Lenovo S145', 'Notebook Lenovo S145 Intel Celeron N4000 15.6 4gb 1tb', 'https://http2.mlstatic.com/D_NQ_NP_677579-MLA43915970146_102020-O.webp', 48999 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
-('Notebook Cx Cloudbook', 'Notebook Cx Cloudbook 4gb 64gb 14 Pulgadas Windows 10 Ips', 'https://http2.mlstatic.com/D_NQ_NP_730258-MLA42306517708_062020-O.webp', 31999 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
-('Notebook Asus Vivobook', 'Notebook Asus Vivobook Amd Ryzen 5 8gb 512gb Ssd 15.6 Win10x', 'https://http2.mlstatic.com/D_NQ_NP_974918-MLA43636732460_092020-O.webp', 113999 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
-('NOTEBOOK ACER ASPIRE 3', 'CORE I5 1035G1 8GB SSD PIE 256GB 15,6" FREE DOS', 'https://http2.mlstatic.com/D_NQ_NP_965853-MLA43274311241_082020-V.webp', 99500 , 100, '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
-('Notebook ACER Aspire 3', 'Intel® Core® - i3-1005G1 - 4GB - 1TB - 15,6"', 'https://http2.mlstatic.com/D_NQ_NP_820610-MLA43684986003_102020-V.webp', 80100 , 100 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
+VALUES ('Notebook Lenovo S145', 'Notebook Lenovo S145 Intel Celeron N4000 15.6 4gb 1tb', 'https://http2.mlstatic.com/D_NQ_NP_677579-MLA43915970146_102020-O.webp', 48999 , 20 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
+('Notebook Cx Cloudbook', 'Notebook Cx Cloudbook 4gb 64gb 14 Pulgadas Windows 10 Ips', 'https://http2.mlstatic.com/D_NQ_NP_730258-MLA42306517708_062020-O.webp', 31999 , 10 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
+('Notebook Asus Vivobook', 'Notebook Asus Vivobook Amd Ryzen 5 8gb 512gb Ssd 15.6 Win10x', 'https://http2.mlstatic.com/D_NQ_NP_974918-MLA43636732460_092020-O.webp', 113999 , 5 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
+('NOTEBOOK ACER ASPIRE 3', 'CORE I5 1035G1 8GB SSD PIE 256GB 15,6" FREE DOS', 'https://http2.mlstatic.com/D_NQ_NP_965853-MLA43274311241_082020-V.webp', 99500 , 5, '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
+('Notebook ACER Aspire 3', 'Intel® Core® - i3-1005G1 - 4GB - 1TB - 15,6"', 'https://http2.mlstatic.com/D_NQ_NP_820610-MLA43684986003_102020-V.webp', 80100 , 8 , '2020-12-10 00:00:00 -3:00', '2020-12-10 00:00:00 -3:00'),
 
 
 

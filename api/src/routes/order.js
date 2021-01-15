@@ -163,36 +163,32 @@ server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
     }
 });
 
-server.post('/:idOrder/complete',  (req, res, next) => {
-    const { idOrder } = req.params;
-    const { username, email } = req.body;
-    let total = 0;
-    let arr = [];
-    let quanty=0;
-    let newStock=[];
+server.post('/:idOrder/complete',  async (req, res, next) => {
+    try {
+        const { idOrder } = req.params;
+        const { username, email } = req.body;
+        let total = 0;
+        let arr = [];
+        let quanty=0;
+        let newStock=[];
 
-    Order.findByPk(idOrder, { include: [Product] })
-    .then(order => {
-        let result;
-        order.products.forEach(p => {
-            if(p.stock < p.orderProduct.quantity) result = false;
+        const order = await Order.findByPk(idOrder, { include: [Product] });
+
+        for(const p of order.products) {
+            if(p.stock < p.orderProduct.quantity) return res.status(400).send('sin stock');
             total += p.orderProduct.price * p.orderProduct.quantity;
             arr.push(p.id) ;
             quanty=p.stock - p.orderProduct.quantity;
             newStock.push(quanty);
-        });
-        if(!result) return res.status(400).send('sin stock');
-        return order;
-    })
-    .then((data) => {
-        arr.forEach(a => {
+        };
+
+        await Promise.all(arr.map(a => {
             quanty= newStock.shift();
-            Product.update({stock:quanty} , {where :{id:a}})
-        });
-        Order.update({state:"complete"}, { where: { id: idOrder } })
-        console.log(data);
-    })
-    .then(order => {
+            return Product.update({stock:quanty} , {where :{id:a}})
+        }));
+
+        await Order.update({state:"complete"}, { where: { id: idOrder } });
+
         let obj = {
             email,
             username,
@@ -200,9 +196,10 @@ server.post('/:idOrder/complete',  (req, res, next) => {
             total
         };
         let html = orderEmail(obj);
-        res.send(html)
-    })
-    .catch(err => next(err))
+        return res.send(html)
+    } catch (error){
+        next(error)
+    }
 });
 
 module.exports = server;
