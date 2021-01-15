@@ -4,7 +4,7 @@ import { editProduct, getDetails, getCategories, addCategoryToProduct } from '..
 
 export default function EditProduct({ match }) {
     const dispatch = useDispatch();
-    const { details, categories } = useSelector(state => state);
+    const { details, categories, user } = useSelector(state => state);
     const { id } = match.params;
     
     useEffect(() => {
@@ -50,6 +50,8 @@ export default function EditProduct({ match }) {
     };
     
     if(!details || !categories) return (<h3>Loading...</h3>);
+    if (!user?.isAdmin) return window.location.replace('/login');
+
     return (
         <form onSubmit={handleSubmit} className='formAddProduct'>
             <div className='div'>

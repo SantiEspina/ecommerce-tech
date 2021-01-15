@@ -6,7 +6,7 @@ import './users.scss';
 
 function Users() {
     const dispatch = useDispatch();
-    const { users } = useSelector(state => state);
+    const { users, user } = useSelector(state => state);
     const [ input, setInput ] = useState({
         delete: false,
         id: null,
@@ -55,6 +55,8 @@ function Users() {
     }
     
     if(!users) return <h2>Loading...</h2>;
+    if (!user?.isAdmin) return window.location.replace('/login');
+
     return(
         <>
             <table className='usersCnt'>

@@ -14,7 +14,7 @@ import Orders from './components/Main/Admin/Orders/index.js';
 import User from './components/Main/Admin/User';
 import Card from './components/Main/Product/Card.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMe, getPendingOrder, getProductToOrder } from './redux/actions.js';
+import { createOrderToUser, getMe, getPendingOrder, getProductToOrder } from './redux/actions.js';
 import Login from './components/Main/login';
 import ConfirmEmail from './components/Main/login/confirmEmail';
 import ResetPassword from './components/Main/login/resetPassword';
@@ -39,6 +39,7 @@ function App() {
     let token = window.localStorage.getItem('token');
     if(token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      dispatch(createOrderToUser(jwt(token).id));
       dispatch(getMe());
     } else {
       dispatch((getPendingOrder()));
@@ -65,7 +66,6 @@ function App() {
       <Route exact path="/reviews/user/:id" component={ReviewsUser} />
       <Route exact path="/edit/user/:id" component={EditUser} />
       <Route exact path="/order/:id" component={OrderID} />
-      <Route exact path="/order" component={Card} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/confirmEmail" component={ConfirmEmail} />
       <Route exact path="/resetPassword" component={ResetPassword} />

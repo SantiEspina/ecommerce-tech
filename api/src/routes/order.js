@@ -166,7 +166,7 @@ server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
 server.post('/:idOrder/complete',  async (req, res, next) => {
     try {
         const { idOrder } = req.params;
-        const { username, email } = req.body;
+        const { username, email, adress } = req.body;
         let total = 0;
         let arr = [];
         let quanty=0;
@@ -175,7 +175,7 @@ server.post('/:idOrder/complete',  async (req, res, next) => {
         const order = await Order.findByPk(idOrder, { include: [Product] });
 
         for(const p of order.products) {
-            if(p.stock < p.orderProduct.quantity) return res.status(400).send('sin stock');
+            if(p.stock < p.orderProduct.quantity) return res.status(400).send(p.name + " - Sin stock");
             total += p.orderProduct.price * p.orderProduct.quantity;
             arr.push(p.id) ;
             quanty=p.stock - p.orderProduct.quantity;
@@ -192,6 +192,7 @@ server.post('/:idOrder/complete',  async (req, res, next) => {
         let obj = {
             email,
             username,
+            adress,
             order,
             total
         };
