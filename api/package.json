@@ -37,10 +37,10 @@
     "sequelize": "^6.3.4"
   },
   "devDependencies": {
-    "supertest-session": "^4.0.0",
-    "mocha": "^8.1.1",
     "chai": "^4.2.0",
-    "nodemon": "^2.0.4",
-    "supertest": "^4.0.2"
+    "mocha": "^8.1.1",
+    "nodemon": "^2.0.7",
+    "supertest": "^4.0.2",
+    "supertest-session": "^4.0.0"
   }
 }
