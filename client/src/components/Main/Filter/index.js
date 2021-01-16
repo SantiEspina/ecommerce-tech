@@ -57,7 +57,7 @@ function Filter() {
             {/** Empieza nuestro carrito*/}
             <div className="Carrito">
                 <button className='buttonCart' onClick={handleToggle}>
-                    <img src='https://icons555.com/images/icons-green/image_icon_shopping_cart_pic_512x512.png' name='openCart' />
+                    <img src='https://cdn.icon-icons.com/icons2/933/PNG/512/shopping-cart_icon-icons.com_72552.png' name='openCart' />
                 </button>
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>

@@ -21,7 +21,7 @@ export default function Categories() {
     const handleSubmit = function (e) {
         e.preventDefault();
         axios
-            .post('http://localhost:3001/categories', {
+            .post('/categories', {
             name:`${input.name}`,
         })
         .then((data) => {
