@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getDetailsUser, editUser } from '../../../../redux/actions';
+import { getDetailsUser, editUser } from '../../../../Redux/actions';
 
 export default function EditProduct({ match }) {
     const { id } = match.params;

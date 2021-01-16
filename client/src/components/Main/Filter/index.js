@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { orderByFilt, getProductToOrder, createOrderToUser, deleteOrder, deleteProductToOrder } from '../../../redux/actions';
-import { ADD_PRODUCT_TO_ORDER } from '../../../redux/constants';
+import { orderByFilt, getProductToOrder, createOrderToUser, deleteOrder, deleteProductToOrder } from '../../../Redux/actions';
+import { ADD_PRODUCT_TO_ORDER } from '../../../Redux/constants';
 import { Link } from 'react-router-dom';
 
 

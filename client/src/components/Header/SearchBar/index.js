@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { findProductBySearchBar } from '../../../redux/actions';
+import { findProductBySearchBar } from '../../../Redux/actions';
 
 import './SearchBar.scss';
 

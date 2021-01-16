@@ -4,7 +4,7 @@ import Product from './Product/Product.js';
 import Categories from './Categories';
 import Filter from './Filter';
 import { useDispatch } from 'react-redux';
-import { getProducts, createOrderToUser } from '../../redux/actions';
+import { getProducts, createOrderToUser } from '../../Redux/actions';
 
 
 import './Main.scss';

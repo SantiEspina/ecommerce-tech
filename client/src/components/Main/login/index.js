@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../../redux/actions';
+import { loginUser } from '../../../Redux/actions';
 
 import './login.scss';
 

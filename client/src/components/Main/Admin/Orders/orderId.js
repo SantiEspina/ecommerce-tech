@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addReview, getProductToOrder } from '../../../../redux/actions';
+import { addReview, getProductToOrder } from '../../../../Redux/actions';
 
 import './orderId.scss';
 

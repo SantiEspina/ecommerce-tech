@@ -14,7 +14,7 @@ import Orders from './components/Main/Admin/Orders/index.js';
 import User from './components/Main/Admin/User';
 import Card from './components/Main/Product/Card.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrderToUser, getMe, getPendingOrder, getProductToOrder } from './redux/actions.js';
+import { createOrderToUser, getMe, getPendingOrder, getProductToOrder } from './Redux/actions.js';
 import Login from './components/Main/login';
 import ConfirmEmail from './components/Main/login/confirmEmail';
 import ResetPassword from './components/Main/login/resetPassword';

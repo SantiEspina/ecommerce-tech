@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './Header.scss';
-import { logout } from '../../redux/actions';
+import { logout } from '../../Redux/actions';
 
 function Header () {
     const dispatch = useDispatch();

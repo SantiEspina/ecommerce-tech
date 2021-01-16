@@ -1,7 +1,7 @@
 import React, { useDebugValue, useEffect, useState } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import './Checkout.scss';
-import { confirmPurchase } from '../../../redux/actions';
+import { confirmPurchase } from '../../../Redux/actions';
 
 function Checkout () {
     const { cart, user, order }= useSelector(state => state);

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetailsUser } from '../../../../redux/actions';
+import { getDetailsUser } from '../../../../Redux/actions';
 import { Link } from 'react-router-dom';
 
 import './userID.scss';

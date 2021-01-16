@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { degradeAdmin, deleteUser, getUsers, promoteToAdmin } from '../../../redux/actions';
+import { degradeAdmin, deleteUser, getUsers, promoteToAdmin } from '../../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './users.scss';

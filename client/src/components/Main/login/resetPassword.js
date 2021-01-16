@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword } from '../../../redux/actions';
+import { resetPassword } from '../../../Redux/actions';
 
 import './resetPassword.scss';
 

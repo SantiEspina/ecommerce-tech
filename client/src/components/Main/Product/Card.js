@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addProductToOrder, getMe } from '../../../redux/actions';
+import { addProductToOrder, getMe } from '../../../Redux/actions';
 
 import './Card.scss';
 

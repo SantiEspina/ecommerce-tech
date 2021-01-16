@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetails, getReviews } from '../../../redux/actions';
+import { getDetails, getReviews } from '../../../Redux/actions';
 import './ProductID.scss';
 
 export default function ProductID({ match })  {

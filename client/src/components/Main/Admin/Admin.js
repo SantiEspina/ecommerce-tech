@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, deleteProduct, removeCategoryToProduct, getCategories, deleteCategory, addUser } from '../../../redux/actions';
+import { getProducts, deleteProduct, removeCategoryToProduct, getCategories, deleteCategory, addUser } from '../../../Redux/actions';
 
 import './Admin.scss';
 import './Product/deleteProduct.scss';

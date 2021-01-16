@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../../../../redux/actions';
+import { getOrders } from '../../../../Redux/actions';
 import { Link } from 'react-router-dom';
 import './Orders.scss'
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserAdmin } from '../../../../redux/actions';
+import { addUserAdmin } from '../../../../Redux/actions';
 
 export default function AddUserAdmin() {
     const { user } = useSelector(state => state);

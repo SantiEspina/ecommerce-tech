@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editReview, getReviewsUser } from '../../../../redux/actions';
+import { editReview, getReviewsUser } from '../../../../Redux/actions';
 
 import './reviewUser.scss';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { confirmEmail } from '../../../redux/actions';
+import { confirmEmail } from '../../../Redux/actions';
 
 import './confirmEmail.scss';
 

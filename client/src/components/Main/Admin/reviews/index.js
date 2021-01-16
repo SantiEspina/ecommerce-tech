@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteReview, getAllReviews } from '../../../../redux/actions';
+import { deleteReview, getAllReviews } from '../../../../Redux/actions';
 
 import './reviews.scss';
 

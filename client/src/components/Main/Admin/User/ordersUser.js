@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrdersUser, getProductToOrder } from '../../../../redux/actions';
+import { getOrdersUser, getProductToOrder } from '../../../../Redux/actions';
 import { Link } from 'react-router-dom';
 
 import './orderUsers.scss';
