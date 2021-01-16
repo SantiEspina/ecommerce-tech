@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { orderByFilt, getProductToOrder, createOrderToUser, deleteOrder, deleteProductToOrder } from '../../../redux/actions';
 import { ADD_PRODUCT_TO_ORDER } from '../../../redux/constants';
+import { Link } from 'react-router-dom';
 
 
 import '../Cart/Cart.scss';
 import './Filter.scss';
 
 function Filter() {
-    const { products, cart, order } = useSelector(state => state);
+    const { products, cart, order, user } = useSelector(state => state);
     const dispatch = useDispatch();
     let cont = 0;
 
@@ -16,6 +17,7 @@ function Filter() {
         openCart: false,
         idOrder: order?.id
     });
+    
 
     useEffect(() => {
         setInput({
@@ -55,7 +57,7 @@ function Filter() {
             {/** Empieza nuestro carrito*/}
             <div className="Carrito">
                 <button className='buttonCart' onClick={handleToggle}>
-                    <img src='https://icons555.com/images/icons-green/image_icon_shopping_cart_pic_512x512.png' name='openCart' />
+                    <img src='https://cdn.icon-icons.com/icons2/933/PNG/512/shopping-cart_icon-icons.com_72552.png' name='openCart' />
                 </button>
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
@@ -107,6 +109,14 @@ function Filter() {
                                     })
                                 }}>Empty Cart</button>
                             </div>
+                                {
+                                    user?(  <Link to='/checkout' className='link'>
+                                                <button className='btn-check' onClick={e => { }}>Checkout</button>
+                                            </Link>):
+                                            (<Link to='/login' className='link'>
+                                                <button className='btn-check' onClick={e => { }}>Login</button>
+                                            </Link>)
+                                }
                         </div>
                     </div>
                 </div>

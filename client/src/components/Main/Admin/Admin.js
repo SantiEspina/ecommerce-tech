@@ -9,7 +9,7 @@ import './Category/removeCategory.scss';
 
 
 export default function Admin() {
-    const { products, categories } = useSelector(state => state);
+    const { products, categories, user } = useSelector(state => state);
     const dispatch = useDispatch();
     let [input, setInput] = useState({
         removeCategory: false,
@@ -62,7 +62,8 @@ export default function Admin() {
         dispatch(getCategories());
     }, [dispatch, input]);
 
-    if (!products || !categories) return (<h1>Loading...</h1>)
+    if (!products || !categories) return (<h1>Loading...</h1>);
+    if (!user?.isAdmin) return window.location.replace('/login');
     return (
         <>
             <div className='btnAdd'>

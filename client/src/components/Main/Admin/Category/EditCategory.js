@@ -7,7 +7,7 @@ import './EditCategory.scss';
 
 export default function EditProduct () {
     const dispatch = useDispatch();
-    const { categories } = useSelector(state => state);
+    const { categories, user } = useSelector(state => state);
     const [ input, setInput ] = useState({
         id: false,
         name: ''
@@ -34,7 +34,9 @@ export default function EditProduct () {
         });
     };
 
-    if(!categories) return (<h2>Loading...</h2>)
+    if(!categories) return (<h2>Loading...</h2>); 
+    if (!user?.isAdmin) return window.location.replace('/login');
+
     return (
         <div className='containerEdit'>
             <div className='infoCategories'>

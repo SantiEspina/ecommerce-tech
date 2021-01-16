@@ -6,7 +6,7 @@ import { getCategories, addProduct } from '../../../../redux/actions';
 
 
 function AddProduct(){
-    const { categories } = useSelector(state => state);
+    const { categories, user } = useSelector(state => state);
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
@@ -43,7 +43,9 @@ function AddProduct(){
         window.alert("Your product was created successfully!");
     };
 
-    if(!categories) return (<h2>Loading...</h2>)
+    if(!categories) return (<h2>Loading...</h2>);
+    if (!user?.isAdmin) return window.location.replace('/login');
+
     return (
         <form onSubmit={handleSubmit} className='formAddProduct'>
             <div className='div'>

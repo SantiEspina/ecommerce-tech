@@ -6,7 +6,7 @@ import { getDetailsUser, editUser } from '../../../../redux/actions';
 export default function EditProduct({ match }) {
     const { id } = match.params;
     const dispatch = useDispatch();
-    const { detailsUser } = useSelector(state => state);
+    const { detailsUser, user } = useSelector(state => state);
     
     useEffect(() => {
         dispatch(getDetailsUser(id))
@@ -46,6 +46,8 @@ export default function EditProduct({ match }) {
     };
     
     if(!detailsUser) return (<h3>Loading...</h3>);
+    if (!user?.isAdmin) return window.location.replace('/login');
+
     return (
         <form onSubmit={handleSubmit} className='formAddProduct'>
             <div className='div'>

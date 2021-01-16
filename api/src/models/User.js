@@ -34,9 +34,7 @@ module.exports = (sequelize) => {
       }
     },
     adress: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      required: true
+      type: DataTypes.TEXT
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,

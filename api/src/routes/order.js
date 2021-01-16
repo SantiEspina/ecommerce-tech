@@ -1,6 +1,7 @@
 const server = require('express').Router();
 const { User, Order, Product, OrderProduct } = require('../db.js');
 const { Op } =require ('sequelize');
+const { orderEmail } = require('../mailModel/confirmPurchase');
 
 function parseWhere(where){
 	where = JSON.parse(where)
@@ -89,7 +90,7 @@ server.put('/:idOrder', (req, res, next) => {
 
 server.delete('/:idOrder', (req, res, next) => {
     try {
-        if(req.user.isAdmin){
+        if(req.user){
             const { idOrder } = req.params;
             Order.destroy({ where: { id: idOrder } })
                 .then(data => res.status(201).send('Eliminado'))
@@ -162,27 +163,44 @@ server.delete('/:idOrder/product/:idProduct', async (req, res, next) => {
     }
 });
 
-// ! HACER post /:idOrder/complete -> traer order -> recorrer products y preguntar si hay stock ->
-//   notificar q no hay stock -> modificar products con el stock -> agarrar order y ponerla en complete -> devolver order
-// !UTILIZAR PROMISE ALL, AGARRAR TODOS LOS PRODUCTOS Y PONERLOS EN UN ARR Y SOLO PONER AWAIT EN PROMISE ALL
+server.post('/:idOrder/complete',  async (req, res, next) => {
+    try {
+        const { idOrder } = req.params;
+        const { username, email, adress } = req.body;
+        let total = 0;
+        let arr = [];
+        let quanty=0;
+        let newStock=[];
 
-// server.post('/:idOrder/complete', async (req, res, next) => {
-//     const { idOrder } = req.params;
-//     let arr = [];
+        const order = await Order.findByPk(idOrder, { include: [Product] });
 
-//     const order = await Order.findByPk(idOrder, { include: [Product] });
+        for(const p of order.products) {
+            if(p.stock < p.orderProduct.quantity) return res.status(400).send(p.name + " - Sin stock");
+            total += p.orderProduct.price * p.orderProduct.quantity;
+            arr.push(p.id) ;
+            quanty=p.stock - p.orderProduct.quantity;
+            newStock.push(quanty);
+        };
 
-//     order.products.forEach(p => {
-//         if(p.stock < p.orderProduct.quantity) return res.status(400).send('Sin stock');
-//         arr.push(p);
-//         p.stock = p.stock - p.orderProduct.quantity;
-//     });
+        await Promise.all(arr.map(a => {
+            quanty= newStock.shift();
+            return Product.update({stock:quanty} , {where :{id:a}})
+        }));
 
-//     order.state = 'complete';
+        await Order.update({state:"complete"}, { where: { id: idOrder } });
 
-//     await Promise.all(arr)
-
-//     res.json(order)
-// });
+        let obj = {
+            email,
+            username,
+            adress,
+            order,
+            total
+        };
+        let html = orderEmail(obj);
+        return res.send(html)
+    } catch (error){
+        next(error)
+    }
+});
 
 module.exports = server;

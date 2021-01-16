@@ -2,6 +2,7 @@ const server = require('express').Router();
 const { User, Order, Review } = require('../db.js');
 const { Op } =require ('sequelize');
 const jwt = require("jsonwebtoken");
+const { passwordEmail } = require('../mailModel/password');
 const {
     SECRETO
 } = process.env;
@@ -134,17 +135,8 @@ server.post("/confirmEmail" , async (req , res , next ) => {
     if(!user) {
         return res.status(400).send("Not User")
     }else{
-        let {id} = user;
-    
-    return res.send(
-        jwt.sign(
-        {
-            id,
-            email
-        },
-        SECRETO, console.log("http://localhost:3001/auth/confirmEmail ? token =",jwt.sign({id,email},SECRETO))
-        )
-    )
+        let html = passwordEmail(user);
+        return res.send(html)
     }
 })
 

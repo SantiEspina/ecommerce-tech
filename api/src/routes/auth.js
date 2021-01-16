@@ -82,7 +82,22 @@ server.post("/degrade/:id",  function (req , res , next) {
   } catch (error) {
     next (error)
   }  
-})
+});
+
+server.get('/google',
+  passport.authenticate('google', { scope:
+      [ 'email', 'profile' ] }
+));
+
+server.get( '/googleCallback', function (req, res, next) {
+
+  passport.authorize( 'google', function(err, user) {
+    if(err) return next(err);
+    if(!user) return next(err);
+    const token = jwt.sign(user.toJSON(), SECRETO);
+    res.redirect(`http://localhost:3000/?token=${token}`);
+  })(req, res, next)
+});
   
 // /me -> get
 // /login/google -> get
