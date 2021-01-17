@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../../Redux/actions';
 import google from '../../../assets/img/google.png';
+import './login.scss';
 import dotenv from "dotenv";
 dotenv.config();
 
-import './login.scss';
 
 function Login () {
     const dispatch = useDispatch();
