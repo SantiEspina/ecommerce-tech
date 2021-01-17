@@ -70,7 +70,7 @@ function Login () {
                                 <input type='submit' value='Submit' disabled={!input.email || !input.password || false} className='loginSubmit'/>
                             </form>
                             <div className='extras'>
-                                <a href={process.env.REACT_APP_API || "http://localhost:3001"} className='google'><img src={google} />Login with Google</a>
+                                <a href={process.env.REACT_APP_API + '/auth/google' || "http://localhost:3001" + '/auth/google'} className='google'><img src={google} />Login with Google</a>
                                 <Link to='/confirmEmail' className='link'>
                                     <p>Forgot your password?</p>
                                 </Link>
