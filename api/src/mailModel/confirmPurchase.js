@@ -30,7 +30,7 @@ function orderEmail (obj) {
     modelEmail = modelEmail.replace("%orderTotal%", total);
     modelEmail = modelEmail.replace("%adress%", adress);
     modelEmail = modelEmail.replace("%orderId%", `<p style="font-size: 1.5rem;color: rgb(255, 104, 104);width: 10rem;background-color: #fff;">${order.id}</p>`)
-    modelEmail = modelEmail.replace("%orderLink%", `<a href="http://localhost:3000/order/${order.id}" style="color: rgb(255, 104, 104);font-size: 1.5rem;">Link</a>`)
+    modelEmail = modelEmail.replace("%orderLink%", `<a href="https://ecommerce-ft07-g02.vercel.app/order/${order.id}" style="color: rgb(255, 104, 104);font-size: 1.5rem;">Link</a>`)
 
     nodemailerMailgun.sendMail({
         from: 'ecommerceTech@tech.com',

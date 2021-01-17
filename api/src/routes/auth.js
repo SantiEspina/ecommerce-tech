@@ -95,7 +95,7 @@ server.get( '/googleCallback', function (req, res, next) {
     if(err) return next(err);
     if(!user) return next(err);
     const token = jwt.sign(user.toJSON(), SECRETO);
-    res.redirect(`http://localhost:3000/?token=${token}`);
+    res.redirect(`https://ecommerce-ft07-g02.vercel.app/?token=${token}`);
   })(req, res, next)
 });
   

@@ -7,7 +7,8 @@ const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const {
     SECRETO,
     GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET
+    GOOGLE_CLIENT_SECRET,
+    REACT_APP_API
     } = process.env;
 
 passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password", session: false},
@@ -39,7 +40,7 @@ passport.use(
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3001/auth/googleCallback",
+    callbackURL: REACT_APP_API + "/auth/googleCallback",
     session: false
   },
   async function(request, accessToken, refreshToken, profile, done) {

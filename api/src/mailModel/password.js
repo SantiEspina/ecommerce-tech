@@ -29,8 +29,8 @@ function passwordEmail(obj) {
     });
     // http://localhost:3000/resetPassword?token=token
     modelEmail = modelEmail.replace("%username%", username);
-    modelEmail = modelEmail.replace("%resetLink%", `<a href="http://localhost:3000/resetPassword?token=${token}" style="font-size: 1.5rem;color: rgb(255, 104, 104); cursor: pointer;">Link</a>`)
-    modelEmail = modelEmail.replace("%resetLink%", `<span style="color: rgb(255, 104, 104);">"localhost:3000/resetPassword?token=${token}"</span>`)
+    modelEmail = modelEmail.replace("%resetLink%", `<a href="https://ecommerce-ft07-g02.vercel.app/resetPassword?token=${token}" style="font-size: 1.5rem;color: rgb(255, 104, 104); cursor: pointer;">Link</a>`)
+    modelEmail = modelEmail.replace("%resetLink%", `<span style="color: rgb(255, 104, 104);">"ecommerce-ft07-g02.vercel.app/resetPassword?token=${token}"</span>`)
 
     nodemailerMailgun.sendMail({
         from: 'ecommerceTech@tech.com',

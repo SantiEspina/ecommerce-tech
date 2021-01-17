@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { orderByFilt, getProductToOrder, createOrderToUser, deleteOrder, deleteProductToOrder } from '../../../Redux/actions';
 import { ADD_PRODUCT_TO_ORDER } from '../../../Redux/constants';
 import { Link } from 'react-router-dom';
+import carrito from '../../../assets/img/carrito.png'
 
 
 import '../Cart/Cart.scss';
@@ -57,7 +58,7 @@ function Filter() {
             {/** Empieza nuestro carrito*/}
             <div className="Carrito">
                 <button className='buttonCart' onClick={handleToggle}>
-                    <img src='https://cdn.icon-icons.com/icons2/933/PNG/512/shopping-cart_icon-icons.com_72552.png' name='openCart' />
+                    <img src={carrito} name='openCart' />
                 </button>
                 <div className={`deleteCart-${input.openCart}`}>
                     <div className='deleteCartBox'>
